@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#133826" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="호건 골프코치" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <title>벤 호건 싱글디짓 연습 가이드 (90·50·10)</title>
+  <style>
+    :root {
+      --bg-paper: #F6F4EE;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #EFECE2;
+      --turf-deep: #133826;
+      --turf-mid: #1E563B;
+      --turf-light: #E4EFE9;
+      --sand-bunker: #DFD7C2;
+      --persimmon: #C84B31;
+      --persimmon-soft: #FBEAE6;
+      --gold-badge: #B8860B;
+      --ink-primary: #141A17;
+      --ink-secondary: #48534D;
+      --ink-muted: #76827B;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-card: 0 2px 10px rgba(19, 56, 38, 0.06), 0 1px 2px rgba(19, 56, 38, 0.04);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Noto Sans KR", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-paper);
+      color: var(--ink-primary);
+      font-family: var(--font-sans);
+      line-height: 1.45;
+      padding-bottom: calc(96px + env(safe-area-inset-bottom, 16px));
+      user-select: none;
+    }
+
+    /* Top Header — Augusta Yardage Book Style */
+    .app-header {
+      background: linear-gradient(160deg, var(--turf-deep) 0%, #0D281B 100%);
+      color: #F6F4EE;
+      padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 14px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 4px 16px rgba(13, 40, 27, 0.22);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-emblem {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(246, 244, 238, 0.12);
+      border: 1px solid rgba(233, 226, 208, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      color: #F6F4EE;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-sub {
+      margin: 0;
+      font-size: 11px;
+      color: #B8C9BF;
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .coupon-pill {
+      background: rgba(246, 244, 238, 0.12);
+      border: 1px solid rgba(233, 226, 208, 0.35);
+      color: #F6F4EE;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .coupon-pill:active {
+      transform: scale(0.97);
+    }
+
+    .install-btn {
+      background: var(--persimmon);
+      color: #FFF;
+      border: none;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Master Session Selector (90 / 50 / 10 / Data) */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 12px;
+      background: rgba(0, 0, 0, 0.22);
+      padding: 4px;
+      border-radius: 12px;
+    }
+
+    .mode-tab {
+      background: transparent;
+      border: none;
+      color: #B8C9BF;
+      padding: 8px 4px;
+      border-radius: 9px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .mode-tab .tab-min {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      opacity: 0.85;
+    }
+
+    .mode-tab.active {
+      background: #F6F4EE;
+      color: var(--turf-deep);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 14px 14px 32px;
+    }
+
+    /* Stoic Banner & Session Meta Bar */
+    .stoic-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--sand-bunker);
+      border-left: 4px solid var(--turf-deep);
+      border-radius: var(--radius-md);
+      padding: 11px 13px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .stoic-quote {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--turf-deep);
+      margin: 0 0 4px 0;
+    }
+
+    .stoic-sub {
+      font-size: 11.5px;
+      color: var(--ink-secondary);
+      margin: 0;
+    }
+
+    /* Session Meta Setup Row */
+    .session-meta-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .meta-input-box {
+      background: var(--bg-card);
+      border: 1px solid var(--sand-bunker);
+      border-radius: var(--radius-sm);
+      padding: 7px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .meta-select, .meta-input {
+      border: none;
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-primary);
+      padding: 0;
+      outline: none;
+      width: 100%;
+    }
+
+    /* Global Active Timer Sticky Card */
+    .timer-console {
+      background: var(--turf-deep);
+      color: #F6F4EE;
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 18px rgba(19, 56, 38, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .timer-phase-badge {
+      background: rgba(200, 75, 49, 0.9);
+      color: #FFF;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .wakelock-indicator {
+      font-size: 11px;
+      color: #A5C4B3;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .timer-phase-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      color: #FFFFFF;
+    }
+
+    .timer-main-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .timer-digits {
+      font-family: var(--font-mono);
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      color: #F6F4EE;
+    }
+
+    .timer-digits.running {
+      color: #72F2A7;
+    }
+
+    .timer-digits.urgent {
+      color: #FF8B73;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .t-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 13px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .t-btn-primary {
+      background: #72F2A7;
+      color: #0D281B;
+    }
+
+    .t-btn-pause {
+      background: #F5C451;
+      color: #141A17;
+    }
+
+    .t-btn-sub {
+      background: rgba(246, 244, 238, 0.14);
+      color: #F6F4EE;
+      padding: 10px 10px;
+      font-size: 12px;
+    }
+
+    .timer-progress-track {
+      height: 5px;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 99px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .timer-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #72F2A7, #38B26F);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Phase Drill Cards */
+    .phase-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--sand-bunker);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-card);
+      transition: border-color 0.2s ease;
+    }
+
+    .phase-card.active-phase {
+      border-color: var(--turf-deep);
+      box-shadow: 0 4px 18px rgba(19, 56, 38, 0.12);
+    }
+
+    .phase-card.completed-phase {
+      background: #FAF9F5;
+      border-color: #C5D6CC;
+    }
+
+    .phase-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .phase-step-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--turf-mid);
+      background: var(--turf-light);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .phase-select-btn {
+      border: 1px solid var(--turf-deep);
+      background: transparent;
+      color: var(--turf-deep);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .phase-card.active-phase .phase-select-btn {
+      background: var(--turf-deep);
+      color: #FFF;
+    }
+
+    .phase-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      color: var(--ink-primary);
+    }
+
+    .hogan-cue-box {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 9px 11px;
+      margin-bottom: 10px;
+      font-size: 12.5px;
+    }
+
+    .cue-line {
+      margin: 0 0 4px 0;
+      color: var(--ink-primary);
+      font-weight: 600;
+    }
+
+    .cue-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .cue-highlight {
+      color: var(--persimmon);
+      font-weight: 800;
+    }
+
+    /* Shot Outcome Dispersion Buttons (Thumb Pad) */
+    .shot-pad-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      margin-bottom: 6px;
+    }
+
+    .shot-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .shot-btn {
+      border: 1.5px solid var(--sand-bunker);
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 9px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      transition: transform 0.08s ease, background 0.12s;
+    }
+
+    .shot-btn:active {
+      transform: scale(0.94);
+    }
+
+    .shot-btn.good {
+      border-color: #2A7B4C;
+      background: #F1F8F4;
+    }
+
+    .shot-btn.hook-warn {
+      border-color: var(--persimmon);
+      background: var(--persimmon-soft);
+    }
+
+    .shot-btn-icon {
+      font-size: 15px;
+    }
+
+    .shot-btn-name {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .shot-btn-count {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .shot-undo-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--sand-bunker);
+      font-size: 11.5px;
+      color: var(--ink-muted);
+    }
+
+    .mini-reset-btn {
+      background: none;
+      border: none;
+      color: var(--ink-muted);
+      font-size: 11px;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 2px 4px;
+    }
+
+    /* 50m Approach Distance Matrix Grid */
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 12.5px;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 58px 1fr 112px;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--bg-subtle);
+    }
+
+    .matrix-row:last-child {
+      border-bottom: none;
+    }
+
+    .dist-badge {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 13.5px;
+      color: var(--turf-deep);
+      background: var(--turf-light);
+      padding: 5px 6px;
+      border-radius: 7px;
+      text-align: center;
+    }
+
+    .dist-guide {
+      font-size: 11.5px;
+      color: var(--ink-secondary);
+      line-height: 1.3;
+    }
+
+    .dist-guide strong {
+      color: var(--ink-primary);
+      display: block;
+    }
+
+    .dist-counter-group {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+    }
+
+    .hit-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 7px 9px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hit-btn-in {
+      background: var(--turf-deep);
+      color: #FFF;
+    }
+
+    .hit-btn-miss {
+      background: var(--bg-subtle);
+      color: var(--ink-secondary);
+      border: 1px solid var(--sand-bunker);
+    }
+
+    .hit-score {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 800;
+      min-width: 38px;
+      text-align: right;
+    }
+
+    /* Bottom Floating Action Bar (Plaud + Save Session) */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(246, 244, 238, 0.96);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--sand-bunker);
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 8px));
+      z-index: 45;
+      display: flex;
+      justify-content: center;
+    }
+
+    .bottom-bar-inner {
+      width: 100%;
+      max-width: 560px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 8px;
+    }
+
+    .plaud-trigger-btn {
+      background: var(--persimmon);
+      color: #FFF;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 12px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(200, 75, 49, 0.28);
+    }
+
+    .save-session-btn {
+      background: var(--turf-deep);
+      color: #FFF;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 12px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Data & Analytics View */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--sand-bunker);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .kpi-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--turf-deep);
+    }
+
+    .kpi-value.warn {
+      color: var(--persimmon);
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--ink-secondary);
+      margin-top: 2px;
+    }
+
+    .markdown-preview {
+      width: 100%;
+      min-height: 190px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      background: #141A17;
+      color: #E4EFE9;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      resize: vertical;
+      line-height: 1.45;
+      user-select: text;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      background: var(--turf-light);
+      color: var(--turf-deep);
+      border: 1px solid #B7D1C3;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    /* Modal Sheet (Plaud Guide & Install Guide) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 22, 16, 0.62);
+      z-index: 60;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background: var(--bg-paper);
+      width: 100%;
+      max-width: 560px;
+      max-height: 88vh;
+      border-radius: 22px 22px 0 0;
+      padding: 18px 16px calc(22px + env(safe-area-inset-bottom, 12px));
+      overflow-y: auto;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin: 0;
+      color: var(--ink-primary);
+    }
+
+    .modal-close {
+      background: var(--bg-subtle);
+      border: none;
+      border-radius: 99px;
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .plaud-script-card {
+      background: #FFF;
+      border: 2px solid var(--persimmon);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .plaud-step {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--sand-bunker);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    .plaud-step:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .plaud-step-num {
+      display: inline-block;
+      background: var(--persimmon);
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 99px;
+      margin-right: 6px;
+    }
+
+    .memo-textarea {
+      width: 100%;
+      min-height: 80px;
+      border: 1px solid var(--sand-bunker);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      background: #FFF;
+      resize: vertical;
+      user-select: text;
+    }
+
+    .history-item {
+      background: var(--bg-card);
+      border: 1px solid var(--sand-bunker);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+    }
+
+    .toast {
+      position: fixed;
+      top: 76px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #141A17;
+      color: #72F2A7;
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 80;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">저장되었습니다</div>
+
+  <!-- Top Sticky Header -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="brand-group">
+        <div class="brand-emblem">BH</div>
+        <div>
+          <h1 class="brand-title">벤 호건 싱글디짓 코치</h1>
+          <p class="brand-sub">90분 타석 · 50분 어프로치 · 10분 퍼팅</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="couponBtn" class="coupon-pill" onclick="openCouponModal()" title="곤지암 JS 쿠폰 관리">
+          🎫 JS쿠폰 <span id="couponRemainText">14</span>/15
+        </button>
+        <button class="install-btn" onclick="openInstallModal()">📲 앱설치</button>
+      </div>
+    </div>
+
+    <!-- 4 Mode Selector Tabs -->
+    <nav class="mode-tabs" aria-label="연습 모드 선택">
+      <button class="mode-tab active" data-mode="indoor90" onclick="switchMode('indoor90')">
+        <span>🏌️ 인도어</span>
+        <span class="tab-min">90 MIN</span>
+      </button>
+      <button class="mode-tab" data-mode="approach50" onclick="switchMode('approach50')">
+        <span>⛳ 어프로치</span>
+        <span class="tab-min">50 MIN</span>
+      </button>
+      <button class="mode-tab" data-mode="putting10" onclick="switchMode('putting10')">
+        <span>🕳️ 퍼팅</span>
+        <span class="tab-min">10 MIN</span>
+      </button>
+      <button class="mode-tab" data-mode="analytics" onclick="switchMode('analytics')">
+        <span>📊 데이터</span>
+        <span class="tab-min">기록·변환</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Session Meta Bar (Date & Venue) -->
+    <div class="session-meta-bar">
+      <div class="meta-input-box">
+        <span class="meta-label">연습 일자</span>
+        <input type="date" id="sessionDate" class="meta-input" onchange="saveDraftState()" />
+      </div>
+      <div class="meta-input-box">
+        <span class="meta-label">연습 장소</span>
+        <select id="sessionVenue" class="meta-select" onchange="saveDraftState()">
+          <option value="곤지암 JS 골프클럽">곤지암 JS 골프클럽</option>
+          <option value="인도어 연습장">인도어 연습장 (90분)</option>
+          <option value="영종도 클럽72 연습장">영종도 클럽72 연습장</option>
+          <option value="라운딩 전 워밍업">라운딩 전 워밍업</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Global Countdown Timer Console -->
+    <section id="timerConsole" class="timer-console">
+      <div class="timer-header">
+        <span id="activePhaseBadge" class="timer-phase-badge">INDOOR · PHASE 1</span>
+        <span id="wakeLockStatus" class="wakelock-indicator">⚡ 화면꺼짐 방지 대기</span>
+      </div>
+      <h2 id="activePhaseTitle" class="timer-phase-title">1단계: 52도 웨지 몸풀기 & 왼발 체중 세팅 (15분)</h2>
+      <div class="timer-main-row">
+        <div id="timerDisplay" class="timer-digits">15:00</div>
+        <div class="timer-controls">
+          <button id="timerToggleBtn" class="t-btn t-btn-primary" onclick="toggleTimer()">▶ 시작</button>
+          <button class="t-btn t-btn-sub" onclick="addMinutes(1)">+1분</button>
+          <button class="t-btn t-btn-sub" onclick="resetCurrentTimer()">↺</button>
+        </div>
+      </div>
+      <div class="timer-progress-track">
+        <div id="timerProgressFill" class="timer-progress-fill"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         VIEW 1: 90분 인도어 연습장 (90 MIN INDOOR)
+         ========================================== -->
+    <section id="view-indoor90" class="mode-view">
+      <div class="stoic-banner">
+        <p class="stoic-quote">🧭 벤 호건 90분 인도어 원칙: "손을 지우고 등 근육(견갑골)과 하체로만 스윙하라"</p>
+        <p class="stoic-sub">필드 최대의 적인 <strong>'힘 개입 → 좌측 당김(훅)'</strong>을 없애고, 티샷 비상 리셋(3/4 스윙)을 몸에 새기는 90분 코스입니다.</p>
+      </div>
+      <div id="indoorPhasesContainer"></div>
+    </section>
+
+    <!-- ==========================================
+         VIEW 2: 50분 어프로치 연습장 (50 MIN APPROACH)
+         ========================================== -->
+    <section id="view-approach50" class="mode-view" style="display:none;">
+      <div class="stoic-banner">
+        <p class="stoic-quote">🎯 벤 호건 50분 어프로치 원칙: "10~20m가 파(Par)와 보기를 가른다 — 포틴 52도 단일화"</p>
+        <p class="stoic-sub">체중은 왼발에 고정하고, 손목 코킹 없이 <strong>퍼팅식 회전과 시계추 크기(10·15·20·30·40·50m)</strong>로 반경 3m 원 안에 넣으세요.</p>
+      </div>
+      <div id="approachPhasesContainer"></div>
+
+      <!-- 52도 거리별 3m 안착 매트릭스 기록판 -->
+      <div class="phase-card">
+        <div class="phase-top">
+          <span class="phase-step-tag">52° WEDGE MATRIX</span>
+          <button class="mini-reset-btn" onclick="resetApproachMatrix()">매트릭스 초기화</button>
+        </div>
+        <h3 class="phase-title">📏 52도 거리별 '반경 3m 안착' 실전 카운터</h3>
+        <p style="font-size:12px; color:var(--ink-secondary); margin:0 0 8px 0;">
+          각 거리에서 10구씩 치며 <strong>반경 3m 이내에 멈춘 공(⭕ 안착)</strong>과 미스한 공을 탭해 성공률을 남기세요.
+        </p>
+        <div id="approachMatrixRows" class="matrix-table"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         VIEW 3: 10분 퍼팅 연습장 (10 MIN PUTTING)
+         ========================================== -->
+    <section id="view-putting10" class="mode-view" style="display:none;">
+      <div class="stoic-banner">
+        <p class="stoic-quote">🕳️ 벤 호건 10분 퍼팅 원칙: "1.5m는 확신으로 넣고, 10m는 반경 1m 원에 세워 3퍼트를 박멸한다"</p>
+        <p class="stoic-sub">임팩트 후 공을 따라 고개를 들지 마십시오. 홀컵에 공이 떨어지는 소리로 결과를 확인합니다.</p>
+      </div>
+      <div id="puttingPhasesContainer"></div>
+    </section>
+
+    <!-- ==========================================
+         VIEW 4: 데이터 분석 & Obsidian 마크다운 내보내기
+         ========================================== -->
+    <section id="view-analytics" class="mode-view" style="display:none;">
+      <div class="stoic-banner">
+        <p class="stoic-quote">📊 연습 데이터 & Obsidian(JAVIS) 연동 허브</p>
+        <p class="stoic-sub">오늘 기록한 정타율·좌측 훅 비율·52도 거리감 데이터를 마크다운으로 복사해 Vault에 바로 붙여넣거나 파일로 저장하세요.</p>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title">오늘 인도어 정타율</div>
+          <div id="kpiSweetSpot" class="kpi-value">0%</div>
+          <div id="kpiSweetSub" class="kpi-sub">총 0구 기록됨</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">⚠️ 좌측 당김(훅) 경보율</div>
+          <div id="kpiLeftHook" class="kpi-value warn">0%</div>
+          <div id="kpiHookSub" class="kpi-sub">목표: 15% 이하 유지</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">52도 어프로치 3m 안착률</div>
+          <div id="kpiApproachRate" class="kpi-value">0%</div>
+          <div id="kpiApproachSub" class="kpi-sub">0 / 0구 성공</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">퍼팅 (1.5m 성공 / 롱퍼트 OK존)</div>
+          <div id="kpiPuttingRate" class="kpi-value">0%</div>
+          <div id="kpiPuttingSub" class="kpi-sub">0 / 0구 성공</div>
+        </div>
+      </div>
+
+      <!-- Obsidian Markdown Generator -->
+      <div class="phase-card">
+        <div class="phase-top">
+          <span class="phase-step-tag">OBSIDIAN VAULT SYNC</span>
+          <span style="font-size:11px; color:var(--ink-muted);">2_LLMWiki/wiki/골프.md 호환</span>
+        </div>
+        <h3 class="phase-title">📝 오늘 연습 기록 마크다운 (자동 생성)</h3>
+        <textarea id="obsidianMarkdownBox" class="markdown-preview" readonly></textarea>
+        <div class="action-row">
+          <button class="btn-secondary" onclick="copyMarkdownToClipboard()">📋 마크다운 복사</button>
+          <button class="btn-secondary" onclick="downloadMarkdownFile()">💾 .md 파일 저장</button>
+          <button class="btn-secondary" onclick="exportAllHistoryJSON()">📦 전체 기록 JSON 백업</button>
+        </div>
+      </div>
+
+      <!-- Saved Sessions History List -->
+      <div class="phase-card">
+        <div class="phase-top">
+          <span class="phase-step-tag">HISTORY LOG</span>
+          <button class="mini-reset-btn" onclick="clearAllHistory()">전체 이력 초기화</button>
+        </div>
+        <h3 class="phase-title">🗂️ 휴대폰에 저장된 최근 연습 이력</h3>
+        <div id="savedHistoryList"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Floating Bar: Plaud Voice Prompt + Save Session -->
+  <div class="bottom-bar">
+    <div class="bottom-bar-inner">
+      <button class="plaud-trigger-btn" onclick="openPlaudModal()">
+        🎙️ Plaud 녹음 가이드
+      </button>
+      <button class="save-session-btn" onclick="saveCurrentSessionToHistory()">
+        ✅ 연습 결과 저장
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 1: Plaud 녹음 가이드 & 현장 음성 메모
+       ========================================== -->
+  <div id="plaudModal" class="modal-backdrop" onclick="if(event.target===this)closePlaudModal()">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 class="modal-title">🎙️ Plaud 녹음 대본 & 현장 메모</h3>
+        <button class="modal-close" onclick="closePlaudModal()">✕</button>
+      </div>
+      <p style="font-size:12.5px; color:var(--ink-secondary); margin:0 0 10px 0;">
+        연습 직후 차 안이나 타석에서 <strong>Plaud 녹음 버튼</strong>을 누르고 아래 4가지를 순서대로 40초만 말씀하세요. 나중에 JAVIS가 전사해 <code>골프.md</code>에 자동 정리합니다.
+      </p>
+
+      <div id="plaudPromptContent" class="plaud-script-card"></div>
+
+      <div style="margin-top:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <label style="font-size:12px; font-weight:800; color:var(--ink-primary);">✍️ 앱 내 한 줄 체감 메모 (마이크 받아쓰기 지원)</label>
+          <button id="speechBtn" class="phase-select-btn" onclick="toggleSpeechRecognition()">🎤 음성 받아쓰기</button>
+        </div>
+        <textarea id="quickMemoInput" class="memo-textarea" placeholder="예: 등 근육으로 백스윙을 시작하니 유틸리티 좌측 감김이 확 줄어들었다. 20m 어프로치는 왼발 체중 90%가 핵심." oninput="saveDraftState()"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: 곤지암 JS 골프클럽 15회 쿠폰 관리
+       ========================================== -->
+  <div id="couponModal" class="modal-backdrop" onclick="if(event.target===this)closeCouponModal()">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 class="modal-title">🎫 곤지암 JS 골프클럽 쿠폰 (15회권)</h3>
+        <button class="modal-close" onclick="closeCouponModal()">✕</button>
+      </div>
+      <p style="font-size:12.5px; color:var(--ink-secondary); margin:0 0 12px 0;">
+        30만원 / 15회 (회당 어프로치 1시간 + 타석 90분, 유효기간 10개월). 1회차 사용: 2026-10-24.
+      </p>
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#FFF; padding:14px; border-radius:12px; border:1px solid var(--sand-bunker); margin-bottom:12px;">
+        <div>
+          <div style="font-size:11px; color:var(--ink-muted); font-weight:700;">현재 남은 쿠폰</div>
+          <div style="font-family:var(--font-mono); font-size:28px; font-weight:800; color:var(--turf-deep);">
+            <span id="modalCouponRemain">14</span> <span style="font-size:15px; color:var(--ink-muted);">/ 15회</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="t-btn t-btn-primary" onclick="useOneCoupon()">-1회 차감 (오늘 사용)</button>
+          <button class="t-btn t-btn-sub" style="background:var(--bg-subtle); color:var(--ink-primary);" onclick="adjustCoupon(1)">+1 복구</button>
+        </div>
+      </div>
+      <div id="couponLogList" style="font-size:12px; color:var(--ink-secondary);"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 3: 핸드폰 앱 설치 방법 안내
+       ========================================== -->
+  <div id="installModal" class="modal-backdrop" onclick="if(event.target===this)closeInstallModal()">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 class="modal-title">📲 핸드폰 홈 화면에 앱으로 설치하기</h3>
+        <button class="modal-close" onclick="closeInstallModal()">✕</button>
+      </div>
+      <div class="plaud-script-card" style="border-color:var(--turf-deep);">
+        <div class="plaud-step">
+          <span class="plaud-step-num" style="background:var(--turf-deep);">방법 1</span>
+          <strong>어디서나 바로 접속 & 홈 화면에 앱 추가</strong><br/>
+          핸드폰 브라우저에서 <code>https://kimhj1971.github.io/hogan-golf-practice/</code> 에 접속한 뒤:
+          <ul style="margin:6px 0 0 18px; padding:0;">
+            <li><strong>아이폰(Safari)</strong>: 하단 <strong>공유 버튼[↑]</strong> → <strong>'홈 화면에 추가'</strong> 탭</li>
+            <li><strong>갤럭시/안드로이드(Chrome)</strong>: 우측 상단 <strong>메뉴[⋮]</strong> → <strong>'앱 설치'</strong> 또는 <strong>'홈 화면에 추가'</strong> 탭</li>
+          </ul>
+        </div>
+        <div class="plaud-step">
+          <span class="plaud-step-num" style="background:var(--turf-deep);">방법 2</span>
+          <strong>오프라인 자동 저장 (Service Worker 탑재)</strong><br/>
+          한 번만 홈 화면에 추가해 두면, 연습장 야외 어프로치 그린에서 인터넷 연결 없이도 단독 앱으로 즉시 실행되고 기록이 휴대폰에 영구 보관됩니다.
+        </div>
+      </div>
+      <button id="nativeInstallPromptBtn" class="save-session-btn" style="width:100%; display:none;" onclick="triggerNativeInstall()">
+        📲 지금 바로 안드로이드/크롬 앱 설치하기
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /**************************************************************
+     * 1. DRILL CURRICULUM DATA (90분 인도어 / 50분 어프로치 / 10분 퍼팅)
+     **************************************************************/
+    const CURRICULUM = {
+      indoor90: [
+        {
+          id: 'in_p1',
+          step: 'PHASE 1 · 0~15분',
+          minutes: 15,
+          title: '몸풀기 & 포틴 52도 웨지 리듬 세팅',
+          cue: '왼발에 체중 70% 고정. 손목 코킹 없이 등 근육과 몸통 회전(시계추)만으로 20m·30m·40m·50m 정타 감각을 깨웁니다.',
+          trap: '초반부터 풀스윙 금지! 공을 끝까지 보고 헤드 무게가 잔디를 스치는 소리에 집중하세요.'
+        },
+        {
+          id: 'in_p2',
+          step: 'PHASE 2 · 15~40분',
+          minutes: 25,
+          title: '미들 아이언(7I·8I) — 견갑골 시동 & 축 고정',
+          cue: '백스윙 시작은 손이 아니라 오른쪽 등 근육(견갑골)을 뒤로 접으며 시작! 다운스윙은 힘을 빼고 툭 떨어뜨린 뒤 1시 방향으로 던집니다.',
+          trap: '공이 왼쪽으로 감기면(Hook) 100% 손과 팔의 힘이 먼저 개입한 신호입니다. 임팩트 후 공 있던 자리를 1초 더 보세요.'
+        },
+        {
+          id: 'in_p3',
+          step: 'PHASE 3 · 40~60분',
+          minutes: 20,
+          title: '유틸리티 집중 교정 — "긴 7번 아이언 템포"',
+          cue: '11/2 사우스스프링스 약점 보완. 멀리 치려 하지 말고 "조금 긴 7번 아이언"이라 생각하며 헤드 무게만 바닥에 툭 떨어뜨려 쓸어 칩니다.',
+          trap: '공을 띄우려다 축이 뒤로 무너지면 뒤땅·탑볼·좌측 감김이 납니다. 시선을 공 밑면에 묶어두세요.'
+        },
+        {
+          id: 'in_p4',
+          step: 'PHASE 4 · 60~80분',
+          minutes: 20,
+          title: '드라이버 80% 페어웨이 킵 & 비상 3/4 컨트롤 샷',
+          cue: '11/6 샌드파인 후반 해저드 방지 훈련. ① 일반 티샷(등 근육 시동 + 80% 힘) 1구 ↔ ② 비상 리셋 티샷(티 반 개 낮추고 어깨 높이 3/4 스윙) 1구를 번갈아 칩니다.',
+          trap: '잘 맞기 시작할 때(4~5구 연속 정타)가 가장 위험합니다! 잘 맞을수록 그립 악력을 10에서 6으로 낮추세요.'
+        },
+        {
+          id: 'in_p5',
+          step: 'PHASE 5 · 80~90분',
+          minutes: 10,
+          title: '가상 필드 5홀 시뮬레이션 (프리샷 & 5번홀 리셋)',
+          cue: '드라이버 1구 → 유틸/7I 1구 → 52도 웨지 1구를 매번 클럽을 바꿔 잡으며 실전 프리샷 루틴(빈스윙 2회 → 셋업 후 3초 내 스윙)으로 마무리합니다.',
+          trap: '만약 드라이버가 좌측으로 감겼다면, 다음 홀은 무조건 3/4 비상 컨트롤 티샷으로 페어웨이를 지키는 훈련을 실행하세요.'
+        }
+      ],
+      approach50: [
+        {
+          id: 'ap_p1',
+          step: 'PHASE 1 · 0~10분',
+          minutes: 10,
+          title: '10m 이내 — 왼발 체중 90% + 퍼팅식 칩샷',
+          cue: '10/17 영종도 & 10/24 곤지암 핵심 감각. 공은 오른발끝 안쪽, 체중을 왼발에 거의 다 싣고 손목 고정 후 퍼팅하듯 3~4m 지점에 떨어뜨려 굴립니다.',
+          trap: '헤드업으로 결과를 일찍 보면 축이 무너져 뒤땅이 납니다. 10m 이내 불안한 라이에서는 치퍼/퍼터와 결과도 비교해 보세요.'
+        },
+        {
+          id: 'ap_p2',
+          step: 'PHASE 2 · 10~25분',
+          minutes: 15,
+          title: '15m · 20m 스코어링 존 — 반경 3m 원 안착 집중',
+          cue: '스코어를 가르는 핵심 구간. 15m는 7~8m 캐리, 20m는 10m 캐리(전체 거리의 약 1/3~1/2 지점 낙하)에만 시선을 꽂고 등 근육 리듬으로 툭 떨어뜨립니다.',
+          trap: '손으로 거리를 맞추지 말고 왼쪽으로 살짝 숙인 축을 유지한 채 몸통 회전 크기로만 보냅니다.'
+        },
+        {
+          id: 'ap_p3',
+          step: 'PHASE 3 · 25~40분',
+          minutes: 15,
+          title: '30m · 40m · 50m 시계추 매트릭스 & 경사지 공략',
+          cue: '52도 단일 클럽으로 백스윙 크기(20m 허리 · 30m 명치 · 40m 가슴 · 50m 어깨)를 눈 감고도 재현할 수 있게 반복합니다. 내리막 그린은 엣지 Bump & Run!',
+          trap: '50m에서도 절대 손으로 강하게 찍어 치지 마세요. 백스윙은 충분히, 다운스윙은 힘 빼고 툭!'
+        },
+        {
+          id: 'ap_p4',
+          step: 'PHASE 4 · 40~50분',
+          minutes: 10,
+          title: '그린 주변 벙커 1타 탈출 & 랜덤 서바이벌',
+          cue: '두 발을 모래에 깊숙이 묻어 하체를 콘크리트처럼 고정! 손으로 떠내지 말고 공 뒤 3cm 모래를 바운스로 폭발시켜 "핀이 아닌 그린 중앙"으로 10구 연속 탈출합니다.',
+          trap: '벙커 미스는 긴장이 손을 지배한 신호입니다. 하체 고정과 과감한 폴로스루만 기억하세요.'
+        }
+      ],
+      putting10: [
+        {
+          id: 'pt_p1',
+          step: 'PHASE 1 · 0~4분',
+          minutes: 4,
+          title: '1.5m 숏퍼팅 90% 성공 루틴 (10구 연속)',
+          cue: '홀컵 주변 동서남북 1.5m 4방향(직선·슬라이스·훅)에서 스트로크. 임팩트 후 공을 눈으로 쫓지 말고 홀컵에 떨어지는 "땡그랑" 소리로만 확인합니다.',
+          trap: '어깨가 먼저 열리면 왼쪽으로 당겨집니다. 시계추처럼 등 근육으로 진자 운동하세요.'
+        },
+        {
+          id: 'pt_p2',
+          step: 'PHASE 2 · 4~8분',
+          minutes: 4,
+          title: '7~10m 롱퍼팅 — 반경 1m "OK 존" 거리감',
+          cue: '넣으려는 욕심을 버리고 홀컵 반경 1m 큰 원(백스윙 크기 기준) 안에 세우는 훈련으로 3퍼트를 원천 봉쇄합니다.',
+          trap: '내리막 롱퍼트는 홀컵 전방 1m에 멈춘다는 느낌으로 부드럽게 굴리세요.'
+        },
+        {
+          id: 'pt_p3',
+          step: 'PHASE 3 · 8~10분',
+          minutes: 2,
+          title: '실전 압박 2퍼트 서바이벌 (3홀 연속 세이브)',
+          cue: '랜덤 8m 롱퍼트 1구 → 남은 거리 탭인 마무리까지 프리샷 루틴(빈스윙 2회 → 에이밍 → 3초 내 스트로크)을 지켜 3연속 2퍼트로 끝냅니다.',
+          trap: '짧은 세컨드 퍼트라도 대충 한 손으로 치지 말고 루틴을 끝까지 지키세요.'
+        }
+      ]
+    };
+
+    const APPROACH_DISTANCES = [
+      { key: '10m', label: '10m', guide: '왼발체중 90% · 퍼팅식', sub: '캐리 3~4m → 런 6~7m' },
+      { key: '15m', label: '15m', guide: '왼발체중 · 무릎~허리', sub: '캐리 7~8m → 런 7~8m' },
+      { key: '20m', label: '20m', guide: '허리 높이 시계추', sub: '캐리 10m → 런 10m (핵심존)' },
+      { key: '30m', label: '30m', guide: '명치(가슴아래) 시계추', sub: '내리막은 엣지 Bump&Run' },
+      { key: '40m', label: '40m', guide: '가슴 높이 · 등근육 시동', sub: '축 고정 · 힘 빼고 툭' },
+      { key: '50m', label: '50m', guide: '어깨 높이(3/4) · 리듬', sub: '절대 손으로 세게 치지 말 것' },
+      { key: 'bunker', label: '벙커', guide: '두 발 모래 고정 · 중앙', sub: '공 뒤 3cm 폭발 (1타 탈출)' }
+    ];
+
+    /**************************************************************
+     * 2. APPLICATION STATE & STORAGE
+     **************************************************************/
+    const STORAGE_KEY_DRAFT = 'hogan_coach_draft_v1';
+    const STORAGE_KEY_HISTORY = 'hogan_coach_history_v1';
+    const STORAGE_KEY_COUPON = 'hogan_coach_js_coupon_v1';
+
+    let currentMode = 'indoor90';
+    let activePhaseId = 'in_p1';
+    let timerTotalSec = 15 * 60;
+    let timerRemainSec = 15 * 60;
+    let timerInterval = null;
+    let wakeLockSentinel = null;
+
+    let sessionState = getInitialSessionState();
+    let couponState = loadCouponState();
+
+    function getInitialSessionState() {
+      const today = new Date().toISOString().slice(0, 10);
+      const shots = {};
+      [...CURRICULUM.indoor90, ...CURRICULUM.putting10].forEach(p => {
+        shots[p.id] = { good: 0, hook: 0, push: 0, fat: 0 };
+      });
+      const matrix = {};
+      APPROACH_DISTANCES.forEach(d => {
+        matrix[d.key] = { in3m: 0, miss: 0 };
+      });
+      return {
+        date: today,
+        venue: '곤지암 JS 골프클럽',
+        memo: '',
+        shots,
+        matrix
+      };
+    }
+
+    function loadCouponState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_COUPON);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return {
+        total: 15,
+        remain: 14,
+        logs: ['1회차 사용: 2026-10-24 (곤지암 JS 어프로치 1h + 타석 90m)']
+      };
+    }
+
+    function saveCouponState() {
+      localStorage.setItem(STORAGE_KEY_COUPON, JSON.stringify(couponState));
+      renderCouponUI();
+    }
+
+    function loadDraftState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_DRAFT);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          sessionState = { ...getInitialSessionState(), ...parsed };
+        }
+      } catch (e) {}
+    }
+
+    function saveDraftState() {
+      const dateEl = document.getElementById('sessionDate');
+      const venueEl = document.getElementById('sessionVenue');
+      const memoEl = document.getElementById('quickMemoInput');
+      if (dateEl && dateEl.value) sessionState.date = dateEl.value;
+      if (venueEl && venueEl.value) sessionState.venue = venueEl.value;
+      if (memoEl) sessionState.memo = memoEl.value;
+      localStorage.setItem(STORAGE_KEY_DRAFT, JSON.stringify(sessionState));
+      updateAnalyticsAndMarkdown();
+    }
+
+    /**************************************************************
+     * 3. RENDER FUNCTIONS
+     **************************************************************/
+    function initApp() {
+      loadDraftState();
+      document.getElementById('sessionDate').value = sessionState.date;
+      document.getElementById('sessionVenue').value = sessionState.venue;
+      document.getElementById('quickMemoInput').value = sessionState.memo || '';
+
+      renderCouponUI();
+      renderIndoorPhases();
+      renderApproachPhases();
+      renderApproachMatrix();
+      renderPuttingPhases();
+      selectPhase('in_p1', false);
+      updateAnalyticsAndMarkdown();
+      renderSavedHistory();
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      }
+    }
+
+    function renderCouponUI() {
+      document.getElementById('couponRemainText').textContent = couponState.remain;
+      document.getElementById('modalCouponRemain').textContent = couponState.remain;
+      const logEl = document.getElementById('couponLogList');
+      if (logEl) {
+        logEl.innerHTML = '<strong>사용 기록:</strong><ul style="margin:6px 0 0 18px; padding:0;">' +
+          couponState.logs.map(l => `<li>${l}</li>`).join('') + '</ul>';
+      }
+    }
+
+    function renderIndoorPhases() {
+      const container = document.getElementById('indoorPhasesContainer');
+      container.innerHTML = CURRICULUM.indoor90.map((p, idx) => {
+        const s = sessionState.shots[p.id] || { good: 0, hook: 0, push: 0, fat: 0 };
+        const total = s.good + s.hook + s.push + s.fat;
+        const goodRate = total > 0 ? Math.round((s.good / total) * 100) : 0;
+        const hookRate = total > 0 ? Math.round((s.hook / total) * 100) : 0;
+        const isActive = activePhaseId === p.id;
+
+        return `
+          <article class="phase-card ${isActive ? 'active-phase' : ''}" id="card_${p.id}">
+            <div class="phase-top">
+              <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
+              <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
+                ${isActive ? '⏱ 타이머 선택됨' : '이 단계 타이머 켜기'}
+              </button>
+            </div>
+            <h3 class="phase-title">${idx + 1}. ${p.title}</h3>
+            <div class="hogan-cue-box">
+              <p class="cue-line">💡 <strong>호건 큐:</strong> ${p.cue}</p>
+              <p class="cue-line"><span class="cue-highlight">⚠️ 주의:</span> ${p.trap}</p>
+            </div>
+
+            <div class="shot-pad-label">
+              <span>원탭 구질 기록 (총 ${total}구 · 정타 ${goodRate}%)</span>
+              <span style="color:${hookRate > 20 ? 'var(--persimmon)' : 'var(--ink-muted)'};">
+                좌측 훅: ${hookRate}%
+              </span>
+            </div>
+            <div class="shot-grid-4">
+              <button class="shot-btn good" onclick="recordShot('${p.id}', 'good')">
+                <span class="shot-btn-icon">🎯</span>
+                <span class="shot-btn-name">정타·센터</span>
+                <span class="shot-btn-count">${s.good}</span>
+              </button>
+              <button class="shot-btn hook-warn" onclick="recordShot('${p.id}', 'hook')">
+                <span class="shot-btn-icon">⬅️</span>
+                <span class="shot-btn-name">좌측 당김·훅</span>
+                <span class="shot-btn-count">${s.hook}</span>
+              </button>
+              <button class="shot-btn" onclick="recordShot('${p.id}', 'push')">
+                <span class="shot-btn-icon">➡️</span>
+                <span class="shot-btn-name">우측 밀림</span>
+                <span class="shot-btn-count">${s.push}</span>
+              </button>
+              <button class="shot-btn" onclick="recordShot('${p.id}', 'fat')">
+                <span class="shot-btn-icon">💥</span>
+                <span class="shot-btn-name">뒤땅·탑볼</span>
+                <span class="shot-btn-count">${s.fat}</span>
+              </button>
+            </div>
+            <div class="shot-undo-row">
+              <span>${hookRate >= 25 ? '🚨 좌측 감김 경보! 손 힘을 빼고 등 근육(견갑골)으로 시작하세요.' : '일관된 템포를 유지하세요.'}</span>
+              <button class="mini-reset-btn" onclick="resetPhaseShots('${p.id}')">이 단계 카운트 초기화</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderApproachPhases() {
+      const container = document.getElementById('approachPhasesContainer');
+      container.innerHTML = CURRICULUM.approach50.map((p, idx) => {
+        const isActive = activePhaseId === p.id;
+        return `
+          <article class="phase-card ${isActive ? 'active-phase' : ''}" id="card_${p.id}">
+            <div class="phase-top">
+              <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
+              <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
+                ${isActive ? '⏱ 타이머 선택됨' : '이 단계 타이머 켜기'}
+              </button>
+            </div>
+            <h3 class="phase-title">${idx + 1}. ${p.title}</h3>
+            <div class="hogan-cue-box" style="margin-bottom:0;">
+              <p class="cue-line">💡 <strong>호건 큐:</strong> ${p.cue}</p>
+              <p class="cue-line"><span class="cue-highlight">⚠️ 주의:</span> ${p.trap}</p>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderApproachMatrix() {
+      const container = document.getElementById('approachMatrixRows');
+      container.innerHTML = APPROACH_DISTANCES.map(d => {
+        const m = sessionState.matrix[d.key] || { in3m: 0, miss: 0 };
+        const total = m.in3m + m.miss;
+        const rate = total > 0 ? Math.round((m.in3m / total) * 100) + '%' : '-';
+        return `
+          <div class="matrix-row">
+            <div class="dist-badge">${d.label}</div>
+            <div class="dist-guide">
+              <strong>${d.guide}</strong>
+              <span>${d.sub}</span>
+            </div>
+            <div class="dist-counter-group">
+              <button class="hit-btn hit-btn-in" onclick="recordApproach('${d.key}', 'in3m')">⭕ ${m.in3m}</button>
+              <button class="hit-btn hit-btn-miss" onclick="recordApproach('${d.key}', 'miss')">✕ ${m.miss}</button>
+              <span class="hit-score">${rate}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderPuttingPhases() {
+      const container = document.getElementById('puttingPhasesContainer');
+      container.innerHTML = CURRICULUM.putting10.map((p, idx) => {
+        const s = sessionState.shots[p.id] || { good: 0, hook: 0, push: 0, fat: 0 };
+        const total = s.good + s.hook;
+        const rate = total > 0 ? Math.round((s.good / total) * 100) : 0;
+        const isActive = activePhaseId === p.id;
+        return `
+          <article class="phase-card ${isActive ? 'active-phase' : ''}" id="card_${p.id}">
+            <div class="phase-top">
+              <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
+              <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
+                ${isActive ? '⏱ 타이머 선택됨' : '이 단계 타이머 켜기'}
+              </button>
+            </div>
+            <h3 class="phase-title">${idx + 1}. ${p.title}</h3>
+            <div class="hogan-cue-box">
+              <p class="cue-line">💡 <strong>호건 큐:</strong> ${p.cue}</p>
+              <p class="cue-line"><span class="cue-highlight">⚠️ 주의:</span> ${p.trap}</p>
+            </div>
+            <div class="shot-pad-label">
+              <span>퍼팅 성공률 기록 (${s.good} / ${total}구 · ${rate}%)</span>
+              <button class="mini-reset-btn" onclick="resetPhaseShots('${p.id}')">초기화</button>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <button class="shot-btn good" onclick="recordShot('${p.id}', 'good')">
+                <span class="shot-btn-icon">🕳️</span>
+                <span class="shot-btn-name">홀인 / 1m OK존 안착</span>
+                <span class="shot-btn-count">${s.good}</span>
+              </button>
+              <button class="shot-btn hook-warn" onclick="recordShot('${p.id}', 'hook')">
+                <span class="shot-btn-icon">❌</span>
+                <span class="shot-btn-name">미스 / 거리 오차</span>
+                <span class="shot-btn-count">${s.hook}</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    /**************************************************************
+     * 4. SHOT & MATRIX RECORDING ACTIONS
+     **************************************************************/
+    function recordShot(phaseId, type) {
+      if (!sessionState.shots[phaseId]) {
+        sessionState.shots[phaseId] = { good: 0, hook: 0, push: 0, fat: 0 };
+      }
+      sessionState.shots[phaseId][type] += 1;
+      if (navigator.vibrate) navigator.vibrate(18);
+      saveDraftState();
+      renderIndoorPhases();
+      renderPuttingPhases();
+    }
+
+    function resetPhaseShots(phaseId) {
+      sessionState.shots[phaseId] = { good: 0, hook: 0, push: 0, fat: 0 };
+      saveDraftState();
+      renderIndoorPhases();
+      renderPuttingPhases();
+    }
+
+    function recordApproach(distKey, field) {
+      if (!sessionState.matrix[distKey]) {
+        sessionState.matrix[distKey] = { in3m: 0, miss: 0 };
+      }
+      sessionState.matrix[distKey][field] += 1;
+      if (navigator.vibrate) navigator.vibrate(18);
+      saveDraftState();
+      renderApproachMatrix();
+    }
+
+    function resetApproachMatrix() {
+      APPROACH_DISTANCES.forEach(d => {
+        sessionState.matrix[d.key] = { in3m: 0, miss: 0 };
+      });
+      saveDraftState();
+      renderApproachMatrix();
+    }
+
+    /**************************************************************
+     * 5. MODE SWITCHING & PHASE TIMER WITH WAKELOCK + AUDIO BEEP
+     **************************************************************/
+    function switchMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+      ['indoor90', 'approach50', 'putting10', 'analytics'].forEach(m => {
+        document.getElementById('view-' + m).style.display = (m === mode) ? 'block' : 'none';
+      });
+
+      const timerConsole = document.getElementById('timerConsole');
+      if (mode === 'analytics') {
+        timerConsole.style.display = 'none';
+        updateAnalyticsAndMarkdown();
+      } else {
+        timerConsole.style.display = 'block';
+        const firstPhase = CURRICULUM[mode][0];
+        if (firstPhase && !CURRICULUM[mode].some(p => p.id === activePhaseId)) {
+          selectPhase(firstPhase.id, false);
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function findPhaseById(phaseId) {
+      for (const modeKey of ['indoor90', 'approach50', 'putting10']) {
+        const found = CURRICULUM[modeKey].find(p => p.id === phaseId);
+        if (found) return { modeKey, phase: found };
+      }
+      return null;
+    }
+
+    function selectPhase(phaseId, scrollToTimer) {
+      const info = findPhaseById(phaseId);
+      if (!info) return;
+      pauseTimer();
+      activePhaseId = phaseId;
+      timerTotalSec = info.phase.minutes * 60;
+      timerRemainSec = timerTotalSec;
+
+      const modeNames = { indoor90: '90분 인도어', approach50: '50분 어프로치', putting10: '10분 퍼팅' };
+      document.getElementById('activePhaseBadge').textContent = `${modeNames[info.modeKey]} · ${info.phase.step}`;
+      document.getElementById('activePhaseTitle').textContent = `${info.phase.title} (${info.phase.minutes}분)`;
+
+      updateTimerDisplay();
+      renderIndoorPhases();
+      renderApproachPhases();
+      renderPuttingPhases();
+
+      if (scrollToTimer) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function toggleTimer() {
+      if (timerInterval) {
+        pauseTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator) {
+        try {
+          wakeLockSentinel = await navigator.wakeLock.request('screen');
+          document.getElementById('wakeLockStatus').textContent = '🟢 화면꺼짐 방지 작동중';
+        } catch (err) {
+          document.getElementById('wakeLockStatus').textContent = '⚡ 화면꺼짐 방지 대기';
+        }
+      }
+    }
+
+    function startTimer() {
+      requestWakeLock();
+      const btn = document.getElementById('timerToggleBtn');
+      btn.textContent = '⏸ 일시정지';
+      btn.className = 't-btn t-btn-pause';
+      document.getElementById('timerDisplay').classList.add('running');
+
+      timerInterval = setInterval(() => {
+        if (timerRemainSec > 0) {
+          timerRemainSec -= 1;
+          updateTimerDisplay();
+        } else {
+          pauseTimer();
+          playFinishChime();
+          showToast('⏰ 단계 시간이 종료되었습니다! 다음 단계로 이동하세요.');
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      const btn = document.getElementById('timerToggleBtn');
+      if (btn) {
+        btn.textContent = '▶ 시작';
+        btn.className = 't-btn t-btn-primary';
+      }
+      const disp = document.getElementById('timerDisplay');
+      if (disp) disp.classList.remove('running');
+    }
+
+    function addMinutes(min) {
+      timerRemainSec += min * 60;
+      timerTotalSec = Math.max(timerTotalSec, timerRemainSec);
+      updateTimerDisplay();
+    }
+
+    function resetCurrentTimer() {
+      pauseTimer();
+      const info = findPhaseById(activePhaseId);
+      timerTotalSec = info ? info.phase.minutes * 60 : 600;
+      timerRemainSec = timerTotalSec;
+      updateTimerDisplay();
+    }
+
+    function updateTimerDisplay() {
+      const m = String(Math.floor(timerRemainSec / 60)).padStart(2, '0');
+      const s = String(timerRemainSec % 60).padStart(2, '0');
+      const disp = document.getElementById('timerDisplay');
+      disp.textContent = `${m}:${s}`;
+      disp.classList.toggle('urgent', timerRemainSec > 0 && timerRemainSec <= 60);
+
+      const elapsed = Math.max(0, timerTotalSec - timerRemainSec);
+      const pct = timerTotalSec > 0 ? Math.min(100, (elapsed / timerTotalSec) * 100) : 0;
+      document.getElementById('timerProgressFill').style.width = pct + '%';
+    }
+
+    function playFinishChime() {
+      if (navigator.vibrate) navigator.vibrate([250, 120, 250, 120, 400]);
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.18, ctx.currentTime + i * 0.14);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.14 + 0.35);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.14);
+          osc.stop(ctx.currentTime + i * 0.14 + 0.36);
+        });
+      } catch (e) {}
+    }
+
+    /**************************************************************
+     * 6. ANALYTICS, OBSIDIAN MARKDOWN & PLAUD SCRIPT GENERATOR
+     **************************************************************/
+    function computeStats() {
+      let inGood = 0, inHook = 0, inPush = 0, inFat = 0;
+      CURRICULUM.indoor90.forEach(p => {
+        const s = sessionState.shots[p.id] || { good: 0, hook: 0, push: 0, fat: 0 };
+        inGood += s.good;
+        inHook += s.hook;
+        inPush += s.push;
+        inFat += s.fat;
+      });
+      const inTotal = inGood + inHook + inPush + inFat;
+      const inGoodPct = inTotal > 0 ? Math.round((inGood / inTotal) * 100) : 0;
+      const inHookPct = inTotal > 0 ? Math.round((inHook / inTotal) * 100) : 0;
+
+      let apIn = 0, apMiss = 0;
+      APPROACH_DISTANCES.forEach(d => {
+        const m = sessionState.matrix[d.key] || { in3m: 0, miss: 0 };
+        apIn += m.in3m;
+        apMiss += m.miss;
+      });
+      const apTotal = apIn + apMiss;
+      const apPct = apTotal > 0 ? Math.round((apIn / apTotal) * 100) : 0;
+
+      let ptGood = 0, ptMiss = 0;
+      CURRICULUM.putting10.forEach(p => {
+        const s = sessionState.shots[p.id] || { good: 0, hook: 0 };
+        ptGood += s.good;
+        ptMiss += s.hook;
+      });
+      const ptTotal = ptGood + ptMiss;
+      const ptPct = ptTotal > 0 ? Math.round((ptGood / ptTotal) * 100) : 0;
+
+      return {
+        inTotal, inGood, inHook, inPush, inFat, inGoodPct, inHookPct,
+        apTotal, apIn, apMiss, apPct,
+        ptTotal, ptGood, ptMiss, ptPct
+      };
+    }
+
+    function updateAnalyticsAndMarkdown() {
+      const st = computeStats();
+      document.getElementById('kpiSweetSpot').textContent = st.inGoodPct + '%';
+      document.getElementById('kpiSweetSub').textContent = `정타 ${st.inGood} / 총 ${st.inTotal}구`;
+      document.getElementById('kpiLeftHook').textContent = st.inHookPct + '%';
+      document.getElementById('kpiHookSub').textContent = `좌측 당김 ${st.inHook}구 (목표 ≤15%)`;
+      document.getElementById('kpiApproachRate').textContent = st.apPct + '%';
+      document.getElementById('kpiApproachSub').textContent = `3m 안착 ${st.apIn} / 총 ${st.apTotal}구`;
+      document.getElementById('kpiPuttingRate').textContent = st.ptPct + '%';
+      document.getElementById('kpiPuttingSub').textContent = `성공 ${st.ptGood} / 총 ${st.ptTotal}구`;
+
+      const md = generateObsidianMarkdown(st);
+      const box = document.getElementById('obsidianMarkdownBox');
+      if (box) box.value = md;
+    }
+
+    function generateObsidianMarkdown(st) {
+      const lines = [
+        `---`,
+        `type: golf-practice`,
+        `date: ${sessionState.date}`,
+        `venue: "${sessionState.venue}"`,
+        `js_coupon_remain: ${couponState.remain}`,
+        `indoor_sweet_rate: ${st.inGoodPct}%`,
+        `indoor_left_hook_rate: ${st.inHookPct}%`,
+        `approach_3m_rate: ${st.apPct}%`,
+        `putting_rate: ${st.ptPct}%`,
+        `related:`,
+        `  - "[[2_LLMWiki/wiki/골프|골프]]"`,
+        `  - "[[1_MyBrain/Efforts/Projects/골프 안정적인 싱글디짓 핸디캡 달성.project|싱글디짓 프로젝트]]"`,
+        `---`,
+        ``,
+        `# 🏌️ 골프 연습 기록 (${sessionState.date} · ${sessionState.venue})`,
+        ``,
+        `## 1. 핵심 요약 지표`,
+        `- **장소 / 쿠폰**: ${sessionState.venue} (곤지암 JS 잔여 쿠폰: **${couponState.remain}/15회**)`,
+        `- **90분 인도어 타석**: 총 ${st.inTotal}구 — 🎯 정타 **${st.inGood}구(${st.inGoodPct}%)** / ⬅️ 좌측 당김(훅) **${st.inHook}구(${st.inHookPct}%)** / ➡️ 우측 밀림 ${st.inPush}구 / 💥 뒤땅·탑볼 ${st.inFat}구`,
+        `- **50분 52도 어프로치**: 총 ${st.apTotal}구 중 반경 3m 안착 **${st.apIn}구 (${st.apPct}%)**`,
+        `- **10분 퍼팅**: 총 ${st.ptTotal}구 중 성공 **${st.ptGood}구 (${st.ptPct}%)**`,
+        ``
+      ];
+
+      if (st.apTotal > 0) {
+        lines.push(`## 2. 52도 웨지 거리별 반경 3m 안착 매트릭스`);
+        lines.push(`| 거리 | 핵심 큐 | 3m 안착 | 미스 | 성공률 |`);
+        lines.push(`|------|---------|---------|------|--------|`);
+        APPROACH_DISTANCES.forEach(d => {
+          const m = sessionState.matrix[d.key] || { in3m: 0, miss: 0 };
+          const tot = m.in3m + m.miss;
+          if (tot > 0) {
+            const pct = Math.round((m.in3m / tot) * 100) + '%';
+            lines.push(`| **${d.label}** | ${d.guide} | ${m.in3m} | ${m.miss} | **${pct}** |`);
+          }
+        });
+        lines.push(``);
+      }
+
+      if (st.inTotal > 0) {
+        lines.push(`## 3. 90분 인도어 구간별 기록`);
+        lines.push(`| 단계 | 정타(🎯) | 좌측훅(⬅️) | 우측(➡️) | 뒤땅·탑(💥) |`);
+        lines.push(`|------|----------|------------|----------|-------------|`);
+        CURRICULUM.indoor90.forEach(p => {
+          const s = sessionState.shots[p.id] || { good: 0, hook: 0, push: 0, fat: 0 };
+          if (s.good + s.hook + s.push + s.fat > 0) {
+            lines.push(`| ${p.title} | ${s.good} | ${s.hook} | ${s.push} | ${s.fat} |`);
+          }
+        });
+        lines.push(``);
+      }
+
+      lines.push(`## 4. 오늘의 체감 & 벤 호건 복기 메모`);
+      lines.push(`> ${sessionState.memo ? sessionState.memo.replace(/\n/g, '\n> ') : '(Plaud 음성메모 또는 한 줄 복기를 여기에 기록)'}`);
+      lines.push(``);
+      return lines.join('\n');
+    }
+
+    /**************************************************************
+     * 7. PLAUD VOICE PROMPT MODAL & WEB SPEECH DICTATION
+     **************************************************************/
+    function openPlaudModal() {
+      const st = computeStats();
+      const container = document.getElementById('plaudPromptContent');
+      container.innerHTML = `
+        <div class="plaud-step">
+          <span class="plaud-step-num">1. 오프닝 (날짜·장소·쿠폰)</span>
+          "오늘은 <strong>${sessionState.date}</strong>, <strong>${sessionState.venue}</strong> 연습 기록. (곤지암 JS 쿠폰 남은 횟수 <strong>${couponState.remain}회</strong>)"
+        </div>
+        <div class="plaud-step">
+          <span class="plaud-step-num">2. 50분 어프로치 & 10분 퍼팅 감각</span>
+          "포틴 52도 어프로치는 총 <strong>${st.apTotal}구 중 ${st.apIn}구(${st.apPct}%)</strong>가 반경 3m 안에 들어갔다. 왼발 체중 싣기와 퍼팅식 백스윙에서 오늘 가장 좋았던 거리와 미스 원인은..."
+        </div>
+        <div class="plaud-step">
+          <span class="plaud-step-num">3. 90분 인도어 — 등 근육 시동 & 좌측 훅 점검</span>
+          "인도어 타석 총 <strong>${st.inTotal}구 중 정타율 ${st.inGoodPct}%, 좌측 당김(훅) 비율은 ${st.inHookPct}%</strong>였다. 견갑골(등 근육)로 백스윙을 시작했을 때 유틸리티와 드라이버 구질은..."
+        </div>
+        <div class="plaud-step">
+          <span class="plaud-step-num">4. 다음 라운드 One Thing</span>
+          "다음 필드에 나가서 1번 홀과 5번 홀 티박스에서 꼭 지킬 한 가지 큐는..."
+        </div>
+      `;
+      document.getElementById('plaudModal').classList.add('open');
+    }
+
+    function closePlaudModal() {
+      document.getElementById('plaudModal').classList.remove('open');
+    }
+
+    let recognition = null;
+    function toggleSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('이 브라우저에서는 음성 받아쓰기를 지원하지 않습니다. 키보드 마이크 버튼을 사용해 보세요.');
+        return;
+      }
+      const btn = document.getElementById('speechBtn');
+      if (recognition) {
+        recognition.stop();
+        recognition = null;
+        btn.textContent = '🎤 음성 받아쓰기';
+        return;
+      }
+      recognition = new SpeechRecognition();
+      recognition.lang = 'ko-KR';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      btn.textContent = '🔴 듣는 중...';
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        const memoEl = document.getElementById('quickMemoInput');
+        memoEl.value = (memoEl.value ? memoEl.value + ' ' : '') + transcript;
+        saveDraftState();
+        showToast('음성이 메모에 입력되었습니다.');
+      };
+      recognition.onend = () => {
+        recognition = null;
+        btn.textContent = '🎤 음성 받아쓰기';
+      };
+      recognition.start();
+    }
+
+    /**************************************************************
+     * 8. HISTORY SAVE, EXPORT & COUPON MODAL
+     **************************************************************/
+    function saveCurrentSessionToHistory() {
+      saveDraftState();
+      const st = computeStats();
+      let history = [];
+      try {
+        history = JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY) || '[]');
+      } catch (e) {}
+
+      const entry = {
+        id: Date.now(),
+        date: sessionState.date,
+        venue: sessionState.venue,
+        couponRemain: couponState.remain,
+        stats: st,
+        memo: sessionState.memo,
+        markdown: generateObsidianMarkdown(st)
+      };
+
+      history.unshift(entry);
+      localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(history.slice(0, 50)));
+      renderSavedHistory();
+      switchMode('analytics');
+      showToast('✅ 오늘 연습 결과가 저장되었습니다! 마크다운을 복사해 보세요.');
+    }
+
+    function renderSavedHistory() {
+      const container = document.getElementById('savedHistoryList');
+      if (!container) return;
+      let history = [];
+      try {
+        history = JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY) || '[]');
+      } catch (e) {}
+
+      if (history.length === 0) {
+        container.innerHTML = `<p style="font-size:12px; color:var(--ink-muted); margin:0;">아직 저장된 세션이 없습니다. 하단 <strong>'✅ 연습 결과 저장'</strong>을 누르면 이곳에 누적됩니다.</p>`;
+        return;
+      }
+
+      container.innerHTML = history.map((item, idx) => `
+        <div class="history-item">
+          <div>
+            <strong>${item.date} · ${item.venue}</strong>
+            <div style="font-size:11.5px; color:var(--ink-secondary); margin-top:2px;">
+              정타 ${item.stats.inGoodPct}% · 좌측훅 ${item.stats.inHookPct}% · 52도(3m) ${item.stats.apPct}% · 퍼팅 ${item.stats.ptPct}%
+            </div>
+          </div>
+          <button class="phase-select-btn" onclick="loadHistoryMarkdown(${idx})">불러오기</button>
+        </div>
+      `).join('');
+    }
+
+    function loadHistoryMarkdown(idx) {
+      let history = [];
+      try {
+        history = JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY) || '[]');
+      } catch (e) {}
+      if (history[idx]) {
+        document.getElementById('obsidianMarkdownBox').value = history[idx].markdown;
+        showToast(`${history[idx].date} 기록을 불러왔습니다.`);
+      }
+    }
+
+    function clearAllHistory() {
+      if (confirm('저장된 연습 이력과 현재 카운트를 초기화할까요?')) {
+        localStorage.removeItem(STORAGE_KEY_HISTORY);
+        sessionState = getInitialSessionState();
+        saveDraftState();
+        renderIndoorPhases();
+        renderApproachMatrix();
+        renderPuttingPhases();
+        renderSavedHistory();
+        showToast('초기화되었습니다.');
+      }
+    }
+
+    function copyMarkdownToClipboard() {
+      const box = document.getElementById('obsidianMarkdownBox');
+      navigator.clipboard.writeText(box.value).then(() => {
+        showToast('📋 옵시디언 마크다운이 클립보드에 복사되었습니다!');
+      }).catch(() => {
+        box.select();
+        document.execCommand('copy');
+        showToast('📋 복사되었습니다!');
+      });
+    }
+
+    function downloadMarkdownFile() {
+      const box = document.getElementById('obsidianMarkdownBox');
+      const d = sessionState.date.replace(/-/g, '').slice(2);
+      const filename = `${d}_골프연습_${sessionState.venue.replace(/\s+/g, '')}.md`;
+      const blob = new Blob([box.value], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast(`💾 ${filename} 파일이 저장되었습니다.`);
+    }
+
+    function exportAllHistoryJSON() {
+      const history = localStorage.getItem(STORAGE_KEY_HISTORY) || '[]';
+      const blob = new Blob([history], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `hogan_golf_practice_backup_${sessionState.date}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('📦 JSON 백업 파일이 다운로드되었습니다.');
+    }
+
+    function openCouponModal() {
+      renderCouponUI();
+      document.getElementById('couponModal').classList.add('open');
+    }
+
+    function closeCouponModal() {
+      document.getElementById('couponModal').classList.remove('open');
+    }
+
+    function useOneCoupon() {
+      if (couponState.remain <= 0) {
+        showToast('남은 쿠폰이 없습니다.');
+        return;
+      }
+      couponState.remain -= 1;
+      const usedCount = couponState.total - couponState.remain;
+      couponState.logs.unshift(`${usedCount}회차 사용: ${sessionState.date} (잔여 ${couponState.remain}회)`);
+      saveCouponState();
+      saveDraftState();
+      showToast(`🎫 쿠폰 1회 차감! 잔여 ${couponState.remain}/15회`);
+    }
+
+    function adjustCoupon(delta) {
+      couponState.remain = Math.min(couponState.total, Math.max(0, couponState.remain + delta));
+      saveCouponState();
+      saveDraftState();
+    }
+
+    /**************************************************************
+     * 9. PWA INSTALL MODAL
+     **************************************************************/
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      const btn = document.getElementById('nativeInstallPromptBtn');
+      if (btn) btn.style.display = 'flex';
+    });
+
+    function openInstallModal() {
+      document.getElementById('installModal').classList.add('open');
+    }
+
+    function closeInstallModal() {
+      document.getElementById('installModal').classList.remove('open');
+    }
+
+    async function triggerNativeInstall() {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      document.getElementById('nativeInstallPromptBtn').style.display = 'none';
+      closeInstallModal();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        t.style.display = 'none';
+      }, 2800);
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
+
