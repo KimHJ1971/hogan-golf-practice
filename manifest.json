@@ -1,7 +1,7 @@
 {
-  "name": "벤 호건 싱글디짓 연습 가이드",
+  "name": "벤 호건 싱글디짓 코치 & 필드 SOS",
   "short_name": "호건 골프코치",
-  "description": "90분 인도어 · 50분 어프로치 · 10분 퍼팅 실전 연습 가이드 & Plaud 기록 · 데이터 트래커",
+  "description": "90분 인도어 · 50분 어프로치 · 10분 퍼팅 · 집콕 5분 · 필드 SOS 긴급처방 & Plaud 데이터 트래커",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F6F4EE",
@@ -17,4 +17,3 @@
     }
   ]
 }
-
