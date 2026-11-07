@@ -1,7 +1,8 @@
-const CACHE_NAME = 'hogan-golf-coach-v2';
+const CACHE_NAME = 'hogan-golf-coach-v3';
 const ASSETS = [
   './',
   './index.html',
+  './visual-guide.html',
   './manifest.json',
   './icon.svg'
 ];
@@ -30,6 +31,6 @@ self.addEventListener('fetch', (event) => {
         caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
         return res;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(event.request, { ignoreSearch: true }))
   );
 });

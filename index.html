@@ -938,6 +938,113 @@
       max-width: 90vw;
       text-align: center;
     }
+
+    /* Visual Masterbook Integration Buttons & Fullscreen Drawer */
+    .visual-pill-btn {
+      background: linear-gradient(135deg, #249256 0%, #196B3E 100%);
+      border: 1px solid #72F2A7;
+      color: #FFFFFF;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      box-shadow: 0 2px 8px rgba(36, 146, 86, 0.35);
+      white-space: nowrap;
+    }
+
+    .visual-inline-btn {
+      background: #E8F5EE;
+      border: 1px solid #8AC9A6;
+      color: var(--turf-deep);
+      border-radius: 8px;
+      padding: 5px 9px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .visual-inline-btn:active {
+      background: #CFEAD9;
+    }
+
+    .visual-fullscreen-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: #F5F3EC;
+      display: none;
+      flex-direction: column;
+    }
+
+    .visual-fullscreen-modal.open {
+      display: flex;
+    }
+
+    .visual-modal-bar {
+      background: #0E2A1C;
+      color: #F6F4EE;
+      padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid rgba(114, 242, 167, 0.25);
+      flex-shrink: 0;
+    }
+
+    .visual-modal-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #72F2A7;
+    }
+
+    .visual-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .visual-ext-link {
+      background: rgba(255, 255, 255, 0.12);
+      color: #E4EFE9;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .visual-close-btn {
+      background: var(--persimmon);
+      color: #FFF;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .visual-iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #F5F3EC;
+    }
   </style>
 </head>
 <body>
@@ -955,10 +1062,11 @@
         </div>
       </div>
       <div class="header-actions">
+        <button class="visual-pill-btn" onclick="openVisualGuideAuto()">🎨 비주얼 교본</button>
         <button class="coupon-pill" onclick="openCouponModal()">
-          🎫 JS <span id="couponRemainText">14</span>/15
+          🎫 <span id="couponRemainText">14</span>/15
         </button>
-        <button class="install-btn" onclick="openInstallModal()">📲 설치</button>
+        <button class="install-btn" onclick="openInstallModal()">📲</button>
       </div>
     </div>
 
@@ -995,8 +1103,8 @@
     <!-- 30-Sec Zero-Point Setup Check Bar -->
     <section id="zeroCheckSection" class="zero-check-bar">
       <div class="zero-check-header">
-        <span>🎯 연습 전 30초 영점 세팅 (터치해서 체크)</span>
-        <span id="zeroCheckCount" style="font-family:var(--font-mono);">0/3 완료</span>
+        <span>🎯 연습 전 30초 영점 세팅 (<span id="zeroCheckCount" style="font-family:var(--font-mono);">0/3 완료</span>)</span>
+        <button class="visual-inline-btn" onclick="openVisualGuide('ch0')">🎨 3대 영점 도해</button>
       </div>
       <div class="zero-pills">
         <button id="zp_grip" class="zero-pill" onclick="toggleZeroCheck('grip')">☐ 엄지·검지 힘 0%<br/>(악력 '3' 유지)</button>
@@ -1049,7 +1157,7 @@
       <div class="phase-card">
         <div class="phase-top">
           <span class="phase-step-tag">LIE STRATEGY</span>
-          <span style="font-size:11px; color:var(--ink-muted);">지형별 원탭 셋업 공식</span>
+          <button class="visual-inline-btn" onclick="openVisualGuide('ch2')">🎨 거리×지형 시뮬레이터</button>
         </div>
         <div class="lie-tabs">
           <button class="lie-tab active" data-lie="flat" onclick="selectLie('flat')">🟢 평지 기본</button>
@@ -1079,6 +1187,7 @@
       <div class="stoic-banner">
         <p class="stoic-quote">🕳️ 10분 퍼팅 원칙: "1.5m는 홀컵 소리로 넣고, 10m는 반경 1m OK존에 세운다"</p>
         <p class="stoic-sub">그립 압력 '3'을 끝까지 유지하며 시계추 등 근육 진자로 굴립니다. 임팩트 후 절대 공을 따라 고개를 들지 마십시오.</p>
+        <button class="visual-inline-btn" style="margin-top:8px;" onclick="openVisualGuide('ch3')">🎨 1.5m 시계 & 1m OK존 그린 도해 보기</button>
       </div>
       <div id="puttingPhasesContainer"></div>
     </section>
@@ -1090,6 +1199,7 @@
       <div class="stoic-banner">
         <p class="stoic-quote">🏠 평일 집콕 5분 루틴: "연습장 못 가는 날, 옆 사람 안 깨우고 셋업·리듬·체중이동 고정"</p>
         <p class="stoic-sub">벽·수건 한 장·동전 하나·책 한 권으로 스윙 플레인과 골반 힌지를 몸의 세포에 각인합니다.</p>
+        <button class="visual-inline-btn" style="margin-top:8px;" onclick="openVisualGuide('ch4')">🎨 벽·수건·동전 동작 도해 보기</button>
       </div>
       <div id="homePhasesContainer"></div>
       <div class="phase-card" style="text-align:center;">
@@ -1266,14 +1376,26 @@
         </div>
         <div class="plaud-step">
           <span class="plaud-step-num" style="background:var(--turf-deep);">방법 2</span>
-          <strong>필드·연습장 오프라인 자동 작동 (v2)</strong><br/>
-          산악 지형 골프장이나 지하 타석에서 통신이 끊겨도 <code>🆘 필드 SOS 닥터</code>와 모든 타이머·기록 기능이 즉시 작동합니다.
+          <strong>필드·연습장 오프라인 자동 작동 (v3 · 비주얼 교본 포함)</strong><br/>
+          산악 지형 골프장이나 지하 타석에서 통신이 끊겨도 <code>🎨 능동형 비주얼 교본</code>과 <code>🆘 필드 SOS 닥터</code>, 타이머·기록 기능이 모두 작동합니다.
         </div>
       </div>
       <button id="nativeInstallPromptBtn" class="save-session-btn" style="width:100%; display:none;" onclick="triggerNativeInstall()">
         📲 지금 바로 앱 설치하기
       </button>
     </div>
+  </div>
+
+  <!-- MODAL 4: 풀스크린 능동형 비주얼 교본 뷰어 (타이머 유지형) -->
+  <div id="visualGuideModal" class="visual-fullscreen-modal">
+    <div class="visual-modal-bar">
+      <div class="visual-modal-title">🎨 능동형 비주얼 교본 <span style="font-size:11px; color:#B8C9BF; font-weight:600;">(타이머 계속 작동 중)</span></div>
+      <div class="visual-modal-actions">
+        <a id="visualStandaloneLink" class="visual-ext-link" href="./visual-guide.html" target="_blank">단독 창 ↗</a>
+        <button class="visual-close-btn" onclick="closeVisualGuide()">✕ 닫고 연습</button>
+      </div>
+    </div>
+    <iframe id="visualGuideFrame" class="visual-iframe" title="벤 호건 싱글디짓 비주얼 마스터북"></iframe>
   </div>
 
   <script>
@@ -1704,9 +1826,12 @@
           <article class="phase-card ${isActive ? 'active-phase' : ''}">
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
-              <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
-                ${isActive ? '⏱ 타이머 선택됨' : '타이머 켜기'}
-              </button>
+              <div style="display:flex; gap:5px; align-items:center;">
+                <button class="visual-inline-btn" onclick="openVisualGuide('ch1-${idx}')">🎨 도해</button>
+                <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
+                  ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
+                </button>
+              </div>
             </div>
             <h3 class="phase-title">${idx + 1}. ${p.title}</h3>
             <div class="hogan-cue-box">
@@ -1765,6 +1890,7 @@
     }
 
     function renderApproachPhases() {
+      const apTargets = ['ch2-10m', 'ch2-20m', 'ch2-30m', 'ch2-bunker'];
       const container = document.getElementById('approachPhasesContainer');
       container.innerHTML = CURRICULUM.approach50.map((p, idx) => {
         const isActive = activePhaseId === p.id;
@@ -1772,9 +1898,12 @@
           <article class="phase-card ${isActive ? 'active-phase' : ''}">
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
-              <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
-                ${isActive ? '⏱ 타이머 선택됨' : '타이머 켜기'}
-              </button>
+              <div style="display:flex; gap:5px; align-items:center;">
+                <button class="visual-inline-btn" onclick="openVisualGuide('${apTargets[idx] || 'ch2'}')">🎨 도해</button>
+                <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
+                  ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
+                </button>
+              </div>
             </div>
             <h3 class="phase-title">${idx + 1}. ${p.title}</h3>
             <div class="hogan-cue-box" style="margin-bottom:0;">
@@ -1797,7 +1926,7 @@
             const rate = total > 0 ? Math.round((m.in3m / total) * 100) + '%' : '-';
             return `
               <div class="matrix-row">
-                <div class="dist-badge">${d.label}</div>
+                <div class="dist-badge" style="cursor:pointer;" title="터치하면 거리별 도해 열기" onclick="openVisualGuide('ch2-${d.key}')">${d.label} 🎨</div>
                 <div class="dist-guide">
                   <strong>${d.guide}</strong>
                   <span>${d.sub}</span>
@@ -1825,9 +1954,12 @@
           <article class="phase-card ${isActive ? 'active-phase' : ''}">
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
-              <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
-                ${isActive ? '⏱ 타이머 선택됨' : '타이머 켜기'}
-              </button>
+              <div style="display:flex; gap:5px; align-items:center;">
+                <button class="visual-inline-btn" onclick="openVisualGuide('ch3')">🎨 도해</button>
+                <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
+                  ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
+                </button>
+              </div>
             </div>
             <h3 class="phase-title">${idx + 1}. ${p.title}</h3>
             <div class="hogan-cue-box">
@@ -1863,9 +1995,12 @@
           <article class="phase-card ${isActive ? 'active-phase' : ''}">
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
-              <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
-                ${isActive ? '⏱ 타이머 선택됨' : '타이머 켜기'}
-              </button>
+              <div style="display:flex; gap:5px; align-items:center;">
+                <button class="visual-inline-btn" onclick="openVisualGuide('ch4')">🎨 도해</button>
+                <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
+                  ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
+                </button>
+              </div>
             </div>
             <h3 class="phase-title">${idx + 1}. ${p.title}</h3>
             <div class="hogan-cue-box" style="margin-bottom:0;">
@@ -1967,6 +2102,9 @@
               </div>
               <div class="sos-rx-step">1️⃣ ${item.rx1}</div>
               <div class="sos-rx-step">2️⃣ ${item.rx2}</div>
+              <button class="visual-inline-btn" style="width:100%; margin-top:8px; padding:9px;" onclick="openVisualGuide('ch5-${item.key}')">
+                🎨 [붕괴 원인 vs 응급처방] 궤도 도해로 눈으로 보기
+              </button>
               <button class="sos-log-btn" onclick="logSosUsage('${item.key}', '${item.title}')">
                 📌 오늘 필드/연습에서 이 처방 적용함 (+1 기록 · 현재 ${cnt}회)
               </button>
@@ -2514,6 +2652,61 @@
       await deferredInstallPrompt.userChoice;
       deferredInstallPrompt = null;
       closeInstallModal();
+    }
+
+    /**************************************************************
+     * 8. VISUAL MASTERBOOK DRAWER & CONTEXTUAL DEEP-LINKING
+     **************************************************************/
+    let visualFrameLoaded = false;
+
+    function openVisualGuide(targetHash) {
+      const cleanTarget = (targetHash || 'ch0').replace(/^#/, '');
+      const modal = document.getElementById('visualGuideModal');
+      const frame = document.getElementById('visualGuideFrame');
+      const extLink = document.getElementById('visualStandaloneLink');
+
+      if (extLink) {
+        extLink.href = `./visual-guide.html#${cleanTarget}`;
+      }
+
+      modal.classList.add('open');
+
+      if (!visualFrameLoaded || !frame.getAttribute('src')) {
+        frame.src = `./visual-guide.html?embed=1#${cleanTarget}`;
+        frame.onload = () => {
+          visualFrameLoaded = true;
+          try {
+            frame.contentWindow.postMessage({ type: 'HOGAN_VISUAL_NAV', target: cleanTarget }, '*');
+          } catch (e) {}
+        };
+      } else {
+        try {
+          frame.contentWindow.postMessage({ type: 'HOGAN_VISUAL_NAV', target: cleanTarget }, '*');
+        } catch (e) {
+          frame.src = `./visual-guide.html?embed=1#${cleanTarget}`;
+        }
+      }
+    }
+
+    function openVisualGuideAuto() {
+      if (currentMode === 'indoor90') {
+        const idx = CURRICULUM.indoor90.findIndex(p => p.id === activePhaseId);
+        openVisualGuide('ch1-' + (idx >= 0 ? idx : 0));
+      } else if (currentMode === 'approach50') {
+        openVisualGuide('ch2');
+      } else if (currentMode === 'putting10') {
+        openVisualGuide('ch3');
+      } else if (currentMode === 'home5') {
+        openVisualGuide('ch4');
+      } else if (currentMode === 'fieldsos') {
+        openVisualGuide('ch5' + (openSosKey ? '-' + openSosKey : ''));
+      } else {
+        openVisualGuide('ch0');
+      }
+    }
+
+    function closeVisualGuide() {
+      document.getElementById('visualGuideModal').classList.remove('open');
     }
 
     function showToast(msg) {

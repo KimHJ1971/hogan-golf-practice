@@ -2,8 +2,9 @@
 
 **90분 인도어 · 50분 어프로치 · 10분 퍼팅 · 🏠 집콕 5분 · 🆘 필드 SOS 닥터**를 하나로 통합한 모바일 골프 연습 & 실전 라운드 응급처방 웹앱(PWA)입니다.
 
-## 🔗 모바일 실행 주소 (GitHub Pages)
-👉 **https://kimhj1971.github.io/hogan-golf-practice/**
+## 🔗 모바일·웹 바로 실행 주소 (GitHub Pages)
+- 📱 **실전 코치 & 트래커 앱**: **https://kimhj1971.github.io/hogan-golf-practice/**
+- 🎨 **능동형 인터랙티브 비주얼 교본**: **https://kimhj1971.github.io/hogan-golf-practice/visual-guide.html** *(앱 내 `[🎨 비주얼 교본]` 및 각 단계 `[🎨 도해]` 버튼과 타이머 유지형 실시간 오프라인 연동)*
 
 ## ✨ v2 주요 업그레이드
 1. **🎯 연습 전 30초 영점 세팅 체크바**: `엄지·검지 힘 0%(악력 3)` · `52도 바운스 바닥 밀착` · `바닥 T자 정렬선`
