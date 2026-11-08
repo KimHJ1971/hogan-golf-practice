@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hogan-golf-coach-v4';
+const CACHE_NAME = 'hogan-golf-coach-v5';
 const ASSETS = [
   './',
   './index.html',
