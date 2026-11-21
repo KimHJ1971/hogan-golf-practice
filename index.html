@@ -10,7 +10,7 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
-  <title>벤 호건 싱글디짓 & 안정적 70타 코치 v3</title>
+  <title>벤 호건 싱글디짓 & 안정적 70타 코치 v4 (보이스 코치)</title>
   <style>
     :root {
       --bg-paper: #F6F4EE;
@@ -1210,6 +1210,201 @@
       border: none;
       background: #F5F3EC;
     }
+
+    /* Voice Coach Studio & Hands-free Shot Recording */
+    .voice-studio-box {
+      margin-top: 11px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .voice-control-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .v-pill-btn {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+      color: #D9E6DE;
+      border-radius: 99px;
+      padding: 5px 9px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .v-pill-btn.on {
+      background: rgba(114, 242, 167, 0.2);
+      border-color: #72F2A7;
+      color: #72F2A7;
+    }
+
+    .v-pill-btn.mic-listening {
+      background: rgba(200, 75, 49, 0.9);
+      border-color: #FFB4A2;
+      color: #FFF;
+      animation: pulse 1s infinite;
+    }
+
+    .v-pace-select {
+      background: rgba(12, 37, 24, 0.9);
+      color: #F6F4EE;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 99px;
+      padding: 4px 8px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .voice-subtitle-card {
+      background: rgba(7, 22, 14, 0.56);
+      border: 1px solid rgba(114, 242, 167, 0.28);
+      border-radius: 12px;
+      padding: 10px 11px;
+    }
+
+    .voice-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .voice-shot-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: #72F2A7;
+      background: rgba(114, 242, 167, 0.14);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .voice-stage-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #F5C451;
+      background: rgba(245, 196, 81, 0.14);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .voice-live-transcript {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.48;
+      color: #FFFFFF;
+      min-height: 38px;
+      word-break: keep-all;
+    }
+
+    .voice-live-transcript.speaking {
+      color: #B9F8D3;
+    }
+
+    .voice-sub-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .voice-mini-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #E4EFE9;
+      border-radius: 8px;
+      padding: 6px 4px;
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .voice-mini-btn:active {
+      background: rgba(114, 242, 167, 0.25);
+    }
+
+    .console-quick-shot-bar {
+      margin-top: 9px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+    }
+
+    .cq-btn {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFF;
+      border-radius: 9px;
+      padding: 8px 3px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      line-height: 1.2;
+    }
+
+    .cq-btn:active { transform: scale(0.95); }
+    .cq-btn.cq-good { background: rgba(56, 178, 111, 0.28); border-color: #72F2A7; color: #DDFCEB; }
+    .cq-btn.cq-warn { background: rgba(200, 75, 49, 0.34); border-color: #FF8B73; color: #FFE6E0; }
+    .cq-count { font-family: var(--font-mono); font-size: 13px; font-weight: 900; }
+
+    .cq-dist-select {
+      grid-column: span 2;
+      background: rgba(12, 37, 24, 0.92);
+      color: #72F2A7;
+      border: 1px solid rgba(114, 242, 167, 0.45);
+      border-radius: 9px;
+      padding: 7px 8px;
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      font-weight: 800;
+      outline: none;
+    }
+
+    .voice-speak-btn {
+      background: #FFF6E0;
+      border: 1px solid #D9B65B;
+      color: #6B4700;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-family: var(--font-sans);
+      font-size: 11.2px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      white-space: nowrap;
+    }
+
+    .voice-speak-btn.speaking-now {
+      background: #C84B31;
+      border-color: #9E331D;
+      color: #FFF;
+    }
   </style>
 </head>
 <body>
@@ -1222,8 +1417,8 @@
       <div class="brand-group">
         <div class="brand-emblem">70s</div>
         <div style="min-width:0;">
-          <h1 class="brand-title">호건 싱글디짓 코치 <span style="font-size:11px; color:#72F2A7;">v3</span></h1>
-          <p class="brand-sub">안정적 70타 마스터 · 1시 푸시드로우 · 52° 시계추 · 3·6·9 퍼팅 · SOS</p>
+          <h1 class="brand-title">호건 싱글디짓 코치 <span style="font-size:11px; color:#72F2A7;">v4</span></h1>
+          <p class="brand-sub">🔊 실시간 한타한타 보이스 레슨 · 1시 푸시드로우 · 52° 시계추 · 3·6·9 퍼팅</p>
         </div>
       </div>
       <div class="header-actions">
@@ -1270,8 +1465,9 @@
       <div class="zero-check-header">
         <span>🎯 30초 영점 세팅 (<span id="zeroCheckCount" style="font-family:var(--font-mono);">0/3 완료</span>)</span>
         <div style="display:flex; gap:5px; align-items:center;">
+          <button class="voice-speak-btn" onclick="speakZeroPointGuide()">🔊 영점 음성</button>
           <button class="batch-plus-btn" onclick="checkAllZeroPoints()">✅ 일괄완료</button>
-          <button class="visual-inline-btn" onclick="openVisualGuide('ch0')">🎨 영점 도해</button>
+          <button class="visual-inline-btn" onclick="openVisualGuide('ch0')">🎨 도해</button>
         </div>
       </div>
       <div class="zero-pills">
@@ -1298,6 +1494,40 @@
       </div>
       <div class="timer-progress-track">
         <div id="timerProgressFill" class="timer-progress-fill"></div>
+      </div>
+
+      <!-- 실시간 보이스 코치 & 핸즈프리 한타한타 레슨 스튜디오 -->
+      <div class="voice-studio-box">
+        <div class="voice-control-row">
+          <button id="voiceCoachToggleBtn" class="v-pill-btn on" onclick="toggleVoiceCoach()">🔊 보이스코치 ON</button>
+          <select id="voicePaceSelect" class="v-pace-select" aria-label="한타 코칭 간격" onchange="updateVoicePace(this.value)">
+            <option value="25">⚡ 빠름 25초/타</option>
+            <option value="35" selected>⏱ 표준 35초/타</option>
+            <option value="45">🧘 여유 45초/타</option>
+            <option value="55">🎯 집중 55초/타</option>
+          </select>
+          <button id="autoCountToggleBtn" class="v-pill-btn" onclick="toggleVoiceAutoCount()" title="한 타 완료 시 미기록이면 기본 정타 +1 자동 추가">🤖 자동+1구 OFF</button>
+          <button id="voiceRecToggleBtn" class="v-pill-btn" onclick="toggleVoiceResultListening()" title="피니시 후 말로 구질 기록(정타/훅/우측/뒤땅)">🎤 말로 기록 OFF</button>
+        </div>
+
+        <div class="voice-subtitle-card">
+          <div class="voice-meta-row">
+            <span id="voiceShotBadge" class="voice-shot-badge">🏌️ 대기 · 목표 20구</span>
+            <span id="voiceStageBadge" class="voice-stage-badge">🎧 ▶ 시작 시 상세 보이스 레슨 시작</span>
+          </div>
+          <div id="voiceLiveTranscript" class="voice-live-transcript">
+            타이머의 <strong>▶ 시작</strong> 버튼을 누르면 15분 동안 코치가 매 타 셋업·스윙 템포·피니시까지 음성으로 한 타 한 타 직접 안내합니다.
+          </div>
+          <div class="voice-sub-actions">
+            <button class="voice-mini-btn" onclick="playPhaseOpeningManual()">📖 오프닝 레슨</button>
+            <button class="voice-mini-btn" onclick="nextShotCoachManual()">⏭ 다음 타</button>
+            <button class="voice-mini-btn" onclick="repeatCurrentShotCoach()">🔁 다시 듣기</button>
+            <button class="voice-mini-btn" onclick="stopCoachSpeech(true)">🔇 음성 멈춤</button>
+          </div>
+        </div>
+
+        <!-- 장갑 착용 시 화면 상단에서 바로 누르는 원탭 기록 바 -->
+        <div id="consoleQuickShotBar" class="console-quick-shot-bar"></div>
       </div>
     </section>
 
@@ -1340,7 +1570,10 @@
       <div class="phase-card">
         <div class="phase-top">
           <span class="phase-step-tag">5 LIE & TROUBLE FORMULA</span>
-          <button class="visual-inline-btn" onclick="openVisualGuide('ch2')">🎨 거리×지형 시뮬레이터</button>
+          <div style="display:flex; gap:5px; align-items:center;">
+            <button class="voice-speak-btn" onclick="speakCurrentLie()">🔊 라이 음성</button>
+            <button class="visual-inline-btn" onclick="openVisualGuide('ch2')">🎨 시뮬레이터</button>
+          </div>
         </div>
         <div class="lie-tabs" style="grid-template-columns: repeat(3, 1fr);">
           <button class="lie-tab active" data-lie="flat" onclick="selectLie('flat')">🟢 평지 성냥켜기</button>
@@ -1455,7 +1688,10 @@
       <div class="phase-card" style="border-color:var(--turf-mid);">
         <div class="phase-top">
           <span class="phase-step-tag">MOUNTAIN COURSE CHEAT SHEET</span>
-          <button class="visual-inline-btn" onclick="openVisualGuide('ch5-slope')">🎨 4대 경사지 도해</button>
+          <div style="display:flex; gap:5px; align-items:center;">
+            <button class="voice-speak-btn" onclick="speakCurrentSlope()">🔊 경사지 음성</button>
+            <button class="visual-inline-btn" onclick="openVisualGuide('ch5-slope')">🎨 도해</button>
+          </div>
         </div>
         <h3 class="phase-title">⛰️ 2단계: 한국 산악지형 4대 경사지 3초 공식 (억지로 몸 눕히기 금지!)</h3>
         <div class="slope-grid-4">
@@ -2058,6 +2294,11 @@
         matChecks: { towel: false, gate: false, divot: false },
         quickGrades: { indoor: '', approach: '' },
         homeDone: 0,
+        voiceEnabled: true,
+        voicePaceSec: 35,
+        voiceAutoCount: false,
+        voiceRecEnabled: false,
+        consoleApDist: '30m',
         shots,
         matrix,
         sosCounts
@@ -2154,6 +2395,7 @@
       selectMentalSOS('goodstart');
       selectFieldSlope('ball_above');
       renderSosAccordions();
+      initVoiceCoachEngine();
       selectPhase('in_p1', false);
       updateAnalyticsAndMarkdown();
       renderSavedHistory();
@@ -2256,6 +2498,7 @@
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
               <div style="display:flex; gap:5px; align-items:center;">
+                <button class="voice-speak-btn" onclick="playPhaseMasterLesson('${p.id}')">🔊 레슨</button>
                 <button class="visual-inline-btn" onclick="openVisualGuide('ch1-${idx}')">🎨 도해</button>
                 <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
                   ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
@@ -2328,6 +2571,7 @@
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
               <div style="display:flex; gap:5px; align-items:center;">
+                <button class="voice-speak-btn" onclick="playPhaseMasterLesson('${p.id}')">🔊 레슨</button>
                 <button class="visual-inline-btn" onclick="openVisualGuide('${apTargets[idx] || 'ch2'}')">🎨 도해</button>
                 <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
                   ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
@@ -2427,6 +2671,7 @@
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
               <div style="display:flex; gap:5px; align-items:center;">
+                <button class="voice-speak-btn" onclick="playPhaseMasterLesson('${p.id}')">🔊 레슨</button>
                 <button class="visual-inline-btn" onclick="openVisualGuide('ch3')">🎨 도해</button>
                 <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
                   ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
@@ -2471,6 +2716,7 @@
             <div class="phase-top">
               <span class="phase-step-tag">${p.step} (${p.minutes}분)</span>
               <div style="display:flex; gap:5px; align-items:center;">
+                <button class="voice-speak-btn" onclick="playPhaseMasterLesson('${p.id}')">🔊 레슨</button>
                 <button class="visual-inline-btn" onclick="openVisualGuide('ch4')">🎨 도해</button>
                 <button class="phase-select-btn" onclick="selectPhase('${p.id}', true)">
                   ${isActive ? '⏱ 선택됨' : '타이머 켜기'}
@@ -2492,8 +2738,12 @@
       sessionState.homeDone = (sessionState.homeDone || 0) + 1;
       if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
       renderHomePhases();
+      renderConsoleQuickShotBar();
       saveDraftState();
       showToast('🏠 집콕 5분 루틴 완료가 기록되었습니다!');
+      if (voiceCoachEnabled) {
+        speakImmediateFeedback(`집콕 5분 루틴 ${sessionState.homeDone}회 완료가 기록되었습니다. 코어와 하체 압력이 한 층 더 단단해졌습니다.`);
+      }
     }
 
     /**************************************************************
@@ -2538,8 +2788,10 @@
       }
 
       let sec = 0;
+      let lastSpokenBucket = '';
       btn.textContent = '⏹ 중지';
       if (navigator.vibrate) navigator.vibrate(40);
+      unlockCoachAudio();
 
       const updateStep = () => {
         const cycleSec = sec % 12;
@@ -2550,14 +2802,34 @@
           statusEl.textContent = '✅ 평정심 리셋 완료! 오른손 엄지·검지 힘을 0%로 비우세요.';
           btn.textContent = '🌬️ 다시 호흡';
           if (navigator.vibrate) navigator.vibrate([80, 60, 120]);
+          if (voiceCoachEnabled) {
+            speakImmediateFeedback('24초 복압 호흡 리셋 완료! 어깨 힘을 툭 빼고 오른손 엄지 검지 힘을 0으로 비운 뒤 공 앞 30센티 중간 타깃만 보세요.');
+          }
           return;
         }
         if (cycleSec < 4) {
           statusEl.textContent = `[${round}/2] 🟢 코로 깊게 360° 복압 들숨... (${4 - cycleSec}초)`;
+          const key = `${round}-in`;
+          if (voiceCoachEnabled && lastSpokenBucket !== key) {
+            lastSpokenBucket = key;
+            speakImmediateFeedback(round === 1
+              ? '1회차. 코로 4초 깊게 들이마시며 아랫배와 옆구리, 허리 뒤까지 360도 복압 기둥을 채웁니다.'
+              : '2회차. 다시 코로 4초 깊게 들이마시며 아랫배 복압을 채우세요.');
+          }
         } else if (cycleSec < 6) {
           statusEl.textContent = `[${round}/2] 🟡 코어 기둥 멈춤... (${6 - cycleSec}초)`;
+          const key = `${round}-hold`;
+          if (voiceCoachEnabled && lastSpokenBucket !== key) {
+            lastSpokenBucket = key;
+            speakImmediateFeedback('2초 잠시 멈춤.');
+          }
         } else {
           statusEl.textContent = `[${round}/2] 🔵 입으로 길게 날숨·어깨/엄지 툭! (${12 - cycleSec}초)`;
+          const key = `${round}-out`;
+          if (voiceCoachEnabled && lastSpokenBucket !== key) {
+            lastSpokenBucket = key;
+            speakImmediateFeedback('입으로 6초 길게 내쉬며 양어깨와 오른손 엄지 검지 긴장을 완전히 툭 떨어뜨리세요.');
+          }
         }
         sec++;
       };
@@ -2589,9 +2861,14 @@
               </div>
               <div class="sos-rx-step">1️⃣ ${item.rx1}</div>
               <div class="sos-rx-step">2️⃣ ${item.rx2}</div>
-              <button class="visual-inline-btn" style="width:100%; margin-top:8px; padding:9px;" onclick="openVisualGuide('ch5-${item.key}')">
-                🎨 [붕괴 원인 vs 응급처방] 궤도 도해로 눈으로 보기
-              </button>
+              <div style="display:flex; gap:6px; margin-top:8px;">
+                <button class="voice-speak-btn" style="flex:0.85; padding:9px;" onclick="speakSosItem('${item.key}')">
+                  🔊 처방 음성 듣기
+                </button>
+                <button class="visual-inline-btn" style="flex:1.15; padding:9px;" onclick="openVisualGuide('ch5-${item.key}')">
+                  🎨 원인 vs 처방 도해
+                </button>
+              </div>
               <button class="sos-log-btn" onclick="logSosUsage('${item.key}', '${item.title}')">
                 📌 오늘 필드/연습에서 이 처방 적용함 (+1 기록 · 현재 ${cnt}회)
               </button>
@@ -2627,19 +2904,38 @@
     /**************************************************************
      * 5. RECORDING, BATCH & TIMER ENGINE
      **************************************************************/
-    function recordShot(phaseId, type) {
-      recordShotBatch(phaseId, type, 1);
+    function recordShot(phaseId, type, fromVoice = false) {
+      recordShotBatch(phaseId, type, 1, fromVoice);
     }
 
-    function recordShotBatch(phaseId, type, delta) {
+    function recordShotBatch(phaseId, type, delta, fromAutoOrSilent = false) {
       if (!sessionState.shots[phaseId]) {
         sessionState.shots[phaseId] = { good: 0, hook: 0, push: 0, fat: 0 };
       }
+      // 직전 12초 내 자동+1구로 정타가 들어갔고 지금 수동/음성으로 미스샷을 눌렀다면 자동 정타를 미스로 교체!
+      if (!fromAutoOrSilent && delta === 1 && type !== 'good' && lastAutoShotMeta &&
+          lastAutoShotMeta.kind === 'shot' && lastAutoShotMeta.phaseId === phaseId &&
+          (Date.now() - lastAutoShotMeta.ts) < 15000 && sessionState.shots[phaseId].good > 0) {
+        sessionState.shots[phaseId].good -= 1;
+        lastAutoShotMeta = null;
+        showToast('🔄 방금 자동 정타를 선택한 미스로 교정했습니다!');
+      }
+
       sessionState.shots[phaseId][type] += delta;
       if (navigator.vibrate) navigator.vibrate(delta > 1 ? [20, 30, 20] : 16);
+      shotRecordedInCycle = true;
+
+      if (type === 'hook') consecutiveHookCount += 1;
+      else consecutiveHookCount = 0;
+
       saveDraftState();
       renderIndoorPhases();
       renderPuttingPhases();
+      renderConsoleQuickShotBar();
+
+      if (fromAutoOrSilent !== 'auto') {
+        speakShotFeedback(phaseId, type, delta);
+      }
     }
 
     function resetPhaseShots(phaseId) {
@@ -2647,16 +2943,31 @@
       saveDraftState();
       renderIndoorPhases();
       renderPuttingPhases();
+      renderConsoleQuickShotBar();
     }
 
-    function recordApproach(distKey, field, delta = 1) {
+    function recordApproach(distKey, field, delta = 1, fromAutoOrSilent = false) {
       if (!sessionState.matrix[distKey]) {
         sessionState.matrix[distKey] = { in3m: 0, miss: 0 };
       }
+      if (!fromAutoOrSilent && delta === 1 && field === 'miss' && lastAutoShotMeta &&
+          lastAutoShotMeta.kind === 'approach' && lastAutoShotMeta.distKey === distKey &&
+          (Date.now() - lastAutoShotMeta.ts) < 15000 && sessionState.matrix[distKey].in3m > 0) {
+        sessionState.matrix[distKey].in3m -= 1;
+        lastAutoShotMeta = null;
+        showToast('🔄 방금 자동 3m 안착을 미스로 교정했습니다!');
+      }
+
       sessionState.matrix[distKey][field] += delta;
       if (navigator.vibrate) navigator.vibrate(delta > 1 ? [20, 30, 20] : 16);
+      shotRecordedInCycle = true;
       saveDraftState();
       renderApproachMatrix();
+      renderConsoleQuickShotBar();
+
+      if (fromAutoOrSilent !== 'auto') {
+        speakApproachFeedback(distKey, field, delta);
+      }
     }
 
     function resetApproachMatrix() {
@@ -2665,6 +2976,7 @@
       }));
       saveDraftState();
       renderApproachMatrix();
+      renderConsoleQuickShotBar();
     }
 
     function switchMode(mode) {
@@ -2680,6 +2992,7 @@
       const zeroSection = document.getElementById('zeroCheckSection');
 
       if (mode === 'analytics' || mode === 'fieldsos') {
+        pauseTimer();
         timerConsole.style.display = 'none';
         zeroSection.style.display = 'none';
         if (mode === 'analytics') updateAnalyticsAndMarkdown();
@@ -2689,6 +3002,8 @@
         const firstPhase = CURRICULUM[mode][0];
         if (firstPhase && !CURRICULUM[mode].some(p => p.id === activePhaseId)) {
           selectPhase(firstPhase.id, false);
+        } else {
+          renderConsoleQuickShotBar();
         }
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2714,11 +3029,13 @@
       document.getElementById('activePhaseBadge').textContent = `${modeNames[info.modeKey]} · ${info.phase.step}`;
       document.getElementById('activePhaseTitle').textContent = `${info.phase.title} (${info.phase.minutes}분)`;
 
+      resetVoicePhaseState(phaseId);
       updateTimerDisplay();
       renderIndoorPhases();
       renderApproachPhases();
       renderPuttingPhases();
       renderHomePhases();
+      renderConsoleQuickShotBar();
 
       if (scrollToTimer) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -2733,24 +3050,35 @@
     }
 
     function toggleTimer() {
+      unlockCoachAudio();
       if (timerInterval) pauseTimer();
       else startTimer();
     }
 
     function startTimer() {
       requestWakeLock();
+      unlockCoachAudio();
       const btn = document.getElementById('timerToggleBtn');
       btn.textContent = '⏸ 정지';
       btn.className = 't-btn t-btn-pause';
       document.getElementById('timerDisplay').classList.add('running');
 
+      if (voiceCoachEnabled) {
+        beginVoiceCoachSession();
+      }
+
       timerInterval = setInterval(() => {
         if (timerRemainSec > 0) {
           timerRemainSec -= 1;
           updateTimerDisplay();
+          checkVoiceTimeMilestones();
         } else {
           pauseTimer();
           playFinishChime();
+          if (voiceCoachEnabled) {
+            const db = VOICE_COACH_DB[activePhaseId];
+            speakCoachText((db && db.completeCue) || '수고하셨습니다! 현재 단계 목표 시간이 완료되었습니다. 다음 단계로 넘어가세요.');
+          }
           showToast('⏰ 단계 시간이 종료되었습니다! 다음 단계로 넘어가세요.');
         }
       }, 1000);
@@ -2761,6 +3089,7 @@
         clearInterval(timerInterval);
         timerInterval = null;
       }
+      stopVoiceCoachLoop();
       const btn = document.getElementById('timerToggleBtn');
       if (btn) {
         btn.textContent = '▶ 시작';
@@ -2781,6 +3110,7 @@
       const info = findPhaseById(activePhaseId);
       timerTotalSec = info ? info.phase.minutes * 60 : 600;
       timerRemainSec = timerTotalSec;
+      resetVoicePhaseState(activePhaseId);
       updateTimerDisplay();
     }
 
@@ -3328,6 +3658,1145 @@
       t.style.display = 'block';
       clearTimeout(window.__toastTimer);
       window.__toastTimer = setTimeout(() => { t.style.display = 'none'; }, 2800);
+    }
+
+    /**************************************************************
+     * 9. REAL-TIME VOICE COACH & HANDS-FREE SHOT STUDIO (v4)
+     **************************************************************/
+    const VOICE_COACH_DB = {
+      in_p1: {
+        club: '52도 웨지',
+        goalShots: 20,
+        defaultPace: 35,
+        opening: '인도어 90분, 첫 번째 15분 52도 앞바운스 성냥 켜기와 30미터 워밍업입니다. 곤지암에서 체득한 대로 오른손은 중지와 약지만 살짝 걸치고 엄지와 검지 힘은 0퍼센트로 완전히 비우세요. 몸이 덜 풀린 초반에 풀스윙하지 말고, 52도 앞바운스로 매트를 성냥 켜듯 치익 스치며 캐리 20미터, 런 10미터 총 30미터 감각을 깨웁니다. 그럼 1구째부터 시작하겠습니다.',
+        swingCue: '오른손 엄지 검지 힘을 비우고, 백스윙 8시에서 반 박자 기다렸다가 등근육으로 툭 떨어뜨립니다. 준비, 하나, 둘, 샷!',
+        finishCue: '좋습니다! 피니시에서 그립 끝이 배꼽을 가리킨 채 3초간 멈추세요. 구질을 말씀하시거나 상단 버튼으로 기록하세요.',
+        midCue: '7분 30초, 절반 지났습니다. 연습장 매트가 뒤땅을 속이지 않도록 공 뒤 수건이나 공 앞 매트 타격음에 다시 집중해 주세요.',
+        wrapCue: '마지막 1분입니다. 남은 두세 구는 30미터 20캐리 10런 리듬이 완전히 몸에 배도록 가볍게 마무리하세요.',
+        completeCue: 'Phase 1 워밍업 15분이 완료되었습니다! 이제 7번 아이언을 꺼내고 Phase 2 타이머를 켜세요.',
+        shots: [
+          '그립 영점 점검입니다. 왼손은 호건 2너클로 새끼, 약지, 중지에 걸치고 오른손 엄지와 검지 힘은 0으로 완전히 비워 헤드 무게를 느껴보세요.',
+          '어드레스 어깨 수평 점검! 옆그립 자세에서 오른손이 밑에 있더라도 양손 높이를 맞추고 양 어깨를 수평으로 두어 리딩엣지가 박히지 않게 합니다.',
+          '앞바운스 성냥 켜기입니다. 페이스를 스퀘어에서 2도만 살짝 열어 앞바운스가 매트 위를 성냥갑에 성냥 켜듯 치익 부드럽게 스쳐 나가게 치세요.',
+          '매트 착시 검증 타석입니다! 공 뒤 3센티미터에 수건이나 명함이 놓여 있다고 상상하고 절대 건드리지 않은 채 공을 먼저 맞히세요.',
+          '30미터 8시에서 4시 시계추입니다. 오른팔꿈치를 옆구리에 가볍게 밀착시키고 골반에서 허리 높이까지 팔과 몸통이 함께 돌아갑니다.',
+          '타깃 시선 고정! 깃대나 먼 그물을 보지 말고 20미터 지점 가로세로 1미터 랜딩 박스에만 공이 톡 떨어지는 이미지를 그리세요.',
+          '등속 악력 3의 법칙입니다. 어드레스 3, 탑 3, 임팩트 3, 피니시 3까지 손아귀 압력이 변하지 않아야 거리가 튀지 않습니다.',
+          '체중 왼쪽 60퍼센트 고정! 공을 맞추기 전에 머리가 들리면 탑볼이 나니 임팩트 순간 공 앞쪽 3센티 매트 소리를 귀로 들으세요.',
+          '손목 코킹을 인위적으로 쓰지 마세요. 배꼽과 그립 끝이 같은 속도로 움직이며 공 앞 매트를 얇게 훑고 지나갑니다.',
+          '피니시 체크입니다. 4시 높이에서 3초 정지했을 때 오른손 엄지 검지가 아직도 말랑말랑하고 헤드가 땅으로 툭 떨어졌는지 확인하세요.'
+        ]
+      },
+      in_p2: {
+        club: '7번·8번 미들아이언',
+        goalShots: 35,
+        defaultPace: 35,
+        opening: 'Phase 2, 25분 미들아이언 좌측 풀훅 박멸 메인 훈련입니다. 7번이나 8번 아이언을 잡으세요. 좌측 당김의 원인은 오른손 엄지 검지 개입과 전환 시 왼쪽 어깨 조기 오픈입니다. 오늘은 백스윙 8시 스퀘어, 탑에서 상체는 닫아두고 왼쪽 엉덩이로 7시 뒤쪽 벽을 먼저 민 다음, 우측 전방 1시 고무티 방향으로 오른손바닥을 길게 뻗는 푸시 익스텐션에 집중합니다. 1구째 들어갑니다.',
+        swingCue: '등이 타깃을 본 채로 왼엉덩이 7시 벽 먼저 열고, 우측 전방 1시 방향으로 길게 뻗어냅니다. 준비, 하나, 둘, 샷!',
+        finishCue: '피니시 3초! 오른손바닥이 1시 쪽으로 빠져나갔는지 확인하고 정타 또는 훅 버튼이나 음성으로 기록하세요.',
+        midCue: '절반인 12분 30초 경과했습니다. 공을 세게 치려 하면 바로 오른손 엄지 검지가 개입합니다. 80퍼센트 리듬으로 1시 방향만 보세요.',
+        wrapCue: '마지막 1분입니다. 좌측 훅 없이 1시로 출발해 살짝 돌아오는 푸시드로우 2구를 기분 좋게 치고 유틸리티로 넘어갑시다.',
+        completeCue: '미들아이언 25분 집중 교정이 끝났습니다! 이제 유틸리티를 들고 Phase 3을 시작하세요.',
+        shots: [
+          '왼손 장갑 로고 마디 딱 2개 보이는 벤 호건 뉴트럴 그립 확인하세요. 과한 스트롱 그립이 좌측 훅의 첫 번째 원인입니다.',
+          '에이밍 순서 점검! 스탠스부터 서지 말고 오른손으로 채를 들고 공 앞 30센티미터 풀잎 중간점에 페이스를 먼저 직각으로 맞춘 뒤 발을 벌리세요.',
+          '테이크어웨이 8시 체크! 골반 높이에서 멈추는 느낌으로 샤프트가 발끝선과 평행, 페이스가 척추각과 평행하게 올라가는지 확인하세요.',
+          '백스윙 시동은 손이 아니라 왼쪽 견갑골과 등근육입니다. 팔을 들어 올리지 말고 등이 타깃을 향할 때까지 몸통을 통째로 돌리세요.',
+          '가장 중요한 전환 동작입니다! 탑에서 왼쪽 어깨를 타깃 쪽으로 열지 말고 등을 타깃에 닫아둔 채 반 박자 기다리세요.',
+          '왼엉덩이 7시 벽 밀기! 다운스윙 시작과 동시에 왼쪽 엉덩이를 뒤쪽 7시 벽으로 깊게 밀어 양손이 내려올 공간을 넓게 열어줍니다.',
+          '오른손 엄지 검지 0퍼센트로 양손을 왼쪽 허벅지 앞까지 수직 낙하시키세요. 채가 위에서 덮이지 않고 몸 안쪽에서 자연스럽게 떨어집니다.',
+          '공 앞 20센티 우측 전방 1시 방향에 가상의 고무티 게이트가 있다고 상상하고, 임팩트 후 오른손바닥을 그 1시 쪽으로 길게 뻗어내세요.',
+          '임팩트 시선 고정! 공의 뒷면이 아니라 공의 앞면, 타깃 쪽 적도를 응시하며 공을 지나 공 앞 3센티 잔디를 눌러 치세요.',
+          '혹시 훅이 날까 봐 몸을 왼쪽으로 에이밍하지 마세요! 몸이 왼쪽을 보면 아웃인 궤도가 되어 오히려 더 왼쪽으로 감겨 죽습니다.',
+          '백스윙 탑에서 오른발 안쪽 엄지발가락 아래에 500원 동전을 꽉 밟는 느낌으로 스웨이 없이 축을 단단히 지키세요.',
+          '피니시에서 왼발 기둥 위에 3초간 흔들림 없이 서 있는지 확인하고, 클럽 헤드가 등 뒤로 편하게 넘어가는지 체크하세요.'
+        ]
+      },
+      in_p3: {
+        club: '유틸리티(하이브리드)',
+        goalShots: 25,
+        defaultPace: 35,
+        opening: 'Phase 3, 20분 유틸리티와 전 클럽 통합 훈련입니다. 드라이버, 유틸리티, 아이언의 스윙 엔진은 단 하나입니다. 공 위치가 달라도 모든 클럽의 그립 끝은 항상 왼쪽 허벅지 안쪽을 가리키게 통일하세요. 유틸리티는 띄우려 퍼올리지 말고 긴 7번 아이언처럼 얇게 눌러 쓸어 치겠습니다. 시작합니다.',
+        swingCue: '머리는 공 뒤 5센티 가상 벽에 남기고, 7번 아이언 리듬 그대로 넓게 쓸어 통과합니다. 준비, 하나, 둘, 샷!',
+        finishCue: '오른발 발끝을 세워 3초 정지! 유틸이 얇고 경쾌하게 빠져나갔는지 확인 후 기록해 주세요.',
+        midCue: '10분 경과했습니다. 유틸리티에 거리 욕심이 들어가면 상체가 먼저 나가거나 훅이 터집니다. 그립을 반 인치 짧게 쥐고 여유 있게 치세요.',
+        wrapCue: '마지막 1분! 페어웨이 세컨샷 상황을 떠올리며 80퍼센트 리듬으로 2구만 안전하게 보내겠습니다.',
+        completeCue: '유틸리티 20분 훈련 완료! 이제 드라이버를 꺼내 Phase 4를 시작하세요.',
+        shots: [
+          '전 클럽 단일 기준점 체크! 공은 왼발 안쪽에 두되, 어드레스 시 그립 끝은 7번 아이언과 똑같이 왼쪽 허벅지 안쪽 앞에 두세요.',
+          '유틸리티 그립을 평소보다 반 인치만 짧게 내려 잡으세요. 미트율이 올라가고 심리적 제어력이 즉시 살아납니다.',
+          '머리 가상 벽 고정! 공 오른쪽 5센티미터 뒤에 보이지 않는 벽을 세우고 임팩트 끝까지 머리가 목표 쪽으로 밀리지 않게 남기세요.',
+          '유틸을 우드처럼 띄우려 걷어 올리지 마세요. 긴 7번 아이언이라 생각하고 넓은 솔이 잔디를 얇고 길게 스치고 지나가게 합니다.',
+          '어드레스 시 코로 숨을 들이마셔 아랫배와 옆구리, 허리에 360도 복압 기둥을 세운 뒤 어깨와 오른손 긴장만 툭 빼고 출발하세요.',
+          '백스윙 탑에서 손으로 바로 내리지 말고 하체가 반 박자 기다리는 동안 등근육 회전으로 클럽이 스르르 떨어지게 두세요.',
+          '임팩트 후 오른어깨가 턱 밑을 지나 우측 전방 1시 방향으로 팔을 길게 뻗어주면 유틸의 악성 훅과 탑볼이 동시에 사라집니다.',
+          '가상의 깊은 러프 상황을 연습합니다! 그립을 한 마디 더 짧게 잡고 페이스를 아주 살짝 열어 악력 4로 공부터 3분의 2 스윙 커트 타격하세요.',
+          '7번 아이언과 유틸리티가 같은 템포인지 느껴보세요. 채가 길어졌다고 스윙 스피드를 억지로 빨리 돌리면 궤도가 무너집니다.',
+          '피니시에서 왼쪽 엉덩이가 완전히 뒤로 열리고 오른발 엄지발끝으로 가볍게 서서 공이 낙하할 때까지 3초 유지하세요.'
+        ]
+      },
+      in_p4: {
+        club: '드라이버 (홀:180m / 짝:220m 교대)',
+        goalShots: 24,
+        defaultPace: 40,
+        opening: 'Phase 4, 20분 임진한 프로 실전 드라이버 교대 훈련입니다! 홀수 번째 공은 티를 반 개 낮추고 그립을 한 마디 짧게 쥐어 페어웨이 중앙에 꽂는 180미터 생존 컨트롤샷, 짝수 번째 공은 머리를 남기고 1시로 뿌리는 220미터 레이백 푸시드로우를 한 구씩 교대로 칩니다. 자, 1구째 180미터 컨트롤부터 시작합니다.',
+        swingCue: '척추 우측 기울기 유지하고, 오른손 엄지 검지 0퍼센트, 상체 닫고 1시로 던집니다. 준비, 하나, 둘, 샷!',
+        finishCue: '임팩트 후 빈 티를 1초 째려본 뒤 왼발 위에 피니시 3초! 이번 샷 결과를 기록하세요.',
+        midCue: '10분 경과, 절반 지점입니다. 만약 방금 샷이 왼쪽으로 감겼다면 욕심이 들어온 신호입니다. 슬로우모션 빈스윙 2회로 등근육 리듬을 리셋하세요.',
+        wrapCue: '마지막 1분! 가장 자신 있는 180미터 페어웨이 중앙 생존 컨트롤 드라이버로 멋지게 마무리하겠습니다.',
+        completeCue: '드라이버 20분 훈련이 끝났습니다! 마지막 Phase 5 가상 필드 5홀 시뮬레이션으로 실전 감각을 복제합시다.',
+        shots: [
+          '【홀수구 · 180m 생존 컨트롤】 티를 반 개 낮추고 그립을 한 마디 짧게 잡으세요. 오른손 엄지 검지 0퍼센트, 왼 견갑골만 접는 3분의 2 백스윙으로 페어웨이 중앙을 지킵니다.',
+          '【짝수구 · 220m 레이백 푸시드로우】 왼발 뒤꿈치 안쪽에 공을 두고 헤드를 공 뒤 주먹 하나 우측에 세팅해 척추 우측 틸트를 만드세요. 머리를 남기고 1시로 폭발 방출합니다.',
+          '【홀수구 · 180m 생존 컨트롤】 넓은 페어웨이 대신 우측 전방 좁은 랜딩 존을 설정하세요. 상체를 타깃에 닫아두고 80퍼센트 리듬으로 툭 건드려 보냅니다.',
+          '【짝수구 · 220m 레이백 푸시드로우】 다운스윙 탑에서 채를 등 뒤로 눕히는 레이백 느낌으로 오른쪽 어깨를 사선 아래로 떨어뜨려 인아웃 어퍼블로를 만드세요.',
+          '【홀수구 · 180m 생존 컨트롤】 호조의 역설 경보! 잘 맞는다고 세게 때리지 마세요. 티박스 오른쪽에 서서 왼쪽 해저드를 지우고 180미터 직진만 봅니다.',
+          '【짝수구 · 220m 레이백 푸시드로우】 임팩트 순간 공만 보지 말고, 공이 떠난 뒤에도 빈 고무티 자리를 1초 동안 째려보며 머리를 공 뒤에 잡아두세요.',
+          '【홀수구 · 180m 생존 컨트롤】 등근육 회전만으로 가볍게 돌아가세요. 손목으로 클럽 페이스를 닫으려 하지 않으면 페어웨이 안착률 80퍼센트가 나옵니다.',
+          '【짝수구 · 220m 레이백 푸시드로우】 오른손바닥과 두 팔이 1시 방향 하늘로 뻗어 나가며 하이 피니시가 만들어지는지 확인하세요.',
+          '【홀수구 · 180m 생존 컨트롤】 후반 10번 홀 체력 저하 상황을 가정해 두 발 안쪽 지면을 단단히 밟고 컴팩트한 컨트롤 티샷을 구사합니다.',
+          '【짝수구 · 220m 레이백 푸시드로우】 360도 복압 호흡을 채운 뒤 어드레스부터 피니시까지 등속 악력 3으로 크고 부드러운 아크를 그려주세요.'
+        ]
+      },
+      in_p5: {
+        club: '실전 가상 5홀 (드라이버→세컨→52도)',
+        goalShots: 15,
+        defaultPace: 40,
+        opening: '마지막 Phase 5, 10분 실전 가상 5홀 시뮬레이션입니다! 지금부터 매 타마다 채를 바꿔 들고 공 뒤로 한 발 물러나 공 앞 30센티 중간 타깃을 찍고 단 한 번에 칩니다. 멀리건은 0회, 오직 루틴과 피니시 3초에만 집중하세요. 가상 1번 홀 파 4 티박스부터 출발합니다!',
+        swingCue: '공 앞 30센티 중간 타깃만 믿고, 15초 프리샷 루틴대로 한 번에 통과합니다. 준비, 하나, 둘, 샷!',
+        finishCue: '완벽합니다! 피니시 3초 유지 후 공이 떨어지는 걸 지켜보며 기록하세요. 다음 채를 준비합니다.',
+        midCue: '가상 3번 홀을 지나는 중입니다. 매 타 채를 바꾸니 실전 필드와 똑같죠? 서두르지 말고 매 샷 공 앞 30센티 점을 먼저 찍으세요.',
+        wrapCue: '마지막 홀입니다! 시야가 뻥 뚫린 5번 홀에서 200미터 앞 안개 커튼을 내리고 오직 과정에만 집중합시다.',
+        completeCue: '와우! 인도어 90분 5단계 풀 코스를 완주하셨습니다! 하단 10초 복기 저장 버튼을 눌러 오늘 데이터를 남기세요.',
+        shots: [
+          '【1번홀 파4 · 티샷】 드라이버를 잡으세요. 공 뒤에서 타깃선 위 30센티 풀잎 점을 찍고 오른손으로 페이스를 먼저 맞춘 뒤 80퍼센트 컨트롤 티샷 갑니다.',
+          '【1번홀 파4 · 세컨샷】 7번 아이언입니다. 좌측 핀이지만 훅 주의! 그린 정중앙을 겨냥해 왼엉덩이 7시 벽 열고 1시 푸시 익스텐션으로 온그린 시킵니다.',
+          '【1번홀 파4 · 어프로치】 포틴 52도 웨지! 그린 앞 30미터 핀입니다. 오른손 엄지 검지 힘 0퍼센트, 8시에서 4시 시계추로 20미터 랜딩 박스에 떨굽니다.',
+          '【2번홀 좁은 파4 · 티샷】 양쪽 해저드 홀입니다! 주저 없이 180미터 생존 컨트롤 드라이버! 티를 낮추고 그립 한 마디 짧게 쥐어 페어웨이 중앙만 노립니다.',
+          '【2번홀 좁은 파4 · 세컨샷】 유틸리티를 꺼내세요. 머리를 공 뒤 5센티 벽에 붙박이처럼 고정하고 긴 7번 아이언 템포로 가볍게 얇게 쓸어냅니다.',
+          '【2번홀 좁은 파4 · 어프로치】 그린 에지 15미터! 로브샷 욕심 버리고 52도 옆그립 양어깨 수평 세팅 후 앞바운스 성냥 켜기로 절반에 떨어뜨려 굴립니다.',
+          '【3번홀 파5 · 티샷】 넓은 파5입니다. 220미터 레이백 푸시드로우! 척추 우측 기울기 유지하고 빈 티를 1초 응시하며 1시로 시원하게 뿌립니다.',
+          '【3번홀 파5 · 세컨샷】 유틸리티로 100미터 이내 안전 구역에 갖다 놓는 레이업 샷입니다. 52도가 가장 자신 있는 30미터나 50미터를 남기도록 편하게 칩니다.',
+          '【3번홀 파5 · 서드샷】 50미터 피치샷! 주먹 3개 스탠스, 악력 3 고정, 9시에서 3시 L투L 하프 스윙으로 43미터 랜딩 박스에 정확히 떨어뜨립니다.',
+          '【4번홀 파3 · 티샷】 맞바람 파3 홀입니다. 7번 또는 한 클럽 크게 잡고 그립 짧게, 3분의 2 등근육 회전으로 핀이 아닌 그린 넓은 한가운데에 올립니다.',
+          '【4번홀 파3 · 에이프런 토샷】 아깝게 그린 에이프런에 걸렸습니다! 뒤땅 0퍼센트 52도 토샷! 공에 아주 가까이 서서 샤프트를 수직으로 세워 힐을 띄우고 퍼팅하듯 툭 칩니다.',
+          '【4번홀 파3 · 10m 보너스】 10미터 직선 칩샷입니다. 손목 힌징 0퍼센트로 3미터 지점에 툭 떨어뜨려 7미터 굴러 붙는 장면을 상상하세요.',
+          '【5번홀 내리막 파4 · 안개 커튼 티샷】 앞이 뻥 뚫린 내리막 홀입니다! 지금 200미터 앞에 짙은 스토아 안개 커튼을 내리세요. 멀리 보지 말고 30센티 점과 피니시 3초만 봅니다.',
+          '【5번홀 내리막 파4 · 세컨샷】 발끝 살짝 오르막 경사를 가정합니다! 그립을 짧게 쥐고 타깃 우측 끝을 보고 상체를 닫은 채 1시 방향으로 뻗어줍니다.',
+          '【5번홀 내리막 파4 · 마지막 30m】 대망의 15구째! 오늘 가장 감이 좋았던 오른손 엄지 검지 힘 0퍼센트, 52도 앞바운스로 30미터 20플러스 10 완벽하게 꽂고 마무리합니다!'
+        ]
+      },
+      ap_p1: {
+        club: '퍼터 / 치퍼 / 52° 토샷',
+        goalShots: 16,
+        defaultPace: 25,
+        opening: '어프로치 50분, Phase 1입니다. 15미터 이내는 세이프 퍼스트 피라미드! 자존심을 버리고 1순위 퍼터, 2순위 치퍼, 잔디가 애매할 땐 52도 토샷으로 90퍼센트 굴려 더블보기를 원천 차단합니다. 1구째 시작합니다.',
+        swingCue: '손목을 완전히 잠그고 어깨와 등근육 진자로 목표 랜딩 지점에 가볍게 툭 내려놓습니다. 하나, 둘, 샷!',
+        finishCue: '헤드가 깃대를 향해 낮고 곧게 멈췄는지 확인하고 3미터 안착 여부를 기록하세요.',
+        midCue: '5분 경과했습니다. 10미터, 15미터는 띄우면 바보, 굴리면 고수입니다. 가장 낮고 안전한 궤도만 반복하세요.',
+        wrapCue: '마지막 1분! 그린 에지 밖 에이프런 52도 토샷 2구만 완벽하게 성공시키고 다음 칩샷 존으로 넘어가겠습니다.',
+        completeCue: '15미터 이내 세이프 퍼스트 훈련 완료! 이제 15에서 25미터 칩샷 Phase 2를 시작하세요.',
+        shots: [
+          '10미터 그린 프린지 앞입니다. 텍사스 웨지, 즉 퍼터를 들고 3·6·9 퍼터 거리 공식에 오르막 잔디 저항 한 걸음만 더해 쭉 굴려 보세요.',
+          '오르막 에이프런입니다. 치퍼나 8번 아이언을 퍼팅 그립으로 잡고 3미터 지점에 툭 떨어뜨려 7미터를 부드럽게 태워 굴립니다.',
+          '에이프런 필살기 52도 토샷입니다! 공에 헤드 2개 거리만큼 바짝 붙어 서서 샤프트를 거의 수직으로 세워 힐을 공중에 띄우세요.',
+          '52도 토샷 두 번째 체크! 뒤꿈치 힐이 땅에서 완전히 떨어졌는지 확인한 뒤 토우 끝부분만 지면에 댄 채 퍼팅 스트로크로 툭 칩니다.',
+          '왼발을 살짝 뒤로 뺀 좁은 오픈 스탠스에서 체중 70퍼센트를 왼발 앞꿈치에 고정하고, 스윙 내내 머리와 상체가 움직이지 않게 지키세요.',
+          '핀을 직접 보고 치지 마세요! 핀 앞 7미터 전방, 공이 가장 먼저 닿아야 할 가로세로 1미터 랜딩 박스에만 시선을 고정합니다.',
+          '손목이 꺾이면 거리가 들쭉날쭉해집니다. 왼손등의 각도를 어드레스 그대로 유지하며 타깃 쪽으로 손등이 스쳐 나가게 하세요.',
+          '내리막 에이프런 상황입니다. 띄우기 절대 금지! 오른발을 뒤로 빼 길을 열어주고 공을 오른발 쪽에 두어 30센티 앞에 살짝 떨어뜨리세요.'
+        ]
+      },
+      ap_p2: {
+        club: '포틴 52도 (15~25m 칩샷)',
+        goalShots: 18,
+        defaultPace: 30,
+        opening: 'Phase 2, 15분간 15에서 25미터 칩샷 집중 훈련입니다. 스탠스는 클럽 헤드 2개 폭에 왼골반을 미리 살짝 뒤로 열어두고, 옆그립으로 양 어깨를 수평 맞춘 뒤 앞바운스 성냥 켜기로 1미터 랜딩 박스에만 떨굽니다. 1구째 들어갑니다.',
+        swingCue: '오른손 엄지 검지 0퍼센트, 앞바운스로 잔디를 치익 스치며 랜딩 박스에 내려놓습니다. 하나, 둘, 샷!',
+        finishCue: '오른쪽 어깨가 밑으로 쏟아지지 않았는지 체크하고 3미터 안착 여부를 기록해 주세요.',
+        midCue: '7분 지났습니다. 공과 배꼽, 그립 끝이 함께 돌며 20미터 기준점인 캐리 10미터, 런 10미터 황금 1대1 비율을 체득하세요.',
+        wrapCue: '마지막 1분입니다. 20미터 포켓 높이 7시반 진자 리듬을 눈 감고도 재현할 수 있게 2구 마무리하겠습니다.',
+        completeCue: '15에서 25미터 칩샷 훈련 완료! 이제 30에서 80미터 시계추 피치샷 Phase 3으로 넘어가세요.',
+        shots: [
+          '15미터 칩샷입니다. 발 1개 폭 좁은 오픈 스탠스에 왼쪽 골반을 뒤로 살짝 열어 팔이 지나갈 통로를 미리 비켜두세요.',
+          '옆그립으로 잡더라도 오른손이 아래에 있다고 오른쪽 어깨까지 푹 낮추지 마세요! 양 어깨를 지면과 수평으로 맞추는 게 뒤땅 방지의 핵심입니다.',
+          '15미터 목표: 캐리 7미터, 런 8미터! 리딩엣지로 찍지 말고 52도 앞바운스가 잔디 위를 치익 미끄러지게 스쳐 가세요.',
+          '20미터 황금 기준점! 캐리 10미터, 런 10미터입니다. 백스윙은 포켓 높이 7시반까지 팔과 배꼽이 일체로 돌아갑니다.',
+          '오른손 엄지와 검지 힘을 완전히 빼세요. 백스윙에서 중지와 약지에 걸린 헤드 무게가 느껴져야 20미터 거리감이 저절로 살아납니다.',
+          '손목으로 걷어 올리거나 퍼올리지 마세요. 왼발에 체중 65퍼센트를 고정해 두고 그립 끝이 항상 배꼽 앞을 지키며 통과합니다.',
+          '오르막 라이 칩샷 가상 연습! 체중을 왼쪽에 두고 핸드퍼스트를 줄인 뒤 경사면을 따라 빗자루로 쓸어 올리듯 스윙을 한 단계 키우세요.',
+          '25미터 거리감 점검! 10미터 랜딩 박스보다 3미터 더 앞인 13미터 박스에 툭 떨어뜨려 나머지 12미터를 굴려 붙입니다.'
+        ]
+      },
+      ap_p3: {
+        club: '포틴 52도 (30~80m 시계추)',
+        goalShots: 20,
+        defaultPace: 35,
+        opening: 'Phase 3, 15분 동안 30미터에서 80미터까지 포틴 52도 단일 클럽 시계추 매트릭스를 완성합니다. 주먹 3개 스탠스, 악력 3 등속 유지! 30미터는 8시 골반, 40미터는 8시반 명치, 50미터는 9시 L투L, 70미터는 10시 3분의 2 코어턴입니다. 1구째 30미터 기준점부터 시작합니다.',
+        swingCue: '악력 3 고정! 백스윙 크기만 시계에 맞추고 다운스윙은 반 박자 느리게 툭 떨어뜨립니다. 준비, 하나, 둘, 샷!',
+        finishCue: '임팩트 순간 감속하지 않았는지 확인하고 3미터 안착 여부를 기록해 주세요.',
+        midCue: '7분 30초 지났습니다. 50미터에서 70미터로 넘어갈 때 팔에 힘이 들어가기 쉽습니다. 핀을 지우고 랜딩 박스만 보며 등근육으로 도세요.',
+        wrapCue: '마지막 1분! 오늘 가장 잘 되었던 30미터 20캐리 10런 기준점 샷으로 영점을 다시 못 박고 마무리합시다.',
+        completeCue: '30에서 80미터 시계추 거리 매트릭스 완성! 마지막 Phase 4, 90미터 컨트롤과 벙커 서바이벌로 이동하세요.',
+        shots: [
+          '【30m ⭐ JS 검증 기준점】 스탠스 주먹 2~3개, 왼발 체중 60퍼센트, 오른팔꿈치를 옆구리에 밀착하고 8시에서 4시 대칭으로 돌아 캐리 20, 런 10미터를 꽂으세요.',
+          '【30m 반복 정밀】 오른손 엄지와 검지 힘이 0이어야 52도 헤드 무게가 20미터 지점 랜딩 박스에 정확히 떨어집니다. 절대 손목 쓰지 마세요.',
+          '【40m 명치 진자】 백스윙을 8시반 명치 앞까지 올리고, 다운스윙은 백스윙보다 오히려 반 박자 느리게 떨어뜨려 캐리 31미터 박스에 떨굽니다.',
+          '【40m 등속 점검】 손만 번쩍 들어 올리지 말고 배꼽과 가슴이 함께 8시반까지 돈 뒤 타깃을 향해 부드럽게 대칭 회전합니다.',
+          '【50~60m 9시-3시 L투L】 왼팔이 지면과 평행한 9시에서 샤프트가 L자를 이룹니다. 등근육 시동으로 올라갔다 등근육 회전으로 3시 L자까지 통과하세요.',
+          '【50~60m 감속 금지】 핀이 눈앞에 보이면 임팩트 직전에 브레이크를 밟아 뒤땅이 납니다. 오직 45미터 지점 랜딩 박스에만 가속도 유지한 채 던지세요.',
+          '【70~80m 10시-2시 코어턴】 백스윙 10시 어깨 높이까지 몸통을 꽉 회전했다가, 악력 3 그대로 하체 리드로 2시까지 흔들림 없이 돌아나갑니다.',
+          '【70~80m 좌측 훅 차단】 70미터 이상에서 오른손이 덮이면 좌측 훅으로 그린을 벗어납니다. 다운스윙 시 왼엉덩이 7시 벽을 먼저 밀어 길을 여세요.',
+          '【랜덤 30m → 50m 교대】 방금 큰 스윙 뒤 다시 30미터! 한 걸음 물러나 스탠스를 좁히고 8시-4시 작은 리듬으로 즉시 기어를 내리는 연습입니다.',
+          '【랜덤 30m 기준 확정】 어드레스 3, 탑 3, 임팩트 3, 피니시 3! 오늘 30미터는 눈 감고도 3미터 안에 들어갈 만큼 감각이 쌓였습니다.'
+        ]
+      },
+      ap_p4: {
+        club: '52°(80%) / PW / 벙커',
+        goalShots: 14,
+        defaultPace: 35,
+        opening: 'Phase 4, 10분 실전 트러블! 90미터 이상 컨트롤과 그린사이드 벙커 탈출 공식입니다. 웨지는 절대 100퍼센트 풀스윙하지 않고 80퍼센트 리듬이나 피칭웨지 3분의 2를 씁니다. 벙커는 페이스를 먼저 연 뒤 오른손 엄지 검지는 0, 왼손 끝 3손가락만 4에서 5로 단단히 걸어 공 뒤 3센티 모래를 폭발시킵니다. 시작합니다.',
+        swingCue: '리듬이 곧 거리입니다! 힘 주지 말고 바운스로 지면을 끝까지 폭발 통과합니다. 준비, 하나, 둘, 샷!',
+        finishCue: '피니시가 높고 균형이 잡혔는지 체크하고 성공 또는 미스 버튼을 눌러 기록하세요.',
+        midCue: '5분 경과! 벙커나 내리막 같은 무서운 라이일수록 핀은 잊어버리고 무조건 가장 넓고 안전한 그린 중앙만 봅니다.',
+        wrapCue: '마지막 1분! 깊은 러프나 벙커 1타 탈출 루틴으로 스코어 지키는 마지막 샷을 완성합시다.',
+        completeCue: '어프로치 50분, 100미터 이내 완전 정복 훈련 완료! 10분 퍼팅 연습장으로 이동하겠습니다.',
+        shots: [
+          '【90m+ 52도 80% 컨트롤】 52도로 100퍼센트 풀스윙하면 뒤땅과 좌측 훅이 납니다. 80퍼센트 등근육 회전으로 가볍게 90미터 중앙만 공략하세요.',
+          '【90m+ 클럽업 PW 컨트롤】 바람이 불거나 조금만 불안하면 고민 없이 피칭웨지를 반 인치 짧게 쥐고 9시반 스윙으로 아주 편하게 올리세요.',
+          '【그린사이드 일반 벙커】 핀 금지, 그린 정중앙 에이밍! 페이스를 먼저 열고 발이 모래에 묻힌 만큼 그립을 짧게 내려 잡으세요.',
+          '【벙커 손가락 압력 공식】 오픈 페이스가 임팩트 때 닫히지 않도록 오른손 엄지 검지 힘은 0을 유지하고, 모래 저항에 채가 안 돌게 왼손 끝 3손가락 고리만 4에서 5로 단단히 겁니다.',
+          '【벙커 얼리 코킹 & 3cm 폭발】 백스윙에서 손목을 빨리 꺾어 헤드를 높게 든 뒤, 왼쪽 70퍼센트 체중을 고정하고 공 뒤 3센티 모래를 하이 피니시까지 날려 보내세요.',
+          '【중거리 30~70m 페어웨이 벙커】 페이스를 열지 마세요! 오른손 엄지 검지 0과 등속 악력 3으로 세게 치지 말고 헤드가 떨어지는 힘으로 공부터 깔끔히 컨택합니다.',
+          '【포대·내리막 트러블】 오른발을 살짝 뒤로 빼 길을 열고, 공은 오른발 쪽·체중은 왼발 85퍼센트 고정! 절대 띄우려 하지 말고 그린 입구에 떨궈 굴리세요.',
+          '【깊은 러프·디봇 잠김】 그립 끝까지 아주 짧게 쥐고 헤드를 지면에서 살짝 띄운 상태에서 악력 4~5로 풀 저항을 이기며 가파르게 볼만 톡 끊어 칩니다.'
+        ]
+      },
+      pt_p1: {
+        club: '퍼터 (1.5~2m 쇼트)',
+        goalShots: 15,
+        defaultPace: 20,
+        opening: '퍼팅 10분, Phase 1! 1.5에서 2미터 쇼트퍼팅 90퍼센트 성공 루틴입니다. 왼쪽 눈 아래 공을 떨어뜨렸을 때 공 바로 위에 눈이 오게 수직 정렬하고, 공 앞 20센티미터 가상 통과문만 보낸 뒤 홀컵에 떨어지는 땡그랑 소리로만 결과를 확인합니다. 1구째 들어갑니다.',
+        swingCue: '20센티 통과문만 바라보고, 왼손등 유지하며 등속으로 톡 태워 보냅니다. 하나, 둘, 스트로크!',
+        finishCue: '소리가 날 때까지 머리 들지 않기! 홀인 성공 또는 미스를 기록해 주세요.',
+        midCue: '2분 경과! 힘이 너무 빠져 헤드가 덜덜 흔들리면 잔경사를 다 탑니다. 임팩트 충격에 안 밀리는 악력 3~4로 딱 멈추세요.',
+        wrapCue: '마지막 1분! 무조건 넣겠다는 집착 대신 공 앞 20센티 통과문을 지나는 리듬에만 집중해 연속 성공을 쌓읍시다.',
+        completeCue: '쇼트퍼트 Phase 1 완료! 이제 3·6·9 퍼터 헤드 폭 거리 공식을 익히는 Phase 2로 넘어가세요.',
+        shots: [
+          '어드레스 시 왼쪽 눈에서 공을 툭 떨어뜨렸을 때 바닥의 공 바로 위에 맞는 수직 시선 위치를 먼저 맞추세요.',
+          '홀컵까지 멀리 보지 말고, 공 앞 20센티미터 지점에 작은 바늘구멍 통과문이 있다고 상상하고 그 사이로만 공을 지나보냅니다.',
+          '백스윙을 짧고 일정하게 든 뒤 임팩트 후 그립 끝이 배꼽에서 왼쪽 허벅지 안쪽 범위를 절대 벗어나지 않게 딱 멈추세요.',
+          '헤드업 절대 금지! 공이 출발한 뒤 최소 1초간은 공이 있던 빈 잔디를 응시하고 오직 땡그랑 소리를 귀로 들으세요.',
+          '왼손등이 목표를 향해 평평하게 밀고 나가는 느낌으로 임팩트 순간 헤드 페이스가 뒤틀리지 않게 적정 악력 3~4를 유지합니다.',
+          '짧은 오르막 1.5미터! 브레이크를 컵 안쪽 끝으로 적게 보고 직진성 있게 홀컵 뒷벽을 때리는 템포로 들어가세요.'
+        ]
+      },
+      pt_p2: {
+        club: '퍼터 (3·6·9 거리 공식)',
+        goalShots: 12,
+        defaultPace: 25,
+        opening: 'Phase 2, 스코어의 43퍼센트를 지배하는 3·6·9 퍼터 헤드 폭 거리 공식입니다! 감으로 세기를 조절하지 말고, 3걸음은 헤드 1개 폭, 6걸음은 헤드 2개 폭, 9걸음은 헤드 3개 폭만 뒤로 뺀 뒤 박세리 선수의 공 태우기 등속 템포로 굴려 반경 1미터 오케이 존에 세웁니다. 1구째 3걸음부터 시작합니다.',
+        swingCue: '양 팔꿈치를 옆구리에 붙이고 어드레스에서 정한 헤드 개수만 뺐다가 등속으로 공을 태워 보냅니다. 하나, 둘, 스트로크!',
+        finishCue: '홀컵 반경 1미터 오케이 존에 멈췄는지 확인하고 기록해 주세요.',
+        midCue: '2분 지났습니다! 다운스윙 때 때리거나 억지로 길게 밀면 거리가 틀어집니다. 시계추 등속 그대로 공을 태우기만 하세요.',
+        wrapCue: '마지막 1분! 오늘 그린 빠르기 보정을 기억하며 9걸음 8미터 롱퍼트 1미터 세이브로 마무리합니다.',
+        completeCue: '3·6·9 거리 공식 Phase 2 완료! 마지막 2분, 브레이크 리딩과 3연속 2퍼트 서바이벌 Phase 3을 시작하세요.',
+        shots: [
+          '【3걸음(약 2.7m) = 헤드 1개 폭】 공 뒤로 내 퍼터 헤드 가로 폭 딱 1개만큼만 백스윙을 빼고 등속으로 스쳐 지나가세요.',
+          '【6걸음(약 5.4m) = 헤드 2개 폭】 머릿속에 공 뒤 헤드 2개 블록을 그린 뒤, 손목 힘 쓰지 말고 어깨 진자로 공을 부드럽게 태워 보냅니다.',
+          '【9걸음(약 8.1m) = 헤드 3개 폭】 먼 거리라고 세게 때리지 마세요! 단지 백스윙 폭만 헤드 3개로 넓히고 속도는 3걸음과 똑같이 유지합니다.',
+          '【느린·추운 그린 보정】 그린이 느리거나 공기가 차가우면 기본 헤드 폭에 1.25배를 곱해 헤드 반 개에서 한 개를 더 빼서 태워 보내세요.',
+          '【그립 끝 제어】 팔로스루를 억지로 길게 밀어내는 투터치를 주의하고 그립 끝은 항상 왼쪽 허벅지 안쪽에서 절제 있게 멈추세요.',
+          '【거리감 최우선】 5미터 이상 퍼트는 넣으려다 2미터 오버하지 말고, 홀컵을 중심으로 반지름 1미터 훌라후프 원 안에 멈추는 것만 목표로 합니다.'
+        ]
+      },
+      pt_p3: {
+        club: '퍼터 (브레이크·서바이벌)',
+        goalShots: 8,
+        defaultPace: 25,
+        opening: '마지막 2분 Phase 3! 가상 삼각형 브레이크 리딩과 3연속 2퍼트 서바이벌 테스트입니다. 반드시 홀컵 아래쪽에서 라인을 읽어 변곡점 에이펙스 삼각형을 찍고, 오르막은 직진, 내리막은 브레이크를 2배 넓게 보고 소프트 터치합니다. 출발합니다!',
+        swingCue: '빈스윙 2회로 헤드 폭을 몸에 새긴 뒤 3초 안에 망설임 없이 태워 보냅니다. 하나, 둘, 스트로크!',
+        finishCue: '성공 여부를 기록하고 다음 퍼트를 준비하세요.',
+        midCue: '1분 경과했습니다! 내리막 슬라이스나 훅 라인에서는 왼발 쪽 공 윗부분에 헤드가 닿는 이미지로 부드럽게 출발시키세요.',
+        wrapCue: '마지막 한 퍼트! 파 세이브 1.5미터를 넣는 기분으로 프리샷 루틴을 100퍼센트 지켜 마무리합니다.',
+        completeCue: '퍼팅 10분 전 과정 완주! 완벽합니다. 이제 10초 복기 저장 버튼으로 오늘 연습을 마무리하세요.',
+        shots: [
+          '홀컵 뒤쪽 낮은 지점에서 쪼그려 앉아 경사 최고 변곡점 에이펙스 삼각형의 꼭짓점을 먼저 찾아 찍으세요.',
+          '내리막 경사 테스트! 브레이크를 예상보다 2~3배 넓게 보고 공을 살짝 왼발 쪽에 두어 스피드를 죽인 채 변곡점을 태우세요.',
+          '오르막 훅·슬라이스 테스트! 오르막은 경사를 덜 타니 과감하게 컵 안쪽 끝을 보고 헤드 반 개 폭 더 길게 직진 터치합니다.',
+          '서바이벌 8미터 1번! 빈스윙 2회 → 어드레스 3초 내 실행 루틴으로 반경 1미터 오케이 존에 붙이는 첫 번째 테스트입니다.',
+          '서바이벌 1.5m 마킹 세이브! 방금 붙인 공을 반드시 20센티 통과문을 통해 마무리해야 한 홀이 끝납니다.'
+        ]
+      },
+      hm_p1: {
+        club: '맨손 / 책 스퀘어',
+        goalShots: 10,
+        defaultPace: 12,
+        opening: '평일 집콕 5분 홈트레이닝, 1단계 2분! 360도 복압 호흡과 벽 골반 힌지, 그리고 책 스퀘어 플레인 연습입니다. 벽에서 반 발짝 앞으로 서서 양손에 얇은 책을 들고 함께 시작해 봅시다.',
+        swingCue: '코로 복압 채우고, 골반 뒤로 접어 벽 터치 후 오른어깨 사선 아래로 떨어뜨립니다. 하나, 둘, 셋!',
+        finishCue: '무릎이나 허리가 들리지 않았는지 체크하며 다음 반복을 준비하세요.',
+        midCue: '1분 지났습니다. 이제부터는 양 손바닥으로 책을 쥔 채 백스윙 탑에서 임팩트 인아웃 궤도를 천천히 그려봅니다.',
+        wrapCue: '마지막 20초! 배치기 없는 완벽한 골반 공간과 책 임팩트 수직 면을 두 번만 더 확인하세요.',
+        completeCue: '홈트 1단계 완료! 이제 끝을 묶은 수건이나 클럽을 들고 2단계로 넘어가세요.',
+        shots: [
+          '1회차: 코로 깊게 4초 들이마시며 아랫배, 옆구리, 허리 뒤쪽까지 360도 복압 실린더를 팽팽하게 채운 채 척추각을 유지하세요.',
+          '2회차: 복압을 유지한 상태로 무릎이 앞으로 튀어나오지 않게 고관절을 뒤로 접어 엉덩이가 뒤 벽에 가볍게 닿는지 확인합니다.',
+          '3회차: 엉덩이가 벽에 닿은 상태 그대로 백스윙 회전! 오른쪽 엉덩이가 벽을 깊게 누르며 올라가고 오른무릎 각도가 지면 방향으로 버텨줍니다.',
+          '4회차: 전환 시 왼쪽 엉덩이를 7시 뒤쪽 벽으로 밀어 양쪽 엉덩이가 번갈아 벽에 닿는 배치기 제로 힙턴을 3회 천천히 반복합니다.',
+          '5회차: 이제 양 손바닥 사이에 책을 꽉 끼우세요. 백스윙 탑에서 책 표지가 타깃선과 나란한지 눈으로 점검합니다.',
+          '6회차: 책이 밖으로 엎어지지 않게 오른어깨 사선 아래, 몸 안쪽을 타고 부드럽게 내려오는 인아웃 플레인 궤도를 느낍니다.',
+          '7회차: 임팩트 지점에서 책 면이 공 앞 30센티 타깃선에 정확히 직각 수직으로 들어오는지 멈춰서 확인하세요.',
+          '8회차: 팔로스루에서 양팔이 1시 방향으로 자연스럽게 뻗어 나가며 왼쪽 엉덩이가 벽 뒤로 완전히 돌아나갑니다.'
+        ]
+      },
+      hm_p2: {
+        club: '끝 묶은 수건 / 가슴 클럽',
+        goalShots: 10,
+        defaultPace: 12,
+        opening: '집콕 2단계 2분, 끝 묶은 수건 양어깨 터치 리듬과 가슴 교차 코어 회전입니다! 손으로 치는 버릇을 없애고 팔이 수동적인 채찍처럼 몸통 회전에 끌려가는 감각을 깨웁니다. 시작합니다.',
+        swingCue: '백스윙 탑 오른어깨 툭, 하체 반 박자 기다렸다가 코어 회전으로 왼어깨 툭! 리듬 타세요.',
+        finishCue: '수건 매듭이 얼굴 쪽이 아니라 양쪽 어깨에 일정한 박자로 닿았는지 느끼세요.',
+        midCue: '1분 경과! 수건을 연속으로 흔들며 하나에 백스윙 어깨 툭, 둘에 피니시 어깨 툭 소리를 일정한 메트로놈으로 맞추세요.',
+        wrapCue: '마지막 20초! 등근육과 복압이 리드하는 매끄러운 리듬으로 3회만 더 흔들고 마무리합니다.',
+        completeCue: '홈트 2단계 완료! 마지막 1분, 동전 밟기와 오른발 2센티 세팅으로 넘어갑시다.',
+        shots: [
+          '1세트: 클럽이나 우산을 가슴 X자로 안고 어드레스 각도를 잡은 뒤 머리를 벽에 고정한 채 좌우 무스웨이 코어 회전 5회 천천히 돕니다.',
+          '2세트: 끝 묶은 수건을 잡으세요. 손목 힘을 0으로 완전히 빼고 몸통 회전 반동으로만 수건을 오른쪽 어깨 위에 툭 얹어봅니다.',
+          '3세트: 오른쪽 어깨에 매듭이 닿는 찰나 하체가 먼저 7시로 돌며 기다리면 팔은 저절로 떨어집니다. 반대쪽 왼쪽 어깨에도 가볍게 툭 얹히는지 보세요.',
+          '4세트: 멈추지 말고 연속 빈스윙! 툭, 기다리고, 툭! 매듭이 양쪽 어깨를 번갈아 두드리는 박자가 일정해집니다.',
+          '5세트: 만약 매듭이 얼굴이나 목 앞을 친다면 손으로 서둘러 끌어내린 것입니다. 등근육 속도를 늦추고 팔을 길게 늘어뜨리세요.',
+          '6세트: 360도 복압 호흡을 살짝 유지한 상태에서 마지막 5회 연속 수건 리듬 스윙으로 80퍼센트 템포를 저장하세요.'
+        ]
+      },
+      hm_p3: {
+        club: '동전 밟기 (오른발 2cm 뒤)',
+        goalShots: 5,
+        defaultPace: 12,
+        opening: '집콕 마지막 3단계 1분! 오른발 엄지발가락 아래 안쪽 볼록한 살에 500원 동전을 깔고 오른발을 왼발보다 2센티미터만 살짝 뒤로 뺀 뒤 무스웨이 골반 회전을 체화합니다. 시작하세요.',
+        swingCue: '오른발 2센티 뒤 세팅, 발 안쪽 동전을 묵직하게 밟아 누르며 골반이 뒤로 깊게 회전합니다.',
+        finishCue: '체중이 오른발 바깥쪽으로 새지 않았는지 발바닥 감각을 확인하세요.',
+        midCue: '30초 경과! 골반 회전 길이 열렸으니 억지로 뒤로 당기지 않아도 오른쪽 엉덩이가 편하게 돌아가는 느낌을 기억하세요.',
+        wrapCue: '마지막 15초! 집콕 5분 루틴 완료 버튼만 누르면 오늘의 복리 연습이 기록됩니다.',
+        completeCue: '집콕 5분 홈트레이닝 완벽 완주! 하단 완료 버튼을 눌러 오늘 횟수를 기록하세요.',
+        shots: [
+          '1~2회: 오른발을 왼발보다 2센티만 살짝 뒤로 빼 보세요. 오른쪽 고관절 회전 길이 뻥 뚫리는 느낌이 옵니다.',
+          '3~4회: 오른발 엄지발가락 아래 안쪽 살로 동전을 꾹 누르며 백스윙 톱까지 도세요. 바깥쪽 복숭아뼈로 무게가 넘어가면 스웨이입니다.',
+          '5~6회: 동전이 주는 지면 반력을 발바닥 안쪽에 단단히 모아뒀다가, 왼발 앞쪽을 밟으며 자연스럽게 7시 턴으로 전환합니다.',
+          '7~8회: 오른손 엄지 검지 힘 0과 오른발 안쪽 동전 압력을 동시에 느끼며 어드레스부터 탑, 임팩트 구간을 슬로우모션으로 지나갑니다.',
+          '9~10회: 오늘 밤 잠들기 전까지 이 가볍고 견고한 회전 감각만 기억하세요! 수고하셨습니다.'
+        ]
+      }
+    };
+
+    let voiceCoachEnabled = true;
+    let voiceAutoCount = false;
+    let voiceRecEnabled = false;
+    let voicePaceSec = 35;
+    let voiceShotNum = 0;
+    let voiceStage = 'idle'; // idle | opening | setup | swing | finish
+    let voiceSpeechToken = 0;
+    let voiceLastSpokenText = '';
+    let voiceLoopTimers = [];
+    let voiceMidSpoken = false;
+    let voiceWrapSpoken = false;
+    let pendingMidAnnounced = false;
+    let pendingWrapAnnounced = false;
+    let shotRecordedInCycle = false;
+    let consecutiveHookCount = 0;
+    let lastAutoShotMeta = null;
+    let coachAudioCtx = null;
+    let coachResultRec = null;
+
+    function clearVoiceTimers() {
+      voiceLoopTimers.forEach(t => clearTimeout(t));
+      voiceLoopTimers = [];
+    }
+
+    function scheduleVoiceTimer(fn, ms) {
+      const id = setTimeout(fn, ms);
+      voiceLoopTimers.push(id);
+      return id;
+    }
+
+    function unlockCoachAudio() {
+      try {
+        if (!coachAudioCtx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) coachAudioCtx = new AC();
+        }
+        if (coachAudioCtx && coachAudioCtx.state === 'suspended') {
+          coachAudioCtx.resume().catch(() => {});
+        }
+      } catch (e) {}
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.resume();
+        }
+      } catch (e) {}
+    }
+
+    function playCoachTone(freq = 523.25, durationSec = 0.12, vol = 0.12, type = 'sine') {
+      try {
+        if (!coachAudioCtx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          coachAudioCtx = new AC();
+        }
+        if (coachAudioCtx.state === 'suspended') coachAudioCtx.resume().catch(() => {});
+        const now = coachAudioCtx.currentTime;
+        const osc = coachAudioCtx.createOscillator();
+        const gain = coachAudioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(vol, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + durationSec);
+        osc.connect(gain);
+        gain.connect(coachAudioCtx.destination);
+        osc.start(now);
+        osc.stop(now + durationSec + 0.02);
+      } catch (e) {}
+    }
+
+    function pickBestKoreanVoice() {
+      if (!('speechSynthesis' in window)) return null;
+      const voices = window.speechSynthesis.getVoices() || [];
+      const koVoices = voices.filter(v => (v.lang || '').toLowerCase().startsWith('ko'));
+      if (!koVoices.length) return null;
+      const preferred = ['Google', 'Yuna', 'Sora', 'Heami', 'InJoon', 'SunHi', 'Natural'];
+      for (const kw of preferred) {
+        const hit = koVoices.find(v => (v.name || '').includes(kw));
+        if (hit) return hit;
+      }
+      return koVoices[0];
+    }
+
+    function splitCoachSentences(text) {
+      const clean = (text || '')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/[【】\[\]⭐🎯🔥⭕⚠️❌💡📌🆘🏠⛳🕳️🏌️🎙️⚡🧪⛰️📉🪒🌿🐸🪵📏💨⬅️➡️🔄]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (!clean) return [];
+      const parts = clean.match(/[^.!?]+[.!?]?/g) || [clean];
+      const merged = [];
+      for (const rawP of parts) {
+        const p = rawP.trim();
+        if (!p) continue;
+        if (merged.length > 0 && (merged[merged.length - 1].length + p.length) < 68) {
+          merged[merged.length - 1] += ' ' + p;
+        } else {
+          merged.push(p);
+        }
+      }
+      return merged;
+    }
+
+    function updateVoiceSubtitleUI(text, stageLabel, shotLabel, isSpeaking = false) {
+      const box = document.getElementById('voiceLiveTranscript');
+      const stBadge = document.getElementById('voiceStageBadge');
+      const shBadge = document.getElementById('voiceShotBadge');
+      if (box && text !== null && text !== undefined) {
+        box.textContent = text;
+        box.classList.toggle('speaking', !!isSpeaking);
+      }
+      if (stBadge && stageLabel) stBadge.textContent = stageLabel;
+      if (shBadge && shotLabel) shBadge.textContent = shotLabel;
+    }
+
+    function stopCoachSpeech(userRequested = false) {
+      voiceSpeechToken += 1;
+      try {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      } catch (e) {}
+      const box = document.getElementById('voiceLiveTranscript');
+      if (box) box.classList.remove('speaking');
+      if (userRequested) {
+        clearVoiceTimers();
+        stopVoiceResultListening();
+        updateVoiceSubtitleUI('🔇 음성을 정지했습니다. [다시 듣기] 또는 [다음 타]를 누르면 이어집니다.', '⏸ 음성 정지됨', null, false);
+      }
+    }
+
+    function speakCoachText(text, onDone, opts = {}) {
+      const cleanRaw = (text || '').trim();
+      if (!cleanRaw) {
+        if (onDone) onDone();
+        return;
+      }
+      voiceLastSpokenText = cleanRaw;
+      voiceSpeechToken += 1;
+      const myToken = voiceSpeechToken;
+
+      if (opts.stageLabel || opts.shotLabel) {
+        updateVoiceSubtitleUI(cleanRaw, opts.stageLabel, opts.shotLabel, true);
+      } else {
+        updateVoiceSubtitleUI(cleanRaw, null, null, true);
+      }
+
+      if (!voiceCoachEnabled || !('speechSynthesis' in window)) {
+        const box = document.getElementById('voiceLiveTranscript');
+        if (box) box.classList.remove('speaking');
+        if (onDone) scheduleVoiceTimer(() => { if (voiceSpeechToken === myToken) onDone(); }, 1800);
+        return;
+      }
+
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+
+      const chunks = splitCoachSentences(cleanRaw);
+      if (!chunks.length) {
+        if (onDone) onDone();
+        return;
+      }
+
+      const koVoice = pickBestKoreanVoice();
+      const rate = opts.rate || 1.04;
+      let idx = 0;
+
+      const speakNextChunk = () => {
+        if (voiceSpeechToken !== myToken) return;
+        if (idx >= chunks.length) {
+          const box = document.getElementById('voiceLiveTranscript');
+          if (box) box.classList.remove('speaking');
+          if (onDone) onDone();
+          return;
+        }
+        const sentence = chunks[idx++];
+        const utt = new SpeechSynthesisUtterance(sentence);
+        utt.lang = 'ko-KR';
+        if (koVoice) utt.voice = koVoice;
+        utt.rate = rate;
+        utt.pitch = 1.0;
+
+        let settled = false;
+        const estMs = Math.max(2400, Math.round(sentence.length * 145 / rate) + 2200);
+        const safetyTimer = setTimeout(() => {
+          if (!settled) {
+            settled = true;
+            speakNextChunk();
+          }
+        }, estMs);
+
+        utt.onend = () => {
+          clearTimeout(safetyTimer);
+          if (!settled) {
+            settled = true;
+            speakNextChunk();
+          }
+        };
+        utt.onerror = () => {
+          clearTimeout(safetyTimer);
+          if (!settled) {
+            settled = true;
+            speakNextChunk();
+          }
+        };
+
+        try {
+          window.speechSynthesis.speak(utt);
+        } catch (e) {
+          clearTimeout(safetyTimer);
+          if (onDone && voiceSpeechToken === myToken) onDone();
+        }
+      };
+
+      // cancel 직후 짧은 지연으로 iOS/Android 무음 버그 회피
+      scheduleVoiceTimer(() => speakNextChunk(), 60);
+    }
+
+    function speakImmediateFeedback(text) {
+      if (!voiceCoachEnabled) return;
+      unlockCoachAudio();
+      speakCoachText(text, null, { rate: 1.06 });
+    }
+
+    function initVoiceCoachEngine() {
+      voiceCoachEnabled = sessionState.voiceEnabled !== false;
+      voiceAutoCount = !!sessionState.voiceAutoCount;
+      voiceRecEnabled = !!sessionState.voiceRecEnabled;
+      voicePaceSec = parseInt(sessionState.voicePaceSec, 10) || 35;
+
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.getVoices(); } catch (e) {}
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+          window.speechSynthesis.onvoiceschanged = () => { pickBestKoreanVoice(); };
+        }
+      }
+      renderVoiceControlsUI();
+      renderConsoleQuickShotBar();
+    }
+
+    function renderVoiceControlsUI() {
+      const vcBtn = document.getElementById('voiceCoachToggleBtn');
+      const acBtn = document.getElementById('autoCountToggleBtn');
+      const vrBtn = document.getElementById('voiceRecToggleBtn');
+      const paceSel = document.getElementById('voicePaceSelect');
+
+      if (vcBtn) {
+        vcBtn.textContent = voiceCoachEnabled ? '🔊 보이스코치 ON' : '🔇 보이스코치 OFF';
+        vcBtn.classList.toggle('on', voiceCoachEnabled);
+      }
+      if (acBtn) {
+        acBtn.textContent = voiceAutoCount ? '🤖 자동+1구 ON' : '🤖 자동+1구 OFF';
+        acBtn.classList.toggle('on', voiceAutoCount);
+      }
+      if (vrBtn) {
+        vrBtn.textContent = voiceRecEnabled ? '🎤 말로 기록 ON' : '🎤 말로 기록 OFF';
+        vrBtn.classList.toggle('on', voiceRecEnabled);
+      }
+      if (paceSel) {
+        paceSel.value = String(voicePaceSec);
+      }
+    }
+
+    function toggleVoiceCoach() {
+      voiceCoachEnabled = !voiceCoachEnabled;
+      sessionState.voiceEnabled = voiceCoachEnabled;
+      saveDraftState();
+      renderVoiceControlsUI();
+      if (!voiceCoachEnabled) {
+        stopCoachSpeech(false);
+        updateVoiceSubtitleUI('🔇 보이스코치가 꺼져 있습니다. 화면 자막으로만 진행합니다.', '🔇 음소거 모드', null, false);
+        showToast('🔇 보이스 코치 음성이 꺼졌습니다.');
+      } else {
+        unlockCoachAudio();
+        playCoachTone(659.25, 0.14, 0.12);
+        showToast('🔊 보이스 코치가 켜졌습니다!');
+        if (timerInterval) {
+          speakImmediateFeedback('보이스 코치를 켰습니다. 현재 타수부터 계속 안내해 드립니다.');
+        }
+      }
+    }
+
+    function updateVoicePace(val) {
+      voicePaceSec = parseInt(val, 10) || 35;
+      sessionState.voicePaceSec = voicePaceSec;
+      saveDraftState();
+      showToast(`⏱ 한 타 코칭 간격이 ${voicePaceSec}초로 설정되었습니다.`);
+    }
+
+    function toggleVoiceAutoCount() {
+      voiceAutoCount = !voiceAutoCount;
+      sessionState.voiceAutoCount = voiceAutoCount;
+      saveDraftState();
+      renderVoiceControlsUI();
+      showToast(voiceAutoCount
+        ? '🤖 자동+1구 ON: 한 타가 끝나면 기본 정타(+1)로 자동 기록됩니다 (미스만 정정).'
+        : '🤖 자동+1구 OFF: 버튼이나 말로 직접 기록합니다.');
+    }
+
+    function toggleVoiceResultListening() {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) {
+        showToast('이 브라우저는 자동 음성명령을 지원하지 않아 상단 원탭 버튼을 이용해 주세요.');
+        return;
+      }
+      voiceRecEnabled = !voiceRecEnabled;
+      sessionState.voiceRecEnabled = voiceRecEnabled;
+      saveDraftState();
+      renderVoiceControlsUI();
+      if (!voiceRecEnabled) {
+        stopVoiceResultListening();
+      } else {
+        unlockCoachAudio();
+        showToast('🎤 피니시 후 "정타 · 훅 · 우측 · 뒤땅 · 다음"으로 말해보세요!');
+      }
+    }
+
+    function resetVoicePhaseState(phaseId) {
+      clearVoiceTimers();
+      stopCoachSpeech(false);
+      stopVoiceResultListening();
+      voiceShotNum = 0;
+      voiceStage = 'idle';
+      voiceMidSpoken = false;
+      voiceWrapSpoken = false;
+      pendingMidAnnounced = false;
+      pendingWrapAnnounced = false;
+      shotRecordedInCycle = false;
+
+      const db = VOICE_COACH_DB[phaseId];
+      if (!db) return;
+
+      // 모드 특성별 적정 간격 자동 제안(집콕/퍼팅이면 20~25초대 권장, 사용자가 직접 바꾼 적 없으면)
+      if (phaseId.startsWith('hm_') && voicePaceSec > 25) {
+        voicePaceSec = 25;
+        renderVoiceControlsUI();
+      } else if (phaseId.startsWith('in_') && voicePaceSec < 30) {
+        voicePaceSec = 35;
+        renderVoiceControlsUI();
+      }
+
+      updateVoiceSubtitleUI(
+        `타이머 ▶ 시작 버튼을 누르면 ${db.club} 오프닝 레슨 후 1구째부터 한 타 한 타 상세하게 코칭합니다.`,
+        '🎧 ▶ 시작 시 상세 보이스 레슨 시작',
+        `🏌️ 대기 · 목표 ${db.goalShots}구`,
+        false
+      );
+    }
+
+    function stopVoiceCoachLoop() {
+      clearVoiceTimers();
+      stopCoachSpeech(false);
+      stopVoiceResultListening();
+    }
+
+    function beginVoiceCoachSession() {
+      clearVoiceTimers();
+      const db = VOICE_COACH_DB[activePhaseId];
+      if (!db) return;
+
+      if (voiceShotNum === 0) {
+        voiceStage = 'opening';
+        playCoachTone(440, 0.16, 0.14);
+        speakCoachText(db.opening, () => {
+          if (!timerInterval) return;
+          scheduleVoiceTimer(() => {
+            if (timerInterval) startShotCoachStep(1);
+          }, 1200);
+        }, {
+          stageLabel: '📖 오프닝 종합 레슨',
+          shotLabel: `🏌️ ${db.club} · 목표 ${db.goalShots}구`
+        });
+      } else {
+        startShotCoachStep(voiceShotNum);
+      }
+    }
+
+    function playPhaseOpeningManual() {
+      unlockCoachAudio();
+      const db = VOICE_COACH_DB[activePhaseId];
+      if (!db) return;
+      clearVoiceTimers();
+      playCoachTone(440, 0.16, 0.14);
+      speakCoachText(db.opening, () => {
+        if (timerInterval && voiceCoachEnabled) {
+          scheduleVoiceTimer(() => {
+            if (timerInterval) startShotCoachStep(Math.max(1, voiceShotNum));
+          }, 1000);
+        }
+      }, {
+        stageLabel: '📖 단계 오프닝 레슨',
+        shotLabel: `🏌️ ${db.club} · 목표 ${db.goalShots}구`
+      });
+    }
+
+    function playPhaseMasterLesson(phaseId) {
+      unlockCoachAudio();
+      const info = findPhaseById(phaseId);
+      const db = VOICE_COACH_DB[phaseId];
+      if (!info || !db) return;
+      if (activePhaseId !== phaseId) {
+        selectPhase(phaseId, true);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      playCoachTone(523.25, 0.14, 0.12);
+      speakCoachText(db.opening, null, {
+        stageLabel: '📖 단계 핵심 레슨 브리핑',
+        shotLabel: `🏌️ ${db.club} · 목표 ${db.goalShots}구`
+      });
+    }
+
+    function nextShotCoachManual() {
+      unlockCoachAudio();
+      clearVoiceTimers();
+      stopVoiceResultListening();
+      const nextNum = Math.max(1, voiceShotNum + 1);
+      startShotCoachStep(nextNum);
+    }
+
+    function repeatCurrentShotCoach() {
+      unlockCoachAudio();
+      if (voiceLastSpokenText) {
+        speakCoachText(voiceLastSpokenText);
+      } else {
+        playPhaseOpeningManual();
+      }
+    }
+
+    function checkVoiceTimeMilestones() {
+      if (!timerTotalSec || !voiceCoachEnabled) return;
+      const halfSec = Math.floor(timerTotalSec / 2);
+      if (!voiceMidSpoken && timerTotalSec >= 240 && timerRemainSec === halfSec) {
+        voiceMidSpoken = true;
+      }
+      if (!voiceWrapSpoken && timerTotalSec >= 180 && timerRemainSec === 60) {
+        voiceWrapSpoken = true;
+      }
+    }
+
+    function startShotCoachStep(num) {
+      clearVoiceTimers();
+      stopVoiceResultListening();
+      const db = VOICE_COACH_DB[activePhaseId];
+      if (!db) return;
+
+      voiceShotNum = num;
+      shotRecordedInCycle = false;
+      const shotStartedAt = Date.now();
+      const lessonIdx = (num - 1) % db.shots.length;
+      const lessonBody = db.shots[lessonIdx];
+
+      let prefix = `${num}구째, ${db.club}입니다. `;
+      if (voiceWrapSpoken && !pendingWrapAnnounced && db.wrapCue) {
+        pendingWrapAnnounced = true;
+        prefix = `${db.wrapCue} 자, ${num}구째입니다. `;
+      } else if (voiceMidSpoken && !pendingMidAnnounced && db.midCue) {
+        pendingMidAnnounced = true;
+        prefix = `${db.midCue} 자, ${num}구째입니다. `;
+      }
+
+      if (activePhaseId.startsWith('hm_')) {
+        prefix = `${num}번째 세트입니다. `;
+      }
+
+      voiceStage = 'setup';
+      playCoachTone(440, 0.11, 0.10);
+
+      const stage1Text = prefix + lessonBody;
+      const shotBadgeStr = `🏌️ ${num}구째 / 목표 ${db.goalShots}구`;
+
+      speakCoachText(stage1Text, () => {
+        if (!timerInterval) return;
+        // Stage ① 완료 후 셋업 1.6초 여유
+        scheduleVoiceTimer(() => {
+          if (!timerInterval) return;
+          triggerShotStage2(num, db, shotStartedAt, shotBadgeStr);
+        }, 1600);
+      }, {
+        stageLabel: '① 프리샷 · 상세 레슨',
+        shotLabel: shotBadgeStr
+      });
+    }
+
+    function triggerShotStage2(num, db, shotStartedAt, shotBadgeStr) {
+      voiceStage = 'swing';
+      playCoachTone(523.25, 0.09, 0.11);
+
+      speakCoachText(db.swingCue, () => {
+        if (!timerInterval) return;
+        // "샷!" 맑은 톤 후 Stage ③ 진입
+        playCoachTone(783.99, 0.16, 0.14);
+        scheduleVoiceTimer(() => {
+          if (!timerInterval) return;
+          triggerShotStage3(num, db, shotStartedAt, shotBadgeStr);
+        }, 2800);
+      }, {
+        stageLabel: '② 스윙 템포 · 임팩트',
+        shotLabel: shotBadgeStr
+      });
+    }
+
+    function triggerShotStage3(num, db, shotStartedAt, shotBadgeStr) {
+      voiceStage = 'finish';
+      const elapsedMs = Date.now() - shotStartedAt;
+      const targetCycleMs = Math.max(22000, voicePaceSec * 1000);
+      const remainWaitMs = Math.max(6000, targetCycleMs - elapsedMs);
+
+      const finishPrompt = voiceRecEnabled
+        ? `${db.finishCue} 정타, 훅, 우측, 뒤땅 중 하나를 말씀하세요.`
+        : db.finishCue;
+
+      speakCoachText(finishPrompt, () => {
+        if (!timerInterval) return;
+        if (voiceRecEnabled) {
+          startVoiceResultListening(5200);
+        }
+        scheduleVoiceTimer(() => {
+          if (!timerInterval) return;
+          finishCurrentShotAndAdvance(num);
+        }, Math.max(4500, remainWaitMs));
+      }, {
+        stageLabel: '③ 피니시 3초 & 기록',
+        shotLabel: shotBadgeStr
+      });
+    }
+
+    function finishCurrentShotAndAdvance(num) {
+      stopVoiceResultListening();
+      if (!timerInterval) return;
+
+      // 자동+1구 기능이 켜져 있고 이번 타에서 수동/음성으로 아직 기록하지 않았다면 기본 정타 +1 자동 반영
+      if (voiceAutoCount && !shotRecordedInCycle) {
+        if (currentMode === 'indoor90' || currentMode === 'putting10') {
+          recordShotBatch(activePhaseId, 'good', 1, 'auto');
+          lastAutoShotMeta = { kind: 'shot', phaseId: activePhaseId, field: 'good', ts: Date.now() };
+          playCoachTone(880, 0.09, 0.09);
+        } else if (currentMode === 'approach50') {
+          const dk = sessionState.consoleApDist || '30m';
+          recordApproach(dk, 'in3m', 1, 'auto');
+          lastAutoShotMeta = { kind: 'approach', distKey: dk, field: 'in3m', ts: Date.now() };
+          playCoachTone(880, 0.09, 0.09);
+        }
+      }
+
+      startShotCoachStep(num + 1);
+    }
+
+    function startVoiceResultListening(durationMs = 5000) {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR || !voiceRecEnabled) return;
+      stopVoiceResultListening();
+
+      const vrBtn = document.getElementById('voiceRecToggleBtn');
+      try {
+        coachResultRec = new SR();
+        coachResultRec.lang = 'ko-KR';
+        coachResultRec.interimResults = false;
+        coachResultRec.maxAlternatives = 2;
+        if (vrBtn) vrBtn.classList.add('mic-listening');
+
+        coachResultRec.onresult = (e) => {
+          const transcript = Array.from(e.results[0]).map(r => r.transcript).join(' ');
+          handleSpokenShotCommand(transcript);
+        };
+        coachResultRec.onerror = () => {
+          if (vrBtn) vrBtn.classList.remove('mic-listening');
+        };
+        coachResultRec.onend = () => {
+          if (vrBtn) vrBtn.classList.remove('mic-listening');
+          coachResultRec = null;
+        };
+        coachResultRec.start();
+
+        scheduleVoiceTimer(() => {
+          stopVoiceResultListening();
+        }, durationMs);
+      } catch (e) {
+        if (vrBtn) vrBtn.classList.remove('mic-listening');
+      }
+    }
+
+    function stopVoiceResultListening() {
+      const vrBtn = document.getElementById('voiceRecToggleBtn');
+      if (vrBtn) vrBtn.classList.remove('mic-listening');
+      if (coachResultRec) {
+        try { coachResultRec.stop(); } catch (e) {}
+        coachResultRec = null;
+      }
+    }
+
+    function handleSpokenShotCommand(rawText) {
+      const t = (rawText || '').trim();
+      if (!t) return;
+      stopVoiceResultListening();
+
+      if (/다음|넘겨|스킵/.test(t)) {
+        nextShotCoachManual();
+        return;
+      }
+
+      if (currentMode === 'home5') {
+        if (/완료|끝|기록|저장|좋아|굿/.test(t)) {
+          recordHomeDone();
+        }
+        return;
+      }
+
+      if (currentMode === 'approach50') {
+        const dk = sessionState.consoleApDist || '30m';
+        if (/미스|실패|뒤땅|뒷땅|탑볼|짧|길|벗어/.test(t)) {
+          recordApproach(dk, 'miss', 1);
+        } else if (/정타|굿|나이스|성공|안착|오케이|붙었|들어/.test(t)) {
+          recordApproach(dk, 'in3m', 1);
+        }
+        return;
+      }
+
+      if (currentMode === 'putting10') {
+        if (/미스|실패|짧|길|오차|빗나/.test(t)) {
+          recordShot(activePhaseId, 'hook');
+        } else if (/정타|굿|나이스|성공|홀인|들어|오케이|안착/.test(t)) {
+          recordShot(activePhaseId, 'good');
+        }
+        return;
+      }
+
+      // indoor90
+      if (/훅|왼쪽|좌측|당겼|감겼|감김|풀/.test(t)) {
+        recordShot(activePhaseId, 'hook');
+      } else if (/우측|오른쪽|슬라이스|밀렸|밀림|푸시/.test(t)) {
+        recordShot(activePhaseId, 'push');
+      } else if (/뒤땅|뒷땅|탑볼|탑핑|타핑|미스|생크/.test(t)) {
+        recordShot(activePhaseId, 'fat');
+      } else if (/정타|굿|나이스|드로우|완벽|좋아/.test(t)) {
+        recordShot(activePhaseId, 'good');
+      }
+    }
+
+    function speakShotFeedback(phaseId, type, delta) {
+      if (!voiceCoachEnabled) return;
+      unlockCoachAudio();
+      let msg = '';
+      if (phaseId.startsWith('pt_')) {
+        msg = type === 'good'
+          ? '퍼팅 성공 기록! 등속 공 태우기 템포와 20센티 통과문 감각을 그대로 유지하세요.'
+          : '퍼팅 미스 기록. 다음 퍼트에서는 공이 멈출 때까지 고개를 들지 말고 헤드 폭만 확인하세요.';
+      } else {
+        if (type === 'good') {
+          playCoachTone(880, 0.1, 0.1);
+          msg = delta > 1
+            ? `정타 ${delta}구 추가! 리듬이 아주 좋습니다.`
+            : '정타 기록! 지금의 오른손 힘 빼기와 1시 푸시 익스텐션 감각을 그대로 기억하세요.';
+        } else if (type === 'hook') {
+          playCoachTone(329.63, 0.12, 0.12);
+          msg = consecutiveHookCount >= 2
+            ? '주의! 연속 좌측 훅입니다! 잠깐 공을 멈추고 극저속 슬로우모션으로 등 닫아두기와 왼엉덩이 7시 벽을 2회 리셋하세요.'
+            : '좌측 훅 기록. 오른손 엄지 검지가 개입했거나 왼어깨가 먼저 열렸습니다. 다음 타는 상체를 닫고 1시로 밀어내세요.';
+        } else if (type === 'push') {
+          playCoachTone(392, 0.12, 0.1);
+          msg = '우측 밀림 기록. 공 앞 30센티 중간점에 오른손으로 페이스를 먼저 맞춘 뒤 스탠스를 서세요.';
+        } else if (type === 'fat') {
+          playCoachTone(293.66, 0.14, 0.12);
+          msg = '뒤땅 탑볼 기록. 시선을 공의 앞쪽 적도에 고정하고 양발 앞쪽에 체중을 5퍼센트 더 싣고 치세요.';
+        }
+      }
+      if (msg) {
+        updateVoiceSubtitleUI(msg, '🎙️ 실시간 피드백', null, true);
+        if (!timerInterval) {
+          speakCoachText(msg);
+        } else {
+          // 타이머 중이면 짧은 리듬 큐로 출력하고 다음 타가 곧 이어지도록 유지
+          clearVoiceTimers();
+          speakCoachText(msg, () => {
+            if (timerInterval) {
+              scheduleVoiceTimer(() => {
+                if (timerInterval) startShotCoachStep(Math.max(1, voiceShotNum + 1));
+              }, 2200);
+            }
+          });
+        }
+      }
+    }
+
+    function speakApproachFeedback(distKey, field, delta) {
+      if (!voiceCoachEnabled) return;
+      unlockCoachAudio();
+      const msg = field === 'in3m'
+        ? `${distKey} 3미터 안착 ${delta}구 기록! 핀이 아닌 1미터 랜딩 박스 공략이 정확히 들어갔습니다.`
+        : `${distKey} 안착 미스 기록. 손목 힘 0퍼센트와 앞바운스 성냥 켜기를 점검하고 백스윙보다 느리게 떨어뜨리세요.`;
+      updateVoiceSubtitleUI(msg, '🎙️ 어프로치 피드백', null, true);
+      if (!timerInterval) {
+        speakCoachText(msg);
+      } else {
+        clearVoiceTimers();
+        speakCoachText(msg, () => {
+          if (timerInterval) {
+            scheduleVoiceTimer(() => {
+              if (timerInterval) startShotCoachStep(Math.max(1, voiceShotNum + 1));
+            }, 2200);
+          }
+        });
+      }
+    }
+
+    function changeConsoleApDist(distKey) {
+      sessionState.consoleApDist = distKey;
+      saveDraftState();
+      renderConsoleQuickShotBar();
+    }
+
+    function renderConsoleQuickShotBar() {
+      const bar = document.getElementById('consoleQuickShotBar');
+      if (!bar) return;
+
+      if (currentMode === 'indoor90') {
+        const s = sessionState.shots[activePhaseId] || { good: 0, hook: 0, push: 0, fat: 0 };
+        bar.innerHTML = `
+          <button class="cq-btn cq-good" onclick="recordShot('${activePhaseId}', 'good')">
+            <span>🎯 정타</span>
+            <span class="cq-count">${s.good}</span>
+          </button>
+          <button class="cq-btn cq-warn" onclick="recordShot('${activePhaseId}', 'hook')">
+            <span>⬅️ 좌측훅</span>
+            <span class="cq-count">${s.hook}</span>
+          </button>
+          <button class="cq-btn" onclick="recordShot('${activePhaseId}', 'push')">
+            <span>➡️ 우측</span>
+            <span class="cq-count">${s.push}</span>
+          </button>
+          <button class="cq-btn" onclick="recordShot('${activePhaseId}', 'fat')">
+            <span>💥 뒤땅·탑</span>
+            <span class="cq-count">${s.fat}</span>
+          </button>
+        `;
+      } else if (currentMode === 'approach50') {
+        const curDist = sessionState.consoleApDist || '30m';
+        const m = sessionState.matrix[curDist] || { in3m: 0, miss: 0 };
+        const options = [];
+        APPROACH_ZONES.forEach(z => z.items.forEach(d => {
+          options.push(`<option value="${d.key}" ${d.key === curDist ? 'selected' : ''}>📏 ${d.label}</option>`);
+        }));
+        bar.innerHTML = `
+          <select class="cq-dist-select" onchange="changeConsoleApDist(this.value)">
+            ${options.join('')}
+          </select>
+          <button class="cq-btn cq-good" onclick="recordApproach('${curDist}', 'in3m', 1)">
+            <span>⭕ 3m안착</span>
+            <span class="cq-count">${m.in3m}</span>
+          </button>
+          <button class="cq-btn cq-warn" onclick="recordApproach('${curDist}', 'miss', 1)">
+            <span>✕ 미스</span>
+            <span class="cq-count">${m.miss}</span>
+          </button>
+        `;
+      } else if (currentMode === 'putting10') {
+        const s = sessionState.shots[activePhaseId] || { good: 0, hook: 0 };
+        bar.innerHTML = `
+          <button class="cq-btn cq-good" style="grid-column: span 2;" onclick="recordShot('${activePhaseId}', 'good')">
+            <span>🕳️ 홀인 / 1m OK존 성공</span>
+            <span class="cq-count">${s.good}구</span>
+          </button>
+          <button class="cq-btn cq-warn" style="grid-column: span 2;" onclick="recordShot('${activePhaseId}', 'hook')">
+            <span>❌ 미스 / 거리 오차</span>
+            <span class="cq-count">${s.hook}구</span>
+          </button>
+        `;
+      } else if (currentMode === 'home5') {
+        bar.innerHTML = `
+          <button class="cq-btn cq-good" style="grid-column: span 4; padding:10px;" onclick="recordHomeDone()">
+            <span>✅ 오늘 집콕 5분 루틴 1회 완료 기록 (누적 ${sessionState.homeDone || 0}회)</span>
+          </button>
+        `;
+      }
+    }
+
+    function speakZeroPointGuide() {
+      unlockCoachAudio();
+      const text = '연습과 필드 전 30초 영점 세팅 세 가지입니다. 첫째, 왼손은 호건 2너클 뉴트럴, 오른손은 중지와 약지만 걸치고 엄지와 검지 힘은 0으로 비워 등속 악력 3을 유지하세요. 둘째, 52도 웨지는 옆그립 양 어깨 수평을 맞춰 앞바운스로 매트를 성냥 켜듯 치익 스쳐 냅니다. 셋째, 오른손으로 채를 들고 공 앞 30센티 중간점에 페이스를 먼저 직각 정렬한 뒤 두 발을 서고 360도 복압 기둥을 채우세요.';
+      playCoachTone(523.25, 0.14, 0.12);
+      speakCoachText(text, null, {
+        stageLabel: '🎯 30초 영점 세팅 음성',
+        shotLabel: 'ZERO-POINT 3대 기본기'
+      });
+    }
+
+    function speakCurrentLie() {
+      unlockCoachAudio();
+      const g = LIE_GUIDES[currentLie] || LIE_GUIDES.flat;
+      const text = `${g.title}. ${g.desc}`;
+      playCoachTone(523.25, 0.14, 0.12);
+      speakCoachText(text, null, {
+        stageLabel: '⛳ 5대 라이 음성 처방',
+        shotLabel: currentLie.toUpperCase()
+      });
+    }
+
+    function speakCurrentSlope() {
+      unlockCoachAudio();
+      const sl = FIELD_SLOPES[currentSlopeKey] || FIELD_SLOPES.ball_above;
+      const text = `${sl.title}. ${sl.desc}`;
+      playCoachTone(493.88, 0.14, 0.12);
+      speakCoachText(text);
+    }
+
+    function speakSosItem(sosKey) {
+      unlockCoachAudio();
+      const item = SWING_SOS_LIST.find(s => s.key === sosKey);
+      if (!item) return;
+      const text = `${item.title}. 원인 진단: ${item.cause} 첫 번째 응급처방: ${item.rx1} 두 번째 응급처방: ${item.rx2}`;
+      playCoachTone(392.0, 0.16, 0.14);
+      speakCoachText(text);
     }
 
     window.addEventListener('DOMContentLoaded', initApp);
