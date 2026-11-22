@@ -10,7 +10,7 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
-  <title>벤 호건 싱글디짓 & 안정적 70타 코치 v4 (보이스 코치)</title>
+  <title>벤 호건 × 김형근 10회 마스터스윙 코치 v5 (보이스 코치)</title>
   <style>
     :root {
       --bg-paper: #F6F4EE;
@@ -1405,6 +1405,44 @@
       border-color: #9E331D;
       color: #FFF;
     }
+
+    /* 김형근 10회 골든 스윙 복원 & 손 쓰임 실험 카드 */
+    .hk-verify-card {
+      background: linear-gradient(135deg, #F3FAF6 0%, #E7F3EC 100%);
+      border: 1.5px solid #8AC9A6;
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .wrist-switch-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #9BC9B1;
+    }
+
+    .wrist-btn {
+      border: 1.5px solid #9BC9B1;
+      background: #FFFFFF;
+      color: var(--turf-deep);
+      border-radius: 8px;
+      padding: 7px 6px;
+      font-family: var(--font-sans);
+      font-size: 10.8px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      line-height: 1.25;
+    }
+
+    .wrist-btn.active {
+      background: var(--turf-deep);
+      border-color: var(--turf-deep);
+      color: #72F2A7;
+    }
   </style>
 </head>
 <body>
@@ -1417,8 +1455,8 @@
       <div class="brand-group">
         <div class="brand-emblem">70s</div>
         <div style="min-width:0;">
-          <h1 class="brand-title">호건 싱글디짓 코치 <span style="font-size:11px; color:#72F2A7;">v4</span></h1>
-          <p class="brand-sub">🔊 실시간 한타한타 보이스 레슨 · 1시 푸시드로우 · 52° 시계추 · 3·6·9 퍼팅</p>
+          <h1 class="brand-title">호건×김형근 마스터 코치 <span style="font-size:11px; color:#72F2A7;">v5</span></h1>
+          <p class="brand-sub">🔊 한타한타 보이스 · 머리반개·골반과회전 차단 · 52° 런10m</p>
         </div>
       </div>
       <div class="header-actions">
@@ -1551,6 +1589,28 @@
           <button id="mat_towel" class="mat-chip" onclick="toggleMatCheck('towel')">☐ 공 뒤 3cm 수건·명함 안 건드림</button>
           <button id="mat_gate" class="mat-chip" onclick="toggleMatCheck('gate')">☐ 공 앞 20cm '1시 티 게이트' 통과</button>
           <button id="mat_divot" class="mat-chip" onclick="toggleMatCheck('divot')">☐ 공 앞 3~5cm 매트 타격음 확인</button>
+        </div>
+      </div>
+
+      <!-- 김형근 10회 레슨(2021-12-18) 골든 스윙 복원 · 10구 영상 셀프 판독기 & 손 쓰임 실험 스위치 -->
+      <div class="hk-verify-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:5px; flex-wrap:wrap;">
+          <span style="font-size:12px; font-weight:900; color:var(--turf-deep);">📸 [김형근 10회] 10구 정·후면 영상 셀프 판독기</span>
+          <div style="display:flex; gap:4px; align-items:center;">
+            <button class="voice-speak-btn" onclick="speakHkVideoGuide()">🔊 판독 음성</button>
+            <button class="visual-inline-btn" onclick="openVisualGuide('ch1-hk')">🎨 도해</button>
+          </div>
+        </div>
+        <p style="font-size:11px; color:var(--ink-secondary); margin:3px 0 0;">가장 좋았던 <strong>2021-12-18(5회차)</strong> 스윙 복원! 오늘 10구 영상을 찍어 아래 4가지를 확인하세요.</p>
+        <div class="mat-chips">
+          <button id="hk_headHalf" class="mat-chip" onclick="toggleHkCheck('headHalf')">☐ [정면①] 탑 머리 반 개(공1.5개) 이내</button>
+          <button id="hk_rightFoot" class="mat-chip" onclick="toggleHkCheck('rightFoot')">☐ [정면②] 왼손등 펴기·오른발 다 치고 들기</button>
+          <button id="hk_topSupport" class="mat-chip" onclick="toggleHkCheck('topSupport')">☐ [후면①] 하나-둘 스톱! 주저앉음·크로스오버 0</button>
+          <button id="hk_pelvisHold" class="mat-chip" onclick="toggleHkCheck('pelvisHold')">☐ [후면②] 사선 뒤로 밀기·골반 과회전 방지</button>
+        </div>
+        <div class="wrist-switch-row">
+          <button id="wristMode_hogan2026" class="wrist-btn active" onclick="setWristMode('hogan2026')">🅰️ 2026 호건·JS 모드<br/><span style="font-weight:600;">엄지·검지 0% · 손목 무조작</span></button>
+          <button id="wristMode_hk2021" class="wrist-btn" onclick="setWristMode('hk2021')">🅱️ 2021 김형근 통합 모드<br/><span style="font-weight:600;">탑 공방향 코킹·검지받침·릴리스</span></button>
         </div>
       </div>
 
@@ -1846,8 +1906,8 @@
         </div>
         <div class="plaud-step">
           <span class="plaud-step-num" style="background:var(--turf-deep);">방법 2</span>
-          <strong>필드·연습장 오프라인 자동 작동 (v3 마스터 에디션)</strong><br/>
-          산악 지형 골프장이나 추운 겨울 야외 타석에서도 <code>🎨 비주얼 마스터북 v3</code>, <code>⛰️ 4대 경사지 공식</code>, <code>⚡ 10초 종료 복기</code>가 오프라인으로 즉시 작동합니다.
+          <strong>필드·연습장 오프라인 자동 작동 (v5 마스터스윙 에디션)</strong><br/>
+          산악 지형 골프장이나 추운 겨울 야외 타석에서도 <code>🔊 보이스 코치</code>, <code>📸 김형근 10구 판독기</code>, <code>🎨 비주얼 마스터북 v5</code>가 오프라인으로 즉시 작동합니다.
         </div>
       </div>
       <button id="nativeInstallPromptBtn" class="save-session-btn" style="width:100%; display:none;" onclick="triggerNativeInstall()">
@@ -1859,7 +1919,7 @@
   <!-- MODAL 4: 풀스크린 능동형 비주얼 교본 뷰어 (타이머 유지형) -->
   <div id="visualGuideModal" class="visual-fullscreen-modal">
     <div class="visual-modal-bar">
-      <div class="visual-modal-title">🎨 비주얼 마스터북 v3 <span style="font-size:11px; color:#B8C9BF; font-weight:600;">(타이머 작동 유지)</span></div>
+      <div class="visual-modal-title">🎨 비주얼 마스터북 v5 <span style="font-size:11px; color:#B8C9BF; font-weight:600;">(타이머·보이스 유지)</span></div>
       <div class="visual-modal-actions">
         <a id="visualStandaloneLink" class="visual-ext-link" href="./visual-guide.html" target="_blank">단독 창 ↗</a>
         <button class="visual-close-btn" onclick="closeVisualGuide()">✕ 닫고 연습</button>
@@ -1920,6 +1980,10 @@
           <button class="quick-tag-btn" onclick="appendQuickTag('매트 착시 방지(공 앞 타격) 검증 완료')">+ 매트착시 검증</button>
           <button class="quick-tag-btn" onclick="appendQuickTag('드라이버 180m 생존 컨트롤 ↔ 220m 교대 성공')">+ 180m 컨트롤샷</button>
           <button class="quick-tag-btn" onclick="appendQuickTag('3·6·9 퍼터 헤드 폭 공식 거리감 적용')">+ 3·6·9 퍼팅</button>
+          <button class="quick-tag-btn" onclick="appendQuickTag('머리 반 개(공1.5개) 이내 고정 & 탑 스톱 확인')">+ 머리 반개 이내 고정</button>
+          <button class="quick-tag-btn" onclick="appendQuickTag('하체 사선 뒤로 밀기 & 골반 과회전 방지(배꼽 우측)')">+ 하체 사선밀기·골반 제어</button>
+          <button class="quick-tag-btn" onclick="appendQuickTag('오른발 다 치고 난 뒤 들기 & 팔 몸 밀착 릴리스')">+ 오른발 다 치고 들기</button>
+          <button class="quick-tag-btn" onclick="appendQuickTag('웨지 뒤꿈치 넓은 스탠스·공 중앙·하나둘 기다림·헤드업 0%')">+ 뒤꿈치 스탠스·시선고정</button>
         </div>
         <textarea id="wrapMemoInput" class="memo-textarea" style="margin-top:8px; min-height:64px;" placeholder="추가 한 줄 복기 메모 (선택)" oninput="syncMemoInputs(this.value)"></textarea>
       </div>
@@ -1938,7 +2002,7 @@
 
   <script>
     /**************************************************************
-     * 1. MASTER CURRICULUM v3 (완성기 77개 + 안정적 70타 173개 + 11/8 JS 검증)
+     * 1. MASTER CURRICULUM v5 (김형근 10회 × 벤 호건 × 완성기/70타 × 11/8·11/22 검증)
      **************************************************************/
     const CURRICULUM = {
       indoor90: [
@@ -1946,45 +2010,45 @@
           id: 'in_p1',
           step: 'PHASE 1 · 0~15분',
           minutes: 15,
-          title: '52도 앞바운스 "성냥 켜기" & 30m(20+10) 워밍업',
-          cue: '오른손 중지·약지만 걸치고 엄지·검지 힘을 0%로 비운 뒤(11/8 JS 체득!), 52도 앞바운스가 매트를 성냥 켜듯 "치익-" 스치는 소리만 들으며 30m(20캐리+10런)를 보냅니다.',
-          trap: '첫 15분에 풀스윙 금지! 공 뒤 3cm에 수건·명함을 두고 안 건드리고 공 앞 매트를 스치는지 "매트 착시"부터 검증하세요.',
+          title: '52도 앞바운스 "성냥 켜기" · 동시 출발 & 공 중앙 워밍업',
+          cue: '오른손 엄지·검지 힘을 0%로 비우고 [김형근 ①·⑦] 몸·팔·클럽이 다 같이 가서 다 같이 빠집니다(백스윙 속도 낮추기). 뒤꿈치를 넓힌 스탠스에 공은 중앙! 앞바운스 성냥 켜기로 30m(20캐리+10런)를 보냅니다.',
+          trap: '공을 오른발 뒤에 두면 찍어 쳐서 런이 2~15m로 튑니다! 공 뒤 3cm 수건·명함 매트 착시도 함께 검증하세요.',
           sosKey: 'ap_chunk'
         },
         {
           id: 'in_p2',
           step: 'PHASE 2 · 15~40분',
           minutes: 25,
-          title: '미들 아이언(7I·8I) 훅 박멸 — 왼엉덩이 7시 벽 & 1시 푸시',
-          cue: '① 백스윙 탑에서 왼쪽 견갑골 텐션을 느끼며 상체(왼어깨)는 닫아두고, ② 왼쪽 엉덩이로 뒤쪽 7시 벽을 먼저 열어 손을 왼쪽 허벅지로 낙하시킨 뒤, ③ 공 앞 20cm 우측 전방(1시 방향) 티 위로 오른손바닥을 길게 밀어내세요!',
-          trap: '좌측 훅이 난다고 스탠스를 왼쪽으로 서거나 손목을 돌리면 악성 풀훅이 됩니다! 시선은 공 앞 3~5cm 바닥에 고정하세요.',
+          title: '미들 아이언(7I·8I) 훅 박멸 — 머리 반 개 · 사선 밀기 · 골반 과회전 차단',
+          cue: '① 백스윙 머리 이동은 최대 반 개(공 1.5개) 이내! 허리까지 팔 모으고 왼손등 펴 "하나-둘-스톱!" 검지 받침 확인 → ② 상체는 우측 본 채 하체를 사선 뒤로 밀기(7시 벽) → ③ 팔을 허벅지 앞에 먼저 내린 뒤 골반 과회전(배꼽 정면 오픈)을 막고 몸에 붙여 1시로 릴리스! 오른발은 다 치고 들기.',
+          trap: '연습 빈스윙은 과장(120%), 실제 샷은 느낌만(30%)! 머리가 뒤로 밀리거나 채를 눕혀 주저앉으면 손이 먼저 돌아 좌측 커브가 터집니다.',
           sosKey: 'ir_pull'
         },
         {
           id: 'in_p3',
           step: 'PHASE 3 · 40~60분',
           minutes: 20,
-          title: '유틸리티 & 전 클럽 통일 — 그립 끝 왼허벅지 & 긴 7I 타격',
-          cue: '드라이버든 유틸이든 어드레스 그립 끝(왼쪽 허벅지 안쪽)과 오른쪽 허벅지 앞 코킹 타이밍은 100% 동일합니다! 유틸은 반 인치 짧게 쥐고 쓸어 올리지 말고 "긴 7번 아이언"처럼 볼 뒤 5cm 머리를 남긴 채 얇게 눌러 치세요.',
-          trap: '공을 띄우려 오른발에 남거나 결과를 일찍 보면 뒤땅·탑볼·좌측 감김이 동시에 터집니다.',
+          title: '유틸리티 & 전 클럽 통일 — 동시성 · 그립 끝 배꼽~왼허벅지',
+          cue: '전 클럽 그립 끝은 배꼽~왼쪽 허벅지 안쪽 통일! 머리는 반 개(공 뒤 5cm 벽) 안에 두고, 탑에서 뒤로 주저앉지 않은 채 "긴 7번 아이언" 리듬으로 얇게 쓸어 통과하세요. 오른발은 임팩트 후 마지막에 뜹니다.',
+          trap: '채가 길다고 급해져 몸보다 손이 먼저 출발(이탈)하거나, 왼쪽 회전이 막히면 유틸 좌측 감김과 탑볼이 동시에 납니다.',
           sosKey: 'ut_rough'
         },
         {
           id: 'in_p4',
           step: 'PHASE 4 · 60~80분',
           minutes: 20,
-          title: '드라이버 — 임진한 "180m 생존 컨트롤 ↔ 220m 푸시드로우"',
-          cue: '① 1구: 티 반 개 낮추고 3/4 견갑골 스윙으로 180m 페어웨이 정중앙 컨트롤! ↔ ② 1구: 머리를 고정한 채 오른 어깨만 사선 아래로 떨구고(Lay-back) 1시 방향으로 헤드를 폭발 방출하는 220m 정타를 교대로 칩니다.',
-          trap: '연속 2구 이상 감기면 즉시 극저속 슬로우모션 3회(왼어깨 턱 밑 → 하체 반 박자 기다림 → 빈 티 1초 응시)로 리셋하세요.',
+          title: '드라이버 — 머리 반 개(탄도↑) · 180m 컨트롤 ↔ 220m 레이백 교대',
+          cue: '드라이버는 일찍 일어나 몸이 덮이기 쉽습니다(김형근 ③)! ① 1구(180m 생존): 티 낮추고 상체 우측 유지·팔 허벅지 앞 내린 뒤 80% 컨트롤 ↔ ② 1구(220m): 머리 반 개 안에 남기고 하체 사선 밀기 후 빈 티 1초 응시 릴리스로 고탄도 푸시드로우!',
+          trap: '머리가 따라가거나 뒤로 넘어가면 탄도가 낮아지고 런만 늘어납니다. 연속 훅 시 "하나-둘-스톱!" 빈스윙 2회로 즉시 리셋하세요.',
           sosKey: 'dr_hook'
         },
         {
           id: 'in_p5',
           step: 'PHASE 5 · 80~90분',
           minutes: 10,
-          title: '가상 필드 5홀 (15초 루틴 · 공 앞 30cm 에이밍 · 안개 리셋)',
-          cue: '매 샷 [드라이버 → 유틸/7I → 52도]를 바꾸며 오른손으로 채를 들고 "공 앞 30cm 중간 타깃"에 페이스를 먼저 맞춘 뒤 스탠스를 섭니다(15초 루틴). 5번째 홀에서는 "짙은 안개 커튼"을 내려 자만을 끕니다.',
-          trap: '정확히 섰을 때 타깃이 살짝 왼쪽에 보이는 듯한 "기차 레일 착시"를 무시하고 클럽 페이스를 믿으세요!',
+          title: '가상 필드 5홀 (쓸 수 있는 드로우 분류 · 30cm 에이밍 · 안개 리셋)',
+          cue: '매 샷 클럽을 바꾸며 속으로 "하나, 둘"을 세고 30cm 중간점에 오른손 페이스를 맞춘 뒤 단 한 번에 칩니다. 오늘 목표는 "곧게 뻗다 휘는 쓸 수 있는 드로우" 비율 높이기! 5번 홀은 200m 앞 안개 커튼을 내리세요.',
+          trap: '출발부터 안으로 말리거나 우측으로 크게 열리는 볼은 구질로 쓸 수 없습니다. 압박감 속에서도 공 지나간 자리를 끝까지 보세요.',
           sosKey: 'dr_slice'
         }
       ],
@@ -1993,33 +2057,33 @@
           id: 'ap_p1',
           step: 'PHASE 1 · 0~10분',
           minutes: 10,
-          title: '15m 이내 Safe First 피라미드 — 퍼터 · 치퍼 · 52° 토샷',
-          cue: '70타 스크램블링 제1원칙은 "90% 굴리기"입니다! ① 그린 엣지는 퍼터, ② 프린지 너머는 치퍼, ③ 잔디가 길어 애매할 때는 샤프트를 수직으로 세워 힐을 띄우고 토우 끝으로 툭 치는 "52° 토샷(Toe Shot)"을 연마합니다.',
-          trap: '10~15m에서 자존심 때문에 로브샷을 띄우려다 뒤땅·홈런 냉온탕으로 더블보기가 시작됩니다.'
+          title: '15m 이내 Safe First 피라미드 — 20m 러닝 · 퍼터 · 치퍼 · 52° 토샷',
+          cue: '70타 스크램블링 제1원칙은 "90% 굴리기"! ① 퍼터 → ② 치퍼 → ③ 에이프런 52° 토샷(힐 띄움) → ④ 20m 러닝 어프로치(김형근 ⑩: 왼쪽에 힘 딱 주고 왼쪽으로 정확히 밀어치기!).',
+          trap: '꼭 붙여야 한다는 압박감에 시선이 공을 일찍 떠나면(11-22 헤드업) 즉시 뒤땅·탑볼이 납니다!'
         },
         {
           id: 'ap_p2',
           step: 'PHASE 2 · 10~25분',
           minutes: 15,
-          title: '15~25m 런닝/칩샷 — 옆그립 어깨 수평 & 앞바운스 성냥 켜기',
-          cue: '공 가까이에 서서 스탠스 헤드 2개 폭 + 왼발·왼골반을 함께 뒤로 열어 회전 길을 만듭니다. 양 어깨를 수평(옆그립 느낌)으로 맞추고 앞바운스가 잔디를 성냥 켜듯 "치익-" 스치게 1m 랜딩 박스에만 내려놓으세요.',
-          trap: '오른손이 밑에 있다고 오른쪽 어깨까지 푹 낮추면 공 뒤 땅을 찍는 뒤땅이 납니다!'
+          title: '15~25m 칩샷 — 뒤꿈치 넓은 스탠스 · 공 중앙 · 런 10m 상수',
+          cue: '김형근 ⑦ 정석 셋업: 발끝이 아닌 "뒤꿈치를 넓혀" 하체 흔들림을 잠그고 공은 중앙! 옆그립 양 어깨 수평으로 맞추고 앞바운스 성냥 켜기로 떨어뜨리면 런은 안정적으로 10m(오르막 5m · 내리막 15m) 굴러갑니다.',
+          trap: '공을 오른발 뒤에 놓으면 누구나 찍어 쳐서 런이 2~15m까지 들쭉날쭉해집니다!'
         },
         {
           id: 'ap_p3',
           step: 'PHASE 3 · 25~40분',
           minutes: 15,
-          title: '30~80m 포틴 52° 시계추 — 8시(30m)·9시(50~60m)·10시(70~80m)',
-          cue: '스탠스를 주먹 3개로 넓히고 그립 악력 "3"을 끝까지 고정! ① 30m=8시(골반·20캐리+10런), ② 40m=8시반(명치), ③ 50~60m=9시(L-to-L 하프), ④ 70~80m=10시(3/4 코어턴) 기준 거리를 몸에 새깁니다.',
-          trap: '핀을 보면 손이 감속합니다! 오직 공이 처음 떨어질 "1m 랜딩 박스"에만 백스윙보다 느린 리듬으로 헤드를 떨구세요.'
+          title: '30~80m 포틴 52° — 반동 없는 "하나-둘(기다림)-셋" & 웨지 커플링',
+          cue: '김형근 ⑦·⑩ 시계추 공식: 백스윙 탑에서 급하게 내려치는 반동을 없애려 "백스윙 하나 → 기다림 둘 → 내려올 때 셋!"으로 치고, 왼쪽을 열며 오른손 기준으로 도는 "웨지 커플링"으로 30m(8시)·50m(9시)·70m(10시) 1m 랜딩 박스를 공략합니다.',
+          trap: '핀을 보고 손이 감속하거나 11-22 구술처럼 결과 압박으로 머리가 들리면 거리 오차가 폭발합니다. 시선은 공이 지나간 자리에 남기세요!'
         },
         {
           id: 'ap_p4',
           step: 'PHASE 4 · 40~50분',
           minutes: 10,
           title: '90m+ 컨트롤 & 그린사이드 벙커 1타 탈출 서바이벌',
-          cue: '90m+는 80% 등근육 리듬(힘 들어가면 PW 3/4으로 전환)! 벙커는 핀 금지·그린 중앙 에이밍 후 두 발을 모래에 깊숙이 묻고(왼발 70%) 공 뒤 3cm 모래를 바운스로 끝까지 폭발시킵니다.',
-          trap: '벙커와 내리막 라이에서 손으로 공을 떠내려 하면 턱 직격 또는 홈런이 납니다.'
+          cue: '90m+는 80% 등근육 리듬(힘 들어가면 PW 3/4 전환)! 벙커는 그린 중앙 조준 후 페이스 먼저 열고 발 묻힌 만큼 짧게 그립 → 오른손 엄지·검지 0 + 왼3손가락 4~5로 공 뒤 3cm 모래를 하이 피니시까지 폭발!',
+          trap: '벙커·내리막에서 손으로 떠내려 하거나 모래 앞에서 멈추면 턱 직격 또는 홈런이 납니다.'
         }
       ],
       putting10: [
@@ -2028,15 +2092,15 @@
           step: 'PHASE 1 · 0~4분',
           minutes: 4,
           title: '1.5~2m 쇼트퍼팅 90% 루틴 (왼쪽 눈 수직 & 20cm 통과문)',
-          cue: '왼쪽 눈이 공 바로 위에 수직으로 오게 서고, 공 앞 20cm 가상 통과문만 똑바로 통과시킵니다. 왼손등이 꺾이지 않게 타깃으로 선행하되 공이 홀컵에 떨어지는 "소리"로만 확인하세요.',
-          trap: '힘을 너무 빼서 헤드가 흔들리면 잔경사를 다 탑니다. 임팩트 충격에 안 밀리는 적정 악력(3~4)으로 딱 멈추세요.'
+          cue: '왼쪽 눈이 공 바로 위에 수직으로 오게 서고, 공 앞 20cm 가상 통과문만 똑바로 통과시킵니다. "꼭 넣어야 한다"는 압박을 지우고 "하나, 둘" 리듬 후 공이 떨어지는 "소리"로만 확인하세요.',
+          trap: '임팩트 충격에 헤드가 흔들리면 잔경사를 탑니다. 적정 악력(3~4)을 유지하고 빈 잔디만 끝까지 보세요.'
         },
         {
           id: 'pt_p2',
           step: 'PHASE 2 · 4~8분',
           minutes: 4,
           title: '3·6·9 헤드 폭 거리 공식 & 반경 1m "OK 존" 태우기',
-          cue: '3걸음(헤드 1개) · 6걸음(헤드 2개) · 9걸음(헤드 3개) 백스윙 크기를 어드레스 때 미리 정하고, 다운스윙은 때리거나 밀지 않고 일정한 템포로 공을 부드럽게 "태워" 반경 1m 원에 세웁니다.',
+          cue: '3걸음(헤드 1개) · 6걸음(헤드 2개) · 9걸음(헤드 3개) 백스윙 크기를 미리 정하고, 다운스윙은 때리거나 밀지 않고 일정한 템포로 공을 부드럽게 "태워" 반경 1m 원에 세웁니다.',
           trap: '팔로스루를 억지로 길게 밀면 거리가 들쭉날쭉해집니다. 그립 끝은 배꼽~왼쪽 허벅지 범위 안에 두세요!'
         },
         {
@@ -2044,8 +2108,8 @@
           step: 'PHASE 3 · 8~10분',
           minutes: 2,
           title: '가상 삼각형 브레이크 리딩 & 3연속 2퍼트 서바이벌',
-          cue: '홀컵 아래쪽(오르막 시점)에서 라인을 읽어 변곡점(Apex) 삼각형을 찍고, 프리샷 루틴(빈스윙 2회 → 3초 내 스트로크)으로 랜덤 8m 3연속 2퍼트 세이브를 달성합니다.',
-          trap: '오르막은 브레이크를 적게 보고 강하게 직진, 내리막은 브레이크를 2~3배 넓게 보고 왼발 쪽 공 윗부분을 소프트 터치!'
+          cue: '홀컵 아래쪽(오르막 시점)에서 라인을 읽어 변곡점(Apex) 삼각형을 찍고, 프리샷 루틴("하나-둘" 빈스윙 2회 → 3초 내 스트로크)으로 랜덤 8m 3연속 2퍼트 세이브를 달성합니다.',
+          trap: '오르막은 브레이크를 적게 보고 직진, 내리막은 브레이크를 2~3배 넓게 보고 소프트 터치!'
         }
       ],
       home5: [
@@ -2053,45 +2117,45 @@
           id: 'hm_p1',
           step: 'HOME 1 · 2분',
           minutes: 2,
-          title: '360° 복압 호흡 + 벽 골반 힌지 & 책 스퀘어 플레인',
-          cue: '코로 숨을 마셔 아랫배·옆구리·허리 뒤까지 360° 복압 실린더를 채운 뒤, 벽에서 반 발짝 떨어져 골반부터 뒤로 접어 벽을 터치합니다. 책을 양 손바닥으로 쥐고 탑(타깃 평행) → 오른어깨 사선 낙하 → 임팩트(수직)를 10회 반복하세요.',
-          trap: '복압 없이 등·무릎만 구부리면 다운스윙 때 배치기(얼리 익스텐션)와 좌측 훅이 나옵니다.'
+          title: '벽 골반 힌지 + 소파 잡고 하체 사선 뒤 밀기 & 책 플레인',
+          cue: '① 360° 복압 채우고 벽 골반 힌지 & 머리 반 개(벽/거울 기준) 고정 → ② [김형근 ② 집 숙제] 소파나 문틀을 손으로 잡고 골반을 돌리지 말고 "사선 뒤쪽으로 밀기" → 감이 오면 밀면서 오른발/왼발까지 떼어 하체·복부 꼬임 체감 → ③ 책 양손바닥 인아웃 10회!',
+          trap: '하체를 제자리에서 돌리기만 하면 팔이 벌어지고 스웨이가 납니다. 사선 뒤로 깊게 밀며 꼬이는 느낌이 정답!'
         },
         {
           id: 'hm_p2',
           step: 'HOME 2 · 2분',
           minutes: 2,
-          title: '끝 묶은 수건 양어깨 터치 리듬 & 가슴 교차 코어 회전',
-          cue: '클럽을 가슴에 교차해 축 고정 트위스트 15회 후, 끝 묶은 수건으로 연속 풀스윙합니다. 백스윙 탑(오른어깨 툭!) → 반 박자 하체 기다림 → 피니시(왼어깨 툭!) 박자가 일정한지 점검하세요.',
-          trap: '손으로 급하게 치면 수건 매듭이 얼굴 쪽으로 튑니다. 팔은 수동적 채찍처럼 코어에 끌려가야 합니다.'
+          title: '끝 묶은 수건 양어깨 터치 리듬 & 머리 반 개 코어 회전',
+          cue: '클럽을 가슴에 교차해 머리 반 개 안에서 축 고정 회전 15회 후, 끝 묶은 수건으로 연속 풀스윙합니다. 백스윙 "하나(오른어깨 툭!)" → 반 박자 기다림 "둘" → 피니시 "셋(왼어깨 툭!)"!',
+          trap: '손으로 급하게 내리면 수건 매듭이 얼굴 쪽으로 튀고 오른발이 일찍 들립니다.'
         },
         {
           id: 'hm_p3',
           step: 'HOME 3 · 1분',
           minutes: 1,
-          title: '오른발 안쪽 동전 압력 & 오른발 2cm 뒤 세팅 회전',
-          cue: '오른발 앞·안쪽 볼록한 살 아래 동전을 밟고, 오른발을 왼발보다 2cm 살짝 뒤로 뺀 채 백스윙 10회! 골반이 막힘 없이 깊게 돌면서 동전이 꾹 눌리는 무스웨이 압력을 체화합니다.',
-          trap: '체중이 오른발 바깥쪽으로 밀리면(스웨이) 회전 에너지가 0이 됩니다.'
+          title: '오른발 안쪽 동전 압력 & 오른발 유지("다 치고 들기") 드릴',
+          cue: '오른발 엄지발가락 아래 동전을 밟고 2cm 살짝 뒤로 뺀 채 백스윙 10회! [김형근 ⑤·⑧] 백스윙부터 임팩트까지 오른발 앞쪽 힘을 꾹 눌러 유지하다가 공을 다 치고 피니시에서만 가볍게 드세요.',
+          trap: '임팩트 전에 오른발이 일찍 들리거나(얼리 익스텐션) 바깥으로 밀리면 훅·슬라이스가 동시에 납니다.'
         }
       ]
     };
 
     const LIE_GUIDES = {
       flat: {
-        title: '🟢 평지 기본 — 앞바운스 "성냥 켜기(치익-)" & 옆그립 어깨 수평',
-        desc: '리딩엣지(날)를 세우지 말고 페이스를 스퀘어~2도 열어 앞바운스가 잔디를 성냥 켜듯 미끄러지게 합니다. 양 어깨를 수평으로 맞추고 "1m 랜딩 박스"에만 헤드 무게를 툭 내려놓으세요.'
+        title: '🟢 평지 기본 — 뒤꿈치 넓은 스탠스·공 중앙 · 앞바운스 성냥켜기(런 10m)',
+        desc: '[김형근 ⑦·⑩] 뒤꿈치를 넓혀 하체 흔들림을 막고 공은 중앙에 두세요(뒤에 두면 찍혀서 런 2~15m 널뛰기). 반동 없이 "하나-둘 기다림" 후 왼쪽에 힘을 주며 앞바운스를 스치면 평지 런은 안정적으로 10m입니다.'
       },
       uphill: {
-        title: '⛰️ 오르막 라이 — 체중 왼쪽 고정 + 호젤 일직선 빗자루 쓸기',
-        desc: '박아 치면 경사에 걸려 짧아집니다! 체중을 왼쪽에 두고 핸드퍼스트를 줄인 채(호젤과 손 일직선), 경사면을 따라 빗자루로 쓸어 올리듯 과감히 패스하세요. 런이 적으므로 한 단계 큰 스윙을 택합니다.'
+        title: '⛰️ 오르막 라이 — 체중 왼쪽 고정 + 호젤 일직선(런 5m 보정)',
+        desc: '박아 치면 경사에 걸려 짧아집니다! 체중을 왼쪽에 두고 핸드퍼스트를 줄인 채 경사면을 따라 쓸어 올리세요. [김형근 ⑦] 오르막은 런이 평지 10m의 절반인 약 5m만 구르므로 스윙 크기를 반 단계 키웁니다.'
       },
       downhill: {
-        title: '📉 내리막·포대 라이 — 오른발 뒤로 후퇴 + 볼 오른발 + 짧은 랜딩 범프앤런',
-        desc: '유효 로프트가 줄어(52°→42°) 절대 띄우려 하면 홈런·뒤땅이 납니다! 오른발을 살짝 뒤로 빼 채가 빠져나갈 길을 터주고, 공은 오른발 쪽·체중 왼발 85% 고정 후 그린 앞 아주 짧은 지점에 떨어뜨려 굴리세요.'
+        title: '📉 내리막·포대 라이 — 오른발 후퇴 + 볼 오른발(런 15m+ 보정)',
+        desc: '[김형근 ⑦] 내리막은 런이 15m 이상으로 크게 늘어납니다! 띄우기 절대 포기, 오른발을 뒤로 빼 채가 나갈 길을 열고 왼발 체중 85% 고정 후 그린 초입 아주 짧은 지점에 떨궈 굴리세요.'
       },
       toeshot: {
         title: '🪒 타이트 에이프런 필살기 — "52° 토샷(Toe Shot)" 뒤땅·홈런 0%',
-        desc: '퍼터 치기엔 에이프런 잔디가 길고 일반 웨지는 뒤땅이 무서울 때! 공에 헤드 2개 거리만큼 아주 가까이 서서 샤프트를 수직으로 세워 힐(뒤꿈치)을 완전히 띄우고, 토우 끝부분만 닿게 한 채 퍼팅 스트로크로 툭 치세요.'
+        desc: '퍼터 치기엔 에이프런 잔디가 길고 일반 웨지는 뒤땅이 무서울 때! 공에 헤드 2개 거리만큼 아주 가까이 서서 샤프트를 수직으로 세워 힐(뒤꿈치)을 완전히 띄우고, 토우 끝만 닿게 해 퍼팅처럼 툭 치고 시선은 끝까지 공 자리에 남기세요.'
       },
       rough: {
         title: '🌿 깊은 러프·디봇 잠김 — 그립 끝까지 짧게 + 헤드 살짝 들고 톡!',
@@ -2101,25 +2165,25 @@
 
     const APPROACH_ZONES = [
       {
-        zoneTitle: 'ZONE A · 10~20m Safe First 스코어 방어 존 (90% 굴리기 · 퍼터/치퍼/52°토샷 · 좁은 오픈)',
+        zoneTitle: 'ZONE A · 10~20m Safe First (뒤꿈치 넓게 · 공 중앙 · 20m 러닝 · 런 10m 기준)',
         items: [
-          { key: '10m', label: '10m', guide: '1순위 퍼터·치퍼 / 52° 토샷(힐 띄움)', sub: '캐리 3m + 런 7m (뒤땅 0% 안전 루트)' },
-          { key: '15m', label: '15m', guide: '좁은 오픈+왼골반 뒤로 · 옆그립 수평', sub: '캐리 7m + 런 8m (1m 랜딩박스 집중)' },
-          { key: '20m', label: '20m', guide: '포켓(7시반) 진자 · 팔-몸통 일체 회전', sub: '캐리 10m + 런 10m (앞바운스 성냥켜기)' }
+          { key: '10m', label: '10m', guide: '1순위 퍼터·치퍼 / 52° 토샷(힐 띄움)', sub: '캐리 3m + 런 7m (시선 끝까지 고정)' },
+          { key: '15m', label: '15m', guide: '뒤꿈치 넓은 오픈 · 옆그립 수평', sub: '캐리 5~7m + 런 8~10m (1m 랜딩박스)' },
+          { key: '20m', label: '20m', guide: '20m 러닝(왼쪽 힘 고정·밀어치기)', sub: '캐리 10m + 런 10m (앞바운스 성냥켜기)' }
         ]
       },
       {
-        zoneTitle: 'ZONE B · 30~60m 포틴 52° 핵심 피치샷 존 (주먹 3개 스탠스 · 악력 3 등속 · 느린 다운스윙)',
+        zoneTitle: 'ZONE B · 30~60m 포틴 52° 시계추 (반동 없는 "하나-둘 기다림" · 평지 런 10m 상수)',
         items: [
-          { key: '30m', label: '30m ⭐', guide: '8시-4시(골반~허리) · 오른팔꿈치 밀착', sub: '캐리 20m + 런 10m (11/8 JS 완벽 검증!)' },
-          { key: '40m', label: '40m', guide: '8시반(명치) · 백스윙보다 느린 낙하', sub: '캐리 31m + 런 9m (오른손 엄지·검지 0%)' },
-          { key: '50m', label: '50~60m', guide: '9시-3시 (L-to-L 하프 기준점)', sub: '캐리 44~53m + 런 7m (등근육 시동 대칭)' }
+          { key: '30m', label: '30m ⭐', guide: '8시-4시 · 공 중앙 · 하나-둘 기다림', sub: '캐리 20m + 런 10m (김형근⑦×JS 완벽 일치!)' },
+          { key: '40m', label: '40m', guide: '8시반(명치) · 반동 없는 다운스윙', sub: '캐리 30m + 런 10m (왼손등·시선 고정)' },
+          { key: '50m', label: '50~60m', guide: '9시-3시 (L-to-L · 웨지 커플링 회전)', sub: '캐리 40~50m + 런 10m (오른발 다 치고 들기)' }
         ]
       },
       {
         zoneTitle: 'ZONE C · 70~90m+ 웨지 풀컨트롤 & 벙커 존 (코어 턴 · 핀 금지 그린 중앙)',
         items: [
-          { key: '70m', label: '70~80m', guide: '10시-2시 (3/4 쓰리쿼터 코어턴)', sub: '캐리 65~74m + 런 6m (감속 금지 등속!)' },
+          { key: '70m', label: '70~80m', guide: '10시-2시 (3/4 쓰리쿼터 · 배꼽 우측)', sub: '캐리 65~74m + 런 6m (감속 금지 등속!)' },
           { key: '90m', label: '90m+', guide: '80% 등근육 풀스윙 (힘 들어가면 PW)', sub: '무리한 100% 금지 · 리듬과 밸런스 3초' },
           { key: 'bunker', label: '벙커', guide: '오른엄지검지 0 · 왼3손가락 4~5', sub: '발 묻은 만큼 짧게 · 공 뒤 3cm 모래 폭발' }
         ]
@@ -2173,9 +2237,9 @@
         key: 'dr_hook',
         icon: '⬅️',
         title: '1. 드라이버가 왼쪽으로 감길 때 (풀훅·해저드 비상)',
-        cause: '욕심·긴장으로 오른손 엄지·검지 개입 + 상체(왼쪽 어깨)가 조기 오픈되며 덮어 침.',
-        rx1: '<strong>[우측 티박스 + 셋업 리셋]</strong> 티박스 우측에 서서 페어웨이 우측으로 시야를 열고, <strong>티를 반 개 낮추며 오른손 엄지·검지 힘을 0%(악력 3)</strong>로 완전히 비운다.',
-        rx2: '<strong>[임진한 180m 3/4 컨트롤]</strong> 풀스윙 봉인! 왼쪽 견갑골만 팽팽히 접어 3/4 높이까지만 든 뒤, 상체를 닫아두고 <strong>180m 페어웨이 중앙</strong>으로 가볍게 툭 보낸다.'
+        cause: '오른손 엄지·검지 개입 + 백스윙 머리 반 개 이탈 후 일찍 일어나며 상체가 확 덮여 침 (김형근 ③·④).',
+        rx1: '<strong>[머리 반 개 + 우측 티박스 + 셋업 리셋]</strong> 백스윙 시 머리를 <strong>반 개(공 1.5개) 이내</strong>에 두고 티를 반 개 낮추며 <strong>오른손 엄지·검지 힘 0%(악력 3)</strong>로 비운다.',
+        rx2: '<strong>[상체 우측·팔 먼저 내림 & 180m 3/4 컨트롤]</strong> 상체는 오른쪽 본 채 엉덩이를 뒤로 빼며 팔부터 허벅지 앞까지 내린 뒤 <strong>180m 페어웨이 중앙</strong>으로 가볍게 통과한다(오른발은 다 치고 들기!).'
       },
       {
         key: 'dr_slice',
@@ -2188,10 +2252,10 @@
       {
         key: 'ir_pull',
         icon: '🎯',
-        title: '3. 아이언·유틸이 왼쪽으로 당겨질 때 (고질병 Pull-Hook 처방)',
-        cause: '과도한 스트롱 그립 또는 다운스윙 시작 때 왼쪽 어깨가 먼저 열리며 몸 안쪽으로 채를 당김 (※발끝 오르막인지도 확인!).',
-        rx1: '<strong>[2너클 그립 & 좌측 조준 함정 탈출]</strong> 왼손 장갑 로고 2마디(뉴트럴) 확인! 훅이 무서워 몸을 왼쪽으로 에이밍하면 더 감긴다 — 공 앞 30cm 중간점으로 스퀘어 정렬한다.',
-        rx2: '<strong>[왼엉덩이 7시 벽 + 1시 푸시 익스텐션]</strong> 탑에서 <strong>등(왼쪽 어깨)을 타깃에 닫아둔 채 왼쪽 엉덩이로 7시 뒤쪽 벽을 먼저 밀고</strong>, 임팩트 후 오른손바닥을 <strong>우측 전방 1시 방향</strong>으로 길게 뻗어준다.'
+        title: '3. 아이언·유틸이 왼쪽으로 당겨질 때 (김형근×호건 통합 처방)',
+        cause: '백스윙 머리 반 개 이탈·채 눕혀 주저앉음 → 왼쪽 회전 막힘 + 다운스윙 골반 과회전(배꼽 정면 오픈)으로 손이 안으로 말림 (김형근 ⑧·⑩).',
+        rx1: '<strong>[머리 반 개 & 하나-둘-스톱]</strong> 머리를 반 개 안에서 고정하고 허리까지 팔 모아 <strong>왼손등 펴기·크로스오버 0</strong>! 몸을 왼쪽으로 에이밍하는 착시를 끊고 30cm 중간점으로 정렬한다.',
+        rx2: '<strong>[하체 사선 뒤 밀기 + 골반 과회전 브레이크]</strong> 상체 닫고 <strong>하체를 사선 뒤쪽(7시 벽)으로 밀며 팔 먼저 낙하</strong>! 임팩트 시 <strong>배꼽이 살짝 오른쪽을 본 느낌으로 골반 과회전을 막고</strong> 팔을 몸에 붙여 1시로 릴리스 + 오른발 다 치고 들기.'
       },
       {
         key: 'dr_iron_diff',
@@ -2212,18 +2276,18 @@
       {
         key: 'ap_chunk',
         icon: '🐸',
-        title: '6. 그린 주변 15m 이내 뒤땅·홈런 (냉온탕 응급실)',
-        cause: '타이트한 잔디에서 리딩엣지(날)로 찍으려 하거나 손목으로 공을 걷어 올림.',
-        rx1: '<strong>[Safe First 피라미드]</strong> 15m 이내는 자존심 봉인! <strong>1순위 퍼터 → 2순위 치퍼</strong>를 먼저 잡는다.',
-        rx2: '<strong>[52° 토샷(Toe Shot) 필살기]</strong> 퍼터가 애매한 에이프런이라면 52도 샤프트를 수직으로 세워 <strong>힐을 완전히 띄우고 토우 끝만 닿게 한 뒤</strong> 공 가까이에 서서 퍼팅하듯 "툭" 친다(잔디 걸림 0%!).'
+        title: '6. 그린 주변 15m 이내 뒤땅·홈런 (헤드업·런 널뛰기 응급실)',
+        cause: '공을 오른발 뒤에 두어 찍어 침(런 2~15m 널뛰기) + 꼭 붙여야 한다는 압박감에 시선이 공을 일찍 떠남(헤드업 11-22 구술).',
+        rx1: '<strong>[Safe First + 뒤꿈치 넓은 스탠스·공 중앙]</strong> 15m 이내는 <strong>1순위 퍼터 → 2순위 치퍼 → 3순위 52° 토샷</strong>(또는 20m 러닝: 왼쪽에 힘 주고 밀어치기)! 스탠스 뒤꿈치를 넓혀 하체를 고정한다.',
+        rx2: '<strong>[헤드업 봉쇄 큐: 공 지나간 자리 응시]</strong> 실수할 것 같은 불안감이 들수록 스윙 전 <strong>"축 고정 & 공이 지나간 빈 잔디에 시선 끝까지 남기기"</strong>를 외치고 52° 토샷이나 앞바운스로 툭 보낸다.'
       },
       {
         key: 'ap_dist',
         icon: '📏',
-        title: '7. 30~80m 웨지 거리 들쭉날쭉 / 갑자기 생크(Shank) 날 때',
-        cause: '핀을 보고 쳐서 임팩트 때 감속하거나, 몸이 공 쪽으로 쏟아지며 호젤에 맞음(생크).',
-        rx1: '<strong>[1m 랜딩 박스 & 악력 3 등속]</strong> 핀은 함정이다! 오직 캐리 지점 <strong>"1m 랜딩 박스"</strong>만 보고 주먹 3개 스탠스 + <strong>8시(30m)·9시(50~60m)·10시(70~80m)</strong> 백스윙보다 느린 다운스윙으로 툭 떨군다.',
-        rx2: '<strong>[생크 즉시 차단]</strong> 어드레스 시 체중이 발끝으로 쏠리지 않게 엉덩이 뒤 공간을 유지하고, 양손이 몸에서 멀어지지 않게 왼쪽 허벅지에 스치듯 통과시킨다.'
+        title: '7. 30~80m 웨지 거리 들쭉날쭉 / 반동·생크(Shank) 날 때',
+        cause: '백스윙 탑 반동 급가속 · 감속 · 공 뒤 위치 찍기(김형근 ⑦) 또는 호젤 쪽 체중 쏠림(생크).',
+        rx1: '<strong>[반동 없는 "하나-둘 기다림" & 런 10m 상수]</strong> 탑에서 급히 채지 말고 <strong>"백스윙 하나 → 기다림 둘 → 셋!"</strong>으로 8시(30m)·9시(50~60m)·10시(70~80m) 1m 랜딩 박스만 보고 떨군다(평지 런 10m · 오르막 5m · 내리막 15m).',
+        rx2: '<strong>[웨지 커플링 & 생크 차단]</strong> 왼쪽이 열리며 오른손 기준으로 돌되(웨지 커플링), 엉덩이 뒤 공간을 지키고 양손이 왼쪽 허벅지에 스치듯 통과시킨다.'
       },
       {
         key: 'ap_downhill',
@@ -2292,6 +2356,8 @@
         memo: '',
         zeroChecks: { grip: false, bounce: false, stick: false },
         matChecks: { towel: false, gate: false, divot: false },
+        hkChecks: { headHalf: false, rightFoot: false, topSupport: false, pelvisHold: false },
+        wristMode: 'hogan2026',
         quickGrades: { indoor: '', approach: '' },
         homeDone: 0,
         voiceEnabled: true,
@@ -2346,6 +2412,7 @@
             ...parsed,
             zeroChecks: { ...base.zeroChecks, ...(parsed.zeroChecks || {}) },
             matChecks: { ...base.matChecks, ...(parsed.matChecks || {}) },
+            hkChecks: { ...base.hkChecks, ...(parsed.hkChecks || {}) },
             quickGrades: { ...base.quickGrades, ...(parsed.quickGrades || {}) },
             shots: { ...base.shots, ...(parsed.shots || {}) },
             matrix: { ...base.matrix, ...(parsed.matrix || {}) },
@@ -2385,6 +2452,8 @@
       renderCouponUI();
       renderZeroChecks();
       renderMatChecks();
+      renderHkChecks();
+      renderWristModeUI();
       renderIndoorPhases();
       selectLie('flat');
       renderApproachPhases();
@@ -2462,6 +2531,51 @@
       saveDraftState();
     }
 
+    function renderHkChecks() {
+      const hk = sessionState.hkChecks || { headHalf: false, rightFoot: false, topSupport: false, pelvisHold: false };
+      const labels = {
+        headHalf: '[정면①] 탑 머리 반 개(공1.5개) 이내',
+        rightFoot: '[정면②] 왼손등 펴기·오른발 다 치고 들기',
+        topSupport: '[후면①] 하나-둘 스톱! 주저앉음·크로스오버 0',
+        pelvisHold: '[후면②] 사선 뒤로 밀기·골반 과회전 방지'
+      };
+      ['headHalf', 'rightFoot', 'topSupport', 'pelvisHold'].forEach(k => {
+        const el = document.getElementById('hk_' + k);
+        if (el) {
+          el.classList.toggle('checked', !!hk[k]);
+          el.textContent = `${hk[k] ? '✅' : '☐'} ${labels[k]}`;
+        }
+      });
+    }
+
+    function toggleHkCheck(key) {
+      if (!sessionState.hkChecks) sessionState.hkChecks = { headHalf: false, rightFoot: false, topSupport: false, pelvisHold: false };
+      sessionState.hkChecks[key] = !sessionState.hkChecks[key];
+      if (navigator.vibrate) navigator.vibrate(15);
+      renderHkChecks();
+      saveDraftState();
+    }
+
+    function renderWristModeUI() {
+      const wm = sessionState.wristMode || 'hogan2026';
+      const b1 = document.getElementById('wristMode_hogan2026');
+      const b2 = document.getElementById('wristMode_hk2021');
+      if (b1) b1.classList.toggle('active', wm === 'hogan2026');
+      if (b2) b2.classList.toggle('active', wm === 'hk2021');
+    }
+
+    function setWristMode(modeKey) {
+      sessionState.wristMode = modeKey;
+      if (navigator.vibrate) navigator.vibrate(18);
+      renderWristModeUI();
+      saveDraftState();
+      const msg = modeKey === 'hk2021'
+        ? '2021 김형근 통합 모드로 전환했습니다. 탑에서 그립 끝이 공을 가리키게 코킹하고 검지 받침 후 팔을 모아 릴리스합니다.'
+        : '2026 호건 제이에스 모드로 전환했습니다. 오른손 엄지 검지 힘을 0퍼센트로 비우고 손목 조작 없이 등근육 회전으로 통과합니다.';
+      showToast(modeKey === 'hk2021' ? '🧪 2021 김형근 코킹·릴리스 모드 선택됨' : '🧪 2026 호건 엄지·검지 0% 모드 선택됨');
+      if (voiceCoachEnabled) speakImmediateFeedback(msg);
+    }
+
     function renderCouponUI() {
       document.getElementById('couponRemainText').textContent = couponState.remain;
       document.getElementById('modalCouponRemain').textContent = couponState.remain;
@@ -2518,22 +2632,22 @@
             <div class="shot-grid-4">
               <button class="shot-btn good" onclick="recordShot('${p.id}', 'good')">
                 <span class="shot-btn-icon">🎯</span>
-                <span class="shot-btn-name">정타·푸시드로우</span>
+                <span class="shot-btn-name">정타·뻗는드로우</span>
                 <span class="shot-btn-count">${s.good}</span>
               </button>
               <button class="shot-btn hook-warn" onclick="recordShot('${p.id}', 'hook')">
                 <span class="shot-btn-icon">⬅️</span>
-                <span class="shot-btn-name">좌측 당김·훅</span>
+                <span class="shot-btn-name">말림·좌측훅</span>
                 <span class="shot-btn-count">${s.hook}</span>
               </button>
               <button class="shot-btn" onclick="recordShot('${p.id}', 'push')">
                 <span class="shot-btn-icon">➡️</span>
-                <span class="shot-btn-name">우측 밀림</span>
+                <span class="shot-btn-name">우측열림·밀림</span>
                 <span class="shot-btn-count">${s.push}</span>
               </button>
               <button class="shot-btn" onclick="recordShot('${p.id}', 'fat')">
                 <span class="shot-btn-icon">💥</span>
-                <span class="shot-btn-name">뒤땅·탑볼</span>
+                <span class="shot-btn-name">뒤땅·탑·주저앉음</span>
                 <span class="shot-btn-count">${s.fat}</span>
               </button>
             </div>
@@ -3308,14 +3422,24 @@
     function generateObsidianMarkdown(st) {
       const z = sessionState.zeroChecks || {};
       const mc = sessionState.matChecks || {};
+      const hk = sessionState.hkChecks || {};
       const matVerified = [
         mc.towel ? '공 뒤 3cm 수건 미접촉' : '',
         mc.gate ? '1시 티 게이트 통과' : '',
         mc.divot ? '공 앞 3~5cm 타격음' : ''
       ].filter(Boolean);
+      const hkVerified = [
+        hk.headHalf ? '탑 머리 반 개(공 1.5개) 이내' : '',
+        hk.rightFoot ? '왼손등 펴기·오른발 다 치고 들기' : '',
+        hk.topSupport ? '탑 하나-둘 스톱·검지 받침' : '',
+        hk.pelvisHold ? '하체 사선 뒤로 밀기·골반 과회전 방지' : ''
+      ].filter(Boolean);
+      const wristLabel = (sessionState.wristMode === 'hk2021')
+        ? '🅱️ 2021 김형근 통합(탑 공방향 코킹·검지받침·몸 붙여 릴리스)'
+        : '🅰️ 2026 호건·JS(엄지·검지 0% · 손목 무조작)';
 
       const inSummary = st.inTotal > 0
-        ? `총 ${st.inTotal}구 — 🎯 정타 **${st.inGood}구(${st.inGoodPct}%)** / ⬅️ 좌측 훅 **${st.inHook}구(${st.inHookPct}%)** / ➡️ 우측 ${st.inPush}구 / 💥 뒤땅·탑볼 ${st.inFat}구`
+        ? `총 ${st.inTotal}구 — 🎯 정타·뻗는드로우 **${st.inGood}구(${st.inGoodPct}%)** / ⬅️ 말림·좌측 훅 **${st.inHook}구(${st.inHookPct}%)** / ➡️ 우측열림 **${st.inPush}구** / 💥 뒤땅·탑·주저앉음 **${st.inFat}구**`
         : (st.inGradeLabel ? `체감 등급 **${st.inGradeLabel}** (추정 정타 **${st.inGoodPct}%** · 좌측 훅 **${st.inHookPct}%**)` : `미기록 (장갑 착용 연습)`);
 
       const apSummary = st.apTotal > 0
@@ -3328,6 +3452,8 @@
         `date: ${sessionState.date}`,
         `venue: "${sessionState.venue}"`,
         `js_coupon_remain: ${couponState.remain}`,
+        `wrist_mode: "${sessionState.wristMode || 'hogan2026'}"`,
+        `hk_video_checks: ${hkVerified.length}/4`,
         `indoor_sweet_rate: ${st.inGoodPct}%`,
         `indoor_left_hook_rate: ${st.inHookPct}%`,
         `approach_3m_rate: ${st.apPct}%`,
@@ -3336,13 +3462,16 @@
         `field_sos_count: ${st.sosTotal}`,
         `related:`,
         `  - "[[2_LLMWiki/wiki/골프|골프]]"`,
-        `  - "[[1_MyBrain/Brain/Knowledge/벤 호건 × 나의 골프연습 완성기 핵심 원리|벤 호건 & 안정적 70타 핵심 원리 v3]]"`,
+        `  - "[[1_MyBrain/Brain/Knowledge/벤 호건 × 나의 골프연습 완성기 핵심 원리|벤 호건 & 김형근 10회 마스터스윙 복원 원리 v5]]"`,
+        `  - "[[3_Synthesis/2026-11-22 김형근 골프스쿨 레슨 영상 10회 분석과 스윙 발전안|김형근 10회 레슨 분석]]"`,
         `---`,
         ``,
-        `# 🏌️ 골프 연습·필드 기록 (${sessionState.date} · ${sessionState.venue})`,
+        `# 🏌️ 골프 연습·필드 기록 v5 (${sessionState.date} · ${sessionState.venue})`,
         ``,
         `## 1. 핵심 요약 지표`,
         `- **장소 / JS 쿠폰**: ${sessionState.venue} (곤지암 JS 잔여: **${couponState.remain}/15회**)`,
+        `- **손 쓰임 실험 모드**: ${wristLabel}`,
+        `- **김형근 10회 10구 영상 셀프 점검 (${hkVerified.length}/4)**: ${hkVerified.length > 0 ? hkVerified.map(v => '✅ ' + v).join(' · ') : '미체크'}`,
         `- **30초 영점 세팅**: 호건 2너클·엄지검지 0%(${z.grip ? '✅' : '✗'}) · 앞바운스 성냥켜기(${z.bounce ? '✅' : '✗'}) · 공 앞 30cm·복압(${z.stick ? '✅' : '✗'})`,
         `- **매트 착시 검증**: ${matVerified.length > 0 ? matVerified.map(v => '✅ ' + v).join(' · ') : '일반 타석 연습'}`,
         `- **90분 인도어**: ${inSummary}`,
@@ -3373,8 +3502,8 @@
 
       if (st.inTotal > 0) {
         lines.push(`## 3. 90분 인도어 구간별 기록`);
-        lines.push(`| 단계 | 정타(🎯) | 좌측훅(⬅️) | 우측(➡️) | 뒤땅·탑(💥) |`);
-        lines.push(`|------|----------|------------|----------|-------------|`);
+        lines.push(`| 단계 | 정타·뻗는드로우(🎯) | 말림·좌측훅(⬅️) | 우측열림(➡️) | 뒤땅·탑·주저앉음(💥) |`);
+        lines.push(`|------|---------------------|-----------------|--------------|----------------------|`);
         CURRICULUM.indoor90.forEach(p => {
           const s = sessionState.shots[p.id] || { good: 0, hook: 0, push: 0, fat: 0 };
           if (s.good + s.hook + s.push + s.fat > 0) {
@@ -3384,7 +3513,7 @@
         lines.push(``);
       }
 
-      lines.push(`## 4. 오늘의 체감 & 벤 호건 복기 메모`);
+      lines.push(`## 4. 오늘의 체감 & 마스터스윙 복원 복기 메모`);
       lines.push(`> ${sessionState.memo ? sessionState.memo.replace(/\n/g, '\n> ') : '(Plaud 음성메모 또는 한 줄 복기)'}`);
       lines.push(``);
       return lines.join('\n');
@@ -3392,25 +3521,28 @@
 
     function openPlaudModal() {
       const st = computeStats();
+      const hk = sessionState.hkChecks || {};
+      const hkCnt = ['headHalf', 'rightFoot', 'topSupport', 'pelvisHold'].filter(k => hk[k]).length;
+      const wristShort = (sessionState.wristMode === 'hk2021') ? '2021 김형근 탑 코킹·릴리스 모드' : '2026 호건 엄지·검지 0% 무조작 모드';
       const sosLine = st.sosTotal > 0
-        ? `오늘 흔들렸을 때 사용한 SOS 처방은 <strong>${st.sosUsedList.join(', ')}</strong>였고, 적용 후 변화는...`
-        : `오늘 드라이버 180m 컨트롤 샷, 매트 착시 검증(공 앞 타격), 3·6·9 퍼팅에서 느낀 점은...`;
+        ? `오늘 흔들렸을 때 사용한 SOS 처방은 <strong>${st.sosUsedList.join(', ')}</strong>였고, 연습 120% 과장→실전 30% 느낌 전환 후 변화는...`
+        : `김형근 10구 영상 셀프 판독(<strong>${hkCnt}/4</strong>), 매트 착시 검증, 3·6·9 퍼팅에서 느낀 내 몸 맞춤 과제 하나는...`;
 
       document.getElementById('plaudPromptContent').innerHTML = `
         <div class="plaud-step">
-          <span class="plaud-step-num">1. 오프닝</span>
-          "오늘은 <strong>${sessionState.date}</strong>, <strong>${sessionState.venue}</strong> 기록. (JS 쿠폰 잔여 <strong>${couponState.remain}회</strong>)"
+          <span class="plaud-step-num">1. 오프닝 & 실험 모드</span>
+          "오늘은 <strong>${sessionState.date}</strong>, <strong>${sessionState.venue}</strong> 기록. JS 쿠폰 잔여 <strong>${couponState.remain}회</strong>, 오늘은 <strong>${wristShort}</strong>으로 테스트했다."
         </div>
         <div class="plaud-step">
-          <span class="plaud-step-num">2. 100m 이내 숏게임 (Safe First & 52° 시계추)</span>
-          "포틴 52도 어프로치(안착률 <strong>${st.apPct}%</strong>): 앞바운스 성냥 켜기와 30m(20캐리+10런), 50~80m 1m 랜딩 박스 체감은..."
+          <span class="plaud-step-num">2. 100m 이내 숏게임 (뒤꿈치 넓은 스탠스·공 중앙 & 시선 고정)</span>
+          "포틴 52도 어프로치(안착률 <strong>${st.apPct}%</strong>): 반동 없는 하나-둘 기다림, 평지 런 10m(오르막 5m/내리막 15m), 그리고 공 지나간 빈 잔디 시선 고정(헤드업 차단) 체감은..."
         </div>
         <div class="plaud-step">
-          <span class="plaud-step-num">3. 아이언·유틸·드라이버 좌측 훅 점검</span>
-          "타석 정타 <strong>${st.inGoodPct}%</strong>, 좌측 훅 <strong>${st.inHookPct}%</strong>. 오른손 엄지·검지 힘 0% + 왼엉덩이 7시 벽 + 1시 푸시 익스텐션 느낌은..."
+          <span class="plaud-step-num">3. 김형근 10회 마스터스윙 복원 & 쓸 수 있는 드로우</span>
+          "타석 정타·뻗는드로우 <strong>${st.inGoodPct}%</strong>, 말림·훅 <strong>${st.inHookPct}%</strong>. 동시 출발·도착과 탑 머리 반 개 이내, 하나-둘 스톱 후 하체 사선 뒤로 밀기, 오른발 다 치고 들기 느낌은..."
         </div>
         <div class="plaud-step">
-          <span class="plaud-step-num">4. 매트 착시 검증 & 다음 라운드 과제</span>
+          <span class="plaud-step-num">4. 영상 셀프 판독(${hkCnt}/4) · SOS & 다음 라운드 과제</span>
           "${sosLine}"
         </div>
       `;
@@ -3668,208 +3800,208 @@
         club: '52도 웨지',
         goalShots: 20,
         defaultPace: 35,
-        opening: '인도어 90분, 첫 번째 15분 52도 앞바운스 성냥 켜기와 30미터 워밍업입니다. 곤지암에서 체득한 대로 오른손은 중지와 약지만 살짝 걸치고 엄지와 검지 힘은 0퍼센트로 완전히 비우세요. 몸이 덜 풀린 초반에 풀스윙하지 말고, 52도 앞바운스로 매트를 성냥 켜듯 치익 스치며 캐리 20미터, 런 10미터 총 30미터 감각을 깨웁니다. 그럼 1구째부터 시작하겠습니다.',
-        swingCue: '오른손 엄지 검지 힘을 비우고, 백스윙 8시에서 반 박자 기다렸다가 등근육으로 툭 떨어뜨립니다. 준비, 하나, 둘, 샷!',
-        finishCue: '좋습니다! 피니시에서 그립 끝이 배꼽을 가리킨 채 3초간 멈추세요. 구질을 말씀하시거나 상단 버튼으로 기록하세요.',
-        midCue: '7분 30초, 절반 지났습니다. 연습장 매트가 뒤땅을 속이지 않도록 공 뒤 수건이나 공 앞 매트 타격음에 다시 집중해 주세요.',
-        wrapCue: '마지막 1분입니다. 남은 두세 구는 30미터 20캐리 10런 리듬이 완전히 몸에 배도록 가볍게 마무리하세요.',
-        completeCue: 'Phase 1 워밍업 15분이 완료되었습니다! 이제 7번 아이언을 꺼내고 Phase 2 타이머를 켜세요.',
+        opening: '인도어 90분, 첫 번째 15분 52도 앞바운스 성냥 켜기와 김형근 10회 숏게임 기준점 워밍업입니다. 뒤꿈치 넓은 스탠스에 공을 중앙에 두고, 백스윙은 동시 출발·동시 도착으로 속도를 절반만 쓰세요. 탑에서는 반동 없이 하나-둘 기다렸다가 등근육으로 툭 떨어뜨리고, 공이 지나간 빈 잔디를 끝까지 바라보며 30미터(캐리 20, 평지 런 10) 감각을 깨웁니다. 1구째 시작하겠습니다.',
+        swingCue: '동시 출발·동시 도착! 반동 없이 하나-둘 기다리고, 공 지나간 자리 보며 떨어뜨립니다. 준비, 하나, 둘, 샷!',
+        finishCue: '좋습니다! 공이 있던 빈 잔디 1초 응시 후 그립 끝이 배꼽을 향한 채 3초 정지하세요. 결과를 기록해 주세요.',
+        midCue: '7분 30초, 절반 지났습니다. 공을 뒤에 두면 찍혀서 런이 2미터에서 15미터로 널뜁니다. 공 중앙 세팅과 공 뒤 3cm 수건 미접촉을 다시 체크하세요.',
+        wrapCue: '마지막 1분입니다. 연습 때 120퍼센트 과장해 느낀 웨지 커플링 리듬을 실전 30퍼센트 부드러운 감각으로 압축해 마무리하세요.',
+        completeCue: 'Phase 1 워밍업 15분이 완료되었습니다! 이제 7번 아이언을 꺼내고 Phase 2 김형근 10회 마스터스윙 복원 타이머를 켜세요.',
         shots: [
-          '그립 영점 점검입니다. 왼손은 호건 2너클로 새끼, 약지, 중지에 걸치고 오른손 엄지와 검지 힘은 0으로 완전히 비워 헤드 무게를 느껴보세요.',
-          '어드레스 어깨 수평 점검! 옆그립 자세에서 오른손이 밑에 있더라도 양손 높이를 맞추고 양 어깨를 수평으로 두어 리딩엣지가 박히지 않게 합니다.',
-          '앞바운스 성냥 켜기입니다. 페이스를 스퀘어에서 2도만 살짝 열어 앞바운스가 매트 위를 성냥갑에 성냥 켜듯 치익 부드럽게 스쳐 나가게 치세요.',
-          '매트 착시 검증 타석입니다! 공 뒤 3센티미터에 수건이나 명함이 놓여 있다고 상상하고 절대 건드리지 않은 채 공을 먼저 맞히세요.',
-          '30미터 8시에서 4시 시계추입니다. 오른팔꿈치를 옆구리에 가볍게 밀착시키고 골반에서 허리 높이까지 팔과 몸통이 함께 돌아갑니다.',
-          '타깃 시선 고정! 깃대나 먼 그물을 보지 말고 20미터 지점 가로세로 1미터 랜딩 박스에만 공이 톡 떨어지는 이미지를 그리세요.',
-          '등속 악력 3의 법칙입니다. 어드레스 3, 탑 3, 임팩트 3, 피니시 3까지 손아귀 압력이 변하지 않아야 거리가 튀지 않습니다.',
-          '체중 왼쪽 60퍼센트 고정! 공을 맞추기 전에 머리가 들리면 탑볼이 나니 임팩트 순간 공 앞쪽 3센티 매트 소리를 귀로 들으세요.',
-          '손목 코킹을 인위적으로 쓰지 마세요. 배꼽과 그립 끝이 같은 속도로 움직이며 공 앞 매트를 얇게 훑고 지나갑니다.',
-          '피니시 체크입니다. 4시 높이에서 3초 정지했을 때 오른손 엄지 검지가 아직도 말랑말랑하고 헤드가 땅으로 툭 떨어졌는지 확인하세요.'
+          '그립 영점 점검입니다. 왼손 호건 2너클을 확인하고, 현재 선택한 손 쓰임 실험 모드에 맞춰 손목을 세팅한 채 헤드 무게를 느껴보세요.',
+          '김형근 숏게임 기본 세팅! 뒤꿈치는 넓게 벌려 하체를 고정하고 공은 뒤가 아닌 양발 정중앙에 둡니다. 공을 뒤에 두면 찍혀서 런 편차가 커집니다.',
+          '앞바운스 성냥 켜기와 웨지 커플링! 페이스를 2도만 열고 손목과 클럽을 몸통과 한 덩어리로 묶어 앞바운스가 매트를 치익 스쳐 가게 치세요.',
+          '동시 출발·동시 도착! 백스윙 속도를 평소의 절반으로 뚝 낮춰 손, 클럽, 몸통이 8시까지 동시에 움직여 도착하게 만드세요.',
+          '매트 착시 검증 타석! 공 뒤 3센티미터에 수건이 있다고 상상하고 절대 건드리지 않은 채 공 앞 3센티 매트를 먼저 훑어냅니다.',
+          '반동 없는 하나-둘 기다림! 8시 탑에서 퉁 튕겨 내리지 말고 속으로 하나-둘을 센 뒤 등근육 회전으로 부드럽게 떨어뜨립니다.',
+          '11월 22일 헤드업 절대 차단 큐! 볼만 보고 친 뒤 고개를 들지 말고, 공이 지나가고 남은 빈 잔디를 1초 동안 끝까지 쳐다보세요.',
+          '평지 런 10미터 감각! 오늘 30미터 기준점은 캐리 20에 런 10미터입니다. 참고로 실전 오르막 런은 5미터, 내리막 런은 15미터로 계산합니다.',
+          '연습 120퍼센트 과장 연습구! 8시에서 반 박자 기다림과 등속 악력 3을 평소보다 조금 더 과장해서 천천히 꽂아 보세요.',
+          '실전 30퍼센트 느낌 전환! 방금 연습한 리듬에서 의식적 조작은 30퍼센트만 남긴 채 4시 피니시 3초 정지로 기분 좋게 마무리합니다.'
         ]
       },
       in_p2: {
         club: '7번·8번 미들아이언',
         goalShots: 35,
         defaultPace: 35,
-        opening: 'Phase 2, 25분 미들아이언 좌측 풀훅 박멸 메인 훈련입니다. 7번이나 8번 아이언을 잡으세요. 좌측 당김의 원인은 오른손 엄지 검지 개입과 전환 시 왼쪽 어깨 조기 오픈입니다. 오늘은 백스윙 8시 스퀘어, 탑에서 상체는 닫아두고 왼쪽 엉덩이로 7시 뒤쪽 벽을 먼저 민 다음, 우측 전방 1시 고무티 방향으로 오른손바닥을 길게 뻗는 푸시 익스텐션에 집중합니다. 1구째 들어갑니다.',
-        swingCue: '등이 타깃을 본 채로 왼엉덩이 7시 벽 먼저 열고, 우측 전방 1시 방향으로 길게 뻗어냅니다. 준비, 하나, 둘, 샷!',
-        finishCue: '피니시 3초! 오른손바닥이 1시 쪽으로 빠져나갔는지 확인하고 정타 또는 훅 버튼이나 음성으로 기록하세요.',
-        midCue: '절반인 12분 30초 경과했습니다. 공을 세게 치려 하면 바로 오른손 엄지 검지가 개입합니다. 80퍼센트 리듬으로 1시 방향만 보세요.',
-        wrapCue: '마지막 1분입니다. 좌측 훅 없이 1시로 출발해 살짝 돌아오는 푸시드로우 2구를 기분 좋게 치고 유틸리티로 넘어갑시다.',
-        completeCue: '미들아이언 25분 집중 교정이 끝났습니다! 이제 유틸리티를 들고 Phase 3을 시작하세요.',
+        opening: 'Phase 2, 25분 김형근 10회 마스터스윙 복원 및 좌측 풀훅 박멸 메인 훈련입니다. 7번·8번 아이언을 잡으세요. 오늘 정·후면 10구 핵심 지표 4가지를 새깁니다. 첫째, 백스윙 시 머리를 반 개(공 1.5개) 안에 두어 손이 먼저 돌지 않게 하고 왼손등을 펴 크로스오버를 막습니다. 둘째, 탑에서 하나-둘 스톱! 주저앉거나 덤비지 마세요. 셋째, 전환 시 상체는 우측에 둔 채 하체를 돌리지 말고 사선 뒤로 깊게 밀며 배꼽이 살짝 우측에 남은 상태에서 팔을 몸에 붙여 릴리스합니다. 넷째, 오른발은 다 치고 난 뒤 들며 쓸 수 있는 드로우를 만듭니다. 1구째 들어갑니다.',
+        swingCue: '머리 반 개 이내, 탑 하나-둘 스톱! 하체 사선 뒤로 밀어 팔 몸 붙여 1시로 뻗습니다. 준비, 하나, 둘, 샷!',
+        finishCue: '피니시 3초! 오른발 다 치고 난 뒤 들었는지, 뻗어 돌아오는 쓸 수 있는 드로우인지 확인 후 기록하세요.',
+        midCue: '절반인 12분 30초 경과했습니다. 10구 중 머리 뒤로 빠짐이나 탑 주저앉음이 나왔다면 연습용 120퍼센트 과장 감각으로 동시 출발과 하나-둘 스톱을 다시 실행하세요.',
+        wrapCue: '마지막 1분입니다. 연습 때 120퍼센트로 과장했던 하체 사선 뒤로 밀기를 실전 30퍼센트 느낌으로 가볍게 압축해 쓸 수 있는 드로우 2구만 치고 유틸리티로 갑시다.',
+        completeCue: '미들아이언 25분 김형근 골든스윙 교정이 끝났습니다! 이제 유틸리티를 들고 Phase 3을 시작하세요.',
         shots: [
-          '왼손 장갑 로고 마디 딱 2개 보이는 벤 호건 뉴트럴 그립 확인하세요. 과한 스트롱 그립이 좌측 훅의 첫 번째 원인입니다.',
-          '에이밍 순서 점검! 스탠스부터 서지 말고 오른손으로 채를 들고 공 앞 30센티미터 풀잎 중간점에 페이스를 먼저 직각으로 맞춘 뒤 발을 벌리세요.',
-          '테이크어웨이 8시 체크! 골반 높이에서 멈추는 느낌으로 샤프트가 발끝선과 평행, 페이스가 척추각과 평행하게 올라가는지 확인하세요.',
-          '백스윙 시동은 손이 아니라 왼쪽 견갑골과 등근육입니다. 팔을 들어 올리지 말고 등이 타깃을 향할 때까지 몸통을 통째로 돌리세요.',
-          '가장 중요한 전환 동작입니다! 탑에서 왼쪽 어깨를 타깃 쪽으로 열지 말고 등을 타깃에 닫아둔 채 반 박자 기다리세요.',
-          '왼엉덩이 7시 벽 밀기! 다운스윙 시작과 동시에 왼쪽 엉덩이를 뒤쪽 7시 벽으로 깊게 밀어 양손이 내려올 공간을 넓게 열어줍니다.',
-          '오른손 엄지 검지 0퍼센트로 양손을 왼쪽 허벅지 앞까지 수직 낙하시키세요. 채가 위에서 덮이지 않고 몸 안쪽에서 자연스럽게 떨어집니다.',
-          '공 앞 20센티 우측 전방 1시 방향에 가상의 고무티 게이트가 있다고 상상하고, 임팩트 후 오른손바닥을 그 1시 쪽으로 길게 뻗어내세요.',
-          '임팩트 시선 고정! 공의 뒷면이 아니라 공의 앞면, 타깃 쪽 적도를 응시하며 공을 지나 공 앞 3센티 잔디를 눌러 치세요.',
-          '혹시 훅이 날까 봐 몸을 왼쪽으로 에이밍하지 마세요! 몸이 왼쪽을 보면 아웃인 궤도가 되어 오히려 더 왼쪽으로 감겨 죽습니다.',
-          '백스윙 탑에서 오른발 안쪽 엄지발가락 아래에 500원 동전을 꽉 밟는 느낌으로 스웨이 없이 축을 단단히 지키세요.',
-          '피니시에서 왼발 기둥 위에 3초간 흔들림 없이 서 있는지 확인하고, 클럽 헤드가 등 뒤로 편하게 넘어가는지 체크하세요.'
+          '①회차 핵심: 백스윙에서 머리를 어드레스 원 반 개(공 1.5개) 안에 가두세요! 머리가 뒤로 밀리면 그 틈을 타 손이 먼저 돌며 크로스오버와 훅이 시작됩니다.',
+          '에이밍과 단일 엔진 정렬! 공 앞 30센티 풀잎 중간점을 찍고 오른손으로 페이스를 먼저 맞춘 뒤 스탠스를 서세요.',
+          '③~④회차 핵심: 동시 출발·동시 도착! 백스윙 속도를 뚝 낮춰 허리 높이까지 양팔을 쭉 펴며 왼손등이 하늘이나 정면을 보지 않고 반듯하게 펴지도록 올리세요.',
+          '크로스오버 차단 점검! 탑에서 헤드가 타깃 우측으로 처지거나 눕지 않도록 허리까지 양팔을 편 일체형 스윙 아크를 유지합니다.',
+          '⑤회차 골든스윙 핵심: 탑 하나-둘-스톱! 탑에서 주저앉거나 공 쪽으로 급하게 덤비지 말고 반 박자 딱 멈춰 상체 균형을 세우세요.',
+          '②~⑥회차 전환 핵심: 상체는 우측에 그대로 고정하고, 하체를 회전으로 돌리지 말고 왼쪽 엉덩이를 7시 사선 뒤로 깊게 밀어 팔이 허벅지 앞으로 내릴 공간을 여세요.',
+          '⑦회차 브레이크: 골반 과회전 방지! 하체가 너무 빨리 다 돌면 막힙니다. 배꼽이 타깃보다 살짝 우측에 남은 상태에서 팔을 몸에 바짝 붙여 릴리스하세요.',
+          '우측 전방 1시 고무티 게이트! 공 앞 20센티 1시 고무티 쪽으로 팔을 몸에 붙여 던져, 왼쪽으로 말리는 미스가 아니라 우측에서 살짝 돌아오는 쓸 수 있는 드로우를 만드세요.',
+          '⑦~⑧회차 피니시 핵심: 오른발 다 치고 들기! 임팩트 전에 오른발 뒤꿈치가 먼저 떼어지면 상체가 덮입니다. 공을 완전히 지나친 뒤 오른발을 세워 피니시하세요.',
+          '임팩트 시선 고정과 빈 잔디! 공의 뒷면이 아니라 앞면 타깃 쪽 적도를 보며 공 앞 3센티 잔디를 누르고, 공이 떠난 자리를 잠깐 더 응시합니다.',
+          '연습 120퍼센트 과장 모드! 지금 1구는 백스윙 속도 50퍼센트, 탑 하나-둘 스톱, 하체 사선 뒤로 밀기를 의식적으로 120퍼센트 과장해 스윙 궤도를 각인하세요.',
+          '실전 30퍼센트 느낌 전환 & 왼발 기둥 피니시 3초! 과장했던 교정은 30퍼센트 여운만 남기고, 왼발 위에 흔들림 없이 3초간 서서 쓸 수 있는 구질을 완성합니다.'
         ]
       },
       in_p3: {
         club: '유틸리티(하이브리드)',
         goalShots: 25,
         defaultPace: 35,
-        opening: 'Phase 3, 20분 유틸리티와 전 클럽 통합 훈련입니다. 드라이버, 유틸리티, 아이언의 스윙 엔진은 단 하나입니다. 공 위치가 달라도 모든 클럽의 그립 끝은 항상 왼쪽 허벅지 안쪽을 가리키게 통일하세요. 유틸리티는 띄우려 퍼올리지 말고 긴 7번 아이언처럼 얇게 눌러 쓸어 치겠습니다. 시작합니다.',
-        swingCue: '머리는 공 뒤 5센티 가상 벽에 남기고, 7번 아이언 리듬 그대로 넓게 쓸어 통과합니다. 준비, 하나, 둘, 샷!',
-        finishCue: '오른발 발끝을 세워 3초 정지! 유틸이 얇고 경쾌하게 빠져나갔는지 확인 후 기록해 주세요.',
-        midCue: '10분 경과했습니다. 유틸리티에 거리 욕심이 들어가면 상체가 먼저 나가거나 훅이 터집니다. 그립을 반 인치 짧게 쥐고 여유 있게 치세요.',
-        wrapCue: '마지막 1분! 페어웨이 세컨샷 상황을 떠올리며 80퍼센트 리듬으로 2구만 안전하게 보내겠습니다.',
+        opening: 'Phase 3, 20분 유틸리티와 전 클럽 통합 훈련입니다. 드라이버~웨지 모두 그립 끝은 왼쪽 허벅지 안쪽 단일 기준점! 유틸리티는 긴 채라서 머리가 뒤로 밀리고 일찍 일어나기 쉽습니다. 동시 출발·동시 도착으로 백스윙 속도를 낮추고, 머리 반 개 이내, 탑 하나-둘 스톱, 하체 사선 뒤로 밀기, 오른발 다 치고 들기 4원칙 그대로 긴 7번 아이언처럼 얇게 쓸어냅니다. 시작합니다.',
+        swingCue: '머리 반 개 고정, 탑 하나-둘 스톱! 하체 사선 뒤로 밀고 팔 몸 붙여 넓게 쓸어냅니다. 준비, 하나, 둘, 샷!',
+        finishCue: '오른발 다 치고 들었는지 확인하며 피니시 3초! 유틸 구질을 기록해 주세요.',
+        midCue: '10분 경과했습니다. 유틸리티에 거리 욕심이 나면 머리가 움직이고 손이 먼저 돕니다. 그립을 반 인치 짧게 쥐고 배꼽 살짝 우측 상태에서 팔을 몸에 붙여 릴리스하세요.',
+        wrapCue: '마지막 1분! 연습 120퍼센트 교정을 실전 30퍼센트 리듬으로 바꿔 쓸 수 있는 드로우 2구만 안전하게 보내겠습니다.',
         completeCue: '유틸리티 20분 훈련 완료! 이제 드라이버를 꺼내 Phase 4를 시작하세요.',
         shots: [
-          '전 클럽 단일 기준점 체크! 공은 왼발 안쪽에 두되, 어드레스 시 그립 끝은 7번 아이언과 똑같이 왼쪽 허벅지 안쪽 앞에 두세요.',
-          '유틸리티 그립을 평소보다 반 인치만 짧게 내려 잡으세요. 미트율이 올라가고 심리적 제어력이 즉시 살아납니다.',
-          '머리 가상 벽 고정! 공 오른쪽 5센티미터 뒤에 보이지 않는 벽을 세우고 임팩트 끝까지 머리가 목표 쪽으로 밀리지 않게 남기세요.',
-          '유틸을 우드처럼 띄우려 걷어 올리지 마세요. 긴 7번 아이언이라 생각하고 넓은 솔이 잔디를 얇고 길게 스치고 지나가게 합니다.',
-          '어드레스 시 코로 숨을 들이마셔 아랫배와 옆구리, 허리에 360도 복압 기둥을 세운 뒤 어깨와 오른손 긴장만 툭 빼고 출발하세요.',
-          '백스윙 탑에서 손으로 바로 내리지 말고 하체가 반 박자 기다리는 동안 등근육 회전으로 클럽이 스르르 떨어지게 두세요.',
-          '임팩트 후 오른어깨가 턱 밑을 지나 우측 전방 1시 방향으로 팔을 길게 뻗어주면 유틸의 악성 훅과 탑볼이 동시에 사라집니다.',
-          '가상의 깊은 러프 상황을 연습합니다! 그립을 한 마디 더 짧게 잡고 페이스를 아주 살짝 열어 악력 4로 공부터 3분의 2 스윙 커트 타격하세요.',
-          '7번 아이언과 유틸리티가 같은 템포인지 느껴보세요. 채가 길어졌다고 스윙 스피드를 억지로 빨리 돌리면 궤도가 무너집니다.',
-          '피니시에서 왼쪽 엉덩이가 완전히 뒤로 열리고 오른발 엄지발끝으로 가볍게 서서 공이 낙하할 때까지 3초 유지하세요.'
+          '전 클럽 단일 기준점 체크! 공은 왼발 안쪽에 두되 그립 끝은 7번 아이언과 똑같이 왼쪽 허벅지 안쪽 앞에 맞추고 반 인치 짧게 잡으세요.',
+          '머리 반 개(공 1.5개) 이내 고정! 채가 길다고 상체를 우측으로 과하게 끌려가지 말고 백스윙 내내 머리를 원 반 개 안에 붙박이처럼 둡니다.',
+          '동시 출발·동시 도착 & 허리까지 양팔 펴기! 유틸 백스윙을 아이언보다 10퍼센트 더 천천히 시작하고 왼손등을 펴서 크로스오버를 원천 차단하세요.',
+          '탑 하나-둘-스톱! 전환 때 급하게 덮어 들어오지 않도록 탑에서 잠시 멈춰 상체를 우측 뒤에 남긴 채 리듬을 세웁니다.',
+          '하체 사선 뒤로 밀기! 긴 클럽일수록 골반이 앞뒤 배치기로 나가기 쉽습니다. 왼엉덩이를 7시 사선 뒤로 밀며 팔을 오른쪽 허벅지 앞으로 내리세요.',
+          '골반 과회전 방지 & 배꼽 살짝 우측! 배꼽이 타깃으로 너무 빨리 돌아가지 않게 버티며 팔을 몸에 붙여 1시로 길게 쓸어 치세요.',
+          '유틸을 띄우려 퍼올리지 마세요! 긴 7번 아이언처럼 360도 복압 기둥을 세운 채 넓은 솔이 잔디를 얇고 길게 스치고 지나가게 합니다.',
+          '가상의 깊은 러프 상황! 그립 한 마디 짧게 쥐고 악력 4로 3분의 2 스윙, 오른발은 끝까지 바닥에 남겼다가 다 친 뒤 자연스럽게 세웁니다.',
+          '연습 120퍼센트 과장구! 슬로우모션처럼 동시 출발과 탑 스톱, 하체 사선 뒤로 밀기를 과장해 궤도가 몸 안쪽에서 나오는지 느낍니다.',
+          '실전 30퍼센트 느낌 피니시! 왼엉덩이 7시 공간이 확보되고 오른발 다 치고 든 완벽한 밸런스로 공 낙하까지 3초 유지하세요.'
         ]
       },
       in_p4: {
         club: '드라이버 (홀:180m / 짝:220m 교대)',
         goalShots: 24,
         defaultPace: 40,
-        opening: 'Phase 4, 20분 임진한 프로 실전 드라이버 교대 훈련입니다! 홀수 번째 공은 티를 반 개 낮추고 그립을 한 마디 짧게 쥐어 페어웨이 중앙에 꽂는 180미터 생존 컨트롤샷, 짝수 번째 공은 머리를 남기고 1시로 뿌리는 220미터 레이백 푸시드로우를 한 구씩 교대로 칩니다. 자, 1구째 180미터 컨트롤부터 시작합니다.',
-        swingCue: '척추 우측 기울기 유지하고, 오른손 엄지 검지 0퍼센트, 상체 닫고 1시로 던집니다. 준비, 하나, 둘, 샷!',
-        finishCue: '임팩트 후 빈 티를 1초 째려본 뒤 왼발 위에 피니시 3초! 이번 샷 결과를 기록하세요.',
-        midCue: '10분 경과, 절반 지점입니다. 만약 방금 샷이 왼쪽으로 감겼다면 욕심이 들어온 신호입니다. 슬로우모션 빈스윙 2회로 등근육 리듬을 리셋하세요.',
-        wrapCue: '마지막 1분! 가장 자신 있는 180미터 페어웨이 중앙 생존 컨트롤 드라이버로 멋지게 마무리하겠습니다.',
-        completeCue: '드라이버 20분 훈련이 끝났습니다! 마지막 Phase 5 가상 필드 5홀 시뮬레이션으로 실전 감각을 복제합시다.',
+        opening: 'Phase 4, 20분 드라이버 180미터 생존 컨트롤과 220미터 푸시드로우 교대 훈련 겸 ③회차 드라이버 들림·덮임 집중 교정입니다! 김형근 10회 분석에서 드라이버만 잡으면 상체가 일찍 일어나며 위에서 덮여 훅·슬라이스가 나기 쉬웠습니다. 홀수구는 180미터 생존 컨트롤, 짝수구는 머리 반 개 이내, 왼손등 펴기, 탑 하나-둘 스톱 후 하체 사선 뒤로 밀어 팔을 몸에 붙여 뿌리는 쓸 수 있는 드로우를 칩니다. 1구째 시작합니다.',
+        swingCue: '들림·덮임 금지! 머리 반 개 고정, 탑 스톱 후 하체 사선 뒤로 밀어 1시로 던집니다. 준비, 하나, 둘, 샷!',
+        finishCue: '빈 티 1초 응시 + 오른발 다 치고 든 피니시 3초! 쓸 수 있는 드로우인지 좌측 말림인지 기록하세요.',
+        midCue: '10분 경과, 절반 지점입니다. 드라이버가 갑자기 말리거나 덮이면 일찍 일어났다는 뜻! 동시 출발과 탑 하나-둘 스톱 빈스윙 2회로 낮춘 리듬을 복원하세요.',
+        wrapCue: '마지막 1분! 실전 30퍼센트 느낌의 가장 믿을 수 있는 180미터 페어웨이 중앙 컨트롤 티샷으로 깔끔하게 마무리하겠습니다.',
+        completeCue: '드라이버 20분 훈련 완료! 마지막 Phase 5 가상 필드 5홀 시뮬레이션에서 연습 30% 실전 느낌을 테스트합시다.',
         shots: [
-          '【홀수구 · 180m 생존 컨트롤】 티를 반 개 낮추고 그립을 한 마디 짧게 잡으세요. 오른손 엄지 검지 0퍼센트, 왼 견갑골만 접는 3분의 2 백스윙으로 페어웨이 중앙을 지킵니다.',
-          '【짝수구 · 220m 레이백 푸시드로우】 왼발 뒤꿈치 안쪽에 공을 두고 헤드를 공 뒤 주먹 하나 우측에 세팅해 척추 우측 틸트를 만드세요. 머리를 남기고 1시로 폭발 방출합니다.',
-          '【홀수구 · 180m 생존 컨트롤】 넓은 페어웨이 대신 우측 전방 좁은 랜딩 존을 설정하세요. 상체를 타깃에 닫아두고 80퍼센트 리듬으로 툭 건드려 보냅니다.',
-          '【짝수구 · 220m 레이백 푸시드로우】 다운스윙 탑에서 채를 등 뒤로 눕히는 레이백 느낌으로 오른쪽 어깨를 사선 아래로 떨어뜨려 인아웃 어퍼블로를 만드세요.',
-          '【홀수구 · 180m 생존 컨트롤】 호조의 역설 경보! 잘 맞는다고 세게 때리지 마세요. 티박스 오른쪽에 서서 왼쪽 해저드를 지우고 180미터 직진만 봅니다.',
-          '【짝수구 · 220m 레이백 푸시드로우】 임팩트 순간 공만 보지 말고, 공이 떠난 뒤에도 빈 고무티 자리를 1초 동안 째려보며 머리를 공 뒤에 잡아두세요.',
-          '【홀수구 · 180m 생존 컨트롤】 등근육 회전만으로 가볍게 돌아가세요. 손목으로 클럽 페이스를 닫으려 하지 않으면 페어웨이 안착률 80퍼센트가 나옵니다.',
-          '【짝수구 · 220m 레이백 푸시드로우】 오른손바닥과 두 팔이 1시 방향 하늘로 뻗어 나가며 하이 피니시가 만들어지는지 확인하세요.',
-          '【홀수구 · 180m 생존 컨트롤】 후반 10번 홀 체력 저하 상황을 가정해 두 발 안쪽 지면을 단단히 밟고 컴팩트한 컨트롤 티샷을 구사합니다.',
-          '【짝수구 · 220m 레이백 푸시드로우】 360도 복압 호흡을 채운 뒤 어드레스부터 피니시까지 등속 악력 3으로 크고 부드러운 아크를 그려주세요.'
+          '【홀수구 · 180m 생존 컨트롤】 티를 반 개 낮추고 그립 한 마디 짧게 잡으세요. 머리 반 개 이내 고정, 3분의 2 백스윙으로 페어웨이 중앙만 지킵니다.',
+          '【짝수구 · 220m 마스터 드로우】 왼발 뒤꿈치 공, 척추 우측 기울기 세팅 후 동시 출발·동시 도착과 왼손등 펴기로 크로스오버 없이 탑 하나-둘 스톱!',
+          '【홀수구 · 180m 들림 방지】 드라이버 ③회차 핵심 약점 차단! 다운스윙 내내 척추각과 머리를 공 뒤에 남기고 오른발을 다 치고 난 뒤 들어 올리세요.',
+          '【짝수구 · 220m 하체 사선 밀기】 탑에서 주저앉거나 위에서 덮지 말고, 상체를 우측에 둔 채 하체를 7시 사선 뒤로 밀어 팔을 허벅지 앞 인아웃으로 내리세요.',
+          '【홀수구 · 180m 과회전 브레이크】 호조의 역설 경보! 세게 때려 골반을 과회전시키지 마세요. 배꼽이 살짝 우측에 남은 상태에서 1시로 가볍게 뻗습니다.',
+          '【짝수구 · 220m 팔 몸 붙여 릴리스】 손목이 혼자 엎어 덮지 않도록 팔을 몸통 앞에 붙여 릴리스하고, 임팩트 후 빈 티 자리를 1초 동안 째려보세요.',
+          '【홀수구 · 180m 연습 120%→실전 30%】 연습할 때 과장했던 탑 멈춤 감각 중 30퍼센트 부드러운 여유만 남긴 채 쓸 수 있는 직진·약드로우를 보냅니다.',
+          '【짝수구 · 220m 쓸 수 있는 드로우 판별】 1시 방향으로 출발해 페어웨이 안쪽으로 살짝 돌아오면 대성공! 왼손등 펴기와 하이 피니시 3초를 확인하세요.',
+          '【홀수구 · 180m 후반 체력 유지】 두 발 안쪽 지면을 단단히 밟고 360도 복압 기둥으로 컴팩트하게 쳐 오른발 다 치고 들기 균형을 지킵니다.',
+          '【짝수구 · 220m 최종 종합구】 동시 출발, 머리 반 개 이내, 하나-둘 스톱, 하체 사선 뒤로 밀기까지 한 호흡에 연결해 1시로 시원하게 뿌립니다.'
         ]
       },
       in_p5: {
         club: '실전 가상 5홀 (드라이버→세컨→52도)',
         goalShots: 15,
         defaultPace: 40,
-        opening: '마지막 Phase 5, 10분 실전 가상 5홀 시뮬레이션입니다! 지금부터 매 타마다 채를 바꿔 들고 공 뒤로 한 발 물러나 공 앞 30센티 중간 타깃을 찍고 단 한 번에 칩니다. 멀리건은 0회, 오직 루틴과 피니시 3초에만 집중하세요. 가상 1번 홀 파 4 티박스부터 출발합니다!',
-        swingCue: '공 앞 30센티 중간 타깃만 믿고, 15초 프리샷 루틴대로 한 번에 통과합니다. 준비, 하나, 둘, 샷!',
-        finishCue: '완벽합니다! 피니시 3초 유지 후 공이 떨어지는 걸 지켜보며 기록하세요. 다음 채를 준비합니다.',
-        midCue: '가상 3번 홀을 지나는 중입니다. 매 타 채를 바꾸니 실전 필드와 똑같죠? 서두르지 말고 매 샷 공 앞 30센티 점을 먼저 찍으세요.',
-        wrapCue: '마지막 홀입니다! 시야가 뻥 뚫린 5번 홀에서 200미터 앞 안개 커튼을 내리고 오직 과정에만 집중합시다.',
-        completeCue: '와우! 인도어 90분 5단계 풀 코스를 완주하셨습니다! 하단 10초 복기 저장 버튼을 눌러 오늘 데이터를 남기세요.',
+        opening: '마지막 Phase 5, 10분 실전 가상 5홀 시뮬레이션입니다! 김형근 코치의 실전 철학대로 연습 때 120퍼센트 과장했던 모든 동작은 머릿속에서 덜어내고, 실전에서는 오직 30퍼센트의 핵심 느낌만 남긴 채 공 앞 30센티 중간점과 리듬으로 칩니다. 멀리건 0회! 1번 홀 파 4 티박스부터 출발합니다!',
+        swingCue: '실전엔 30% 느낌만! 공 앞 30센티 점 찍고, 공 지나간 빈 잔디까지 끝까지 봅니다. 준비, 하나, 둘, 샷!',
+        finishCue: '오른발 다 치고 들기 + 피니시 3초! 쓸 수 있는 구질인지 결과를 기록하고 다음 클럽을 꺼내세요.',
+        midCue: '가상 3번 홀을 지나는 중입니다. 실전 샷 사이사이 5분 간격처럼 여유를 두고, 서두른 백스윙 대신 동시 출발과 하나-둘 기다림만 기억하세요.',
+        wrapCue: '마지막 5번 홀입니다! 시야가 뻥 뚫린 내리막 홀에서 200미터 앞 안개 커튼을 내리고 오직 쓸 수 있는 드로우와 빈 잔디 시선 고정에만 집중합시다.',
+        completeCue: '와우! 김형근 10회 마스터스윙 복원 에디션 인도어 90분 풀 코스를 완주하셨습니다! 10초 복기 저장으로 오늘 데이터를 남기세요.',
         shots: [
-          '【1번홀 파4 · 티샷】 드라이버를 잡으세요. 공 뒤에서 타깃선 위 30센티 풀잎 점을 찍고 오른손으로 페이스를 먼저 맞춘 뒤 80퍼센트 컨트롤 티샷 갑니다.',
-          '【1번홀 파4 · 세컨샷】 7번 아이언입니다. 좌측 핀이지만 훅 주의! 그린 정중앙을 겨냥해 왼엉덩이 7시 벽 열고 1시 푸시 익스텐션으로 온그린 시킵니다.',
-          '【1번홀 파4 · 어프로치】 포틴 52도 웨지! 그린 앞 30미터 핀입니다. 오른손 엄지 검지 힘 0퍼센트, 8시에서 4시 시계추로 20미터 랜딩 박스에 떨굽니다.',
-          '【2번홀 좁은 파4 · 티샷】 양쪽 해저드 홀입니다! 주저 없이 180미터 생존 컨트롤 드라이버! 티를 낮추고 그립 한 마디 짧게 쥐어 페어웨이 중앙만 노립니다.',
-          '【2번홀 좁은 파4 · 세컨샷】 유틸리티를 꺼내세요. 머리를 공 뒤 5센티 벽에 붙박이처럼 고정하고 긴 7번 아이언 템포로 가볍게 얇게 쓸어냅니다.',
-          '【2번홀 좁은 파4 · 어프로치】 그린 에지 15미터! 로브샷 욕심 버리고 52도 옆그립 양어깨 수평 세팅 후 앞바운스 성냥 켜기로 절반에 떨어뜨려 굴립니다.',
-          '【3번홀 파5 · 티샷】 넓은 파5입니다. 220미터 레이백 푸시드로우! 척추 우측 기울기 유지하고 빈 티를 1초 응시하며 1시로 시원하게 뿌립니다.',
-          '【3번홀 파5 · 세컨샷】 유틸리티로 100미터 이내 안전 구역에 갖다 놓는 레이업 샷입니다. 52도가 가장 자신 있는 30미터나 50미터를 남기도록 편하게 칩니다.',
-          '【3번홀 파5 · 서드샷】 50미터 피치샷! 주먹 3개 스탠스, 악력 3 고정, 9시에서 3시 L투L 하프 스윙으로 43미터 랜딩 박스에 정확히 떨어뜨립니다.',
-          '【4번홀 파3 · 티샷】 맞바람 파3 홀입니다. 7번 또는 한 클럽 크게 잡고 그립 짧게, 3분의 2 등근육 회전으로 핀이 아닌 그린 넓은 한가운데에 올립니다.',
-          '【4번홀 파3 · 에이프런 토샷】 아깝게 그린 에이프런에 걸렸습니다! 뒤땅 0퍼센트 52도 토샷! 공에 아주 가까이 서서 샤프트를 수직으로 세워 힐을 띄우고 퍼팅하듯 툭 칩니다.',
-          '【4번홀 파3 · 10m 보너스】 10미터 직선 칩샷입니다. 손목 힌징 0퍼센트로 3미터 지점에 툭 떨어뜨려 7미터 굴러 붙는 장면을 상상하세요.',
-          '【5번홀 내리막 파4 · 안개 커튼 티샷】 앞이 뻥 뚫린 내리막 홀입니다! 지금 200미터 앞에 짙은 스토아 안개 커튼을 내리세요. 멀리 보지 말고 30센티 점과 피니시 3초만 봅니다.',
-          '【5번홀 내리막 파4 · 세컨샷】 발끝 살짝 오르막 경사를 가정합니다! 그립을 짧게 쥐고 타깃 우측 끝을 보고 상체를 닫은 채 1시 방향으로 뻗어줍니다.',
-          '【5번홀 내리막 파4 · 마지막 30m】 대망의 15구째! 오늘 가장 감이 좋았던 오른손 엄지 검지 힘 0퍼센트, 52도 앞바운스로 30미터 20플러스 10 완벽하게 꽂고 마무리합니다!'
+          '【1번홀 파4 · 티샷】 드라이버 180m 생존 컨트롤! 공 앞 30센티 풀잎 점 맞추고, 들림·덮임 방지를 위해 머리 반 개 고정과 실전 30% 느낌으로 칩니다.',
+          '【1번홀 파4 · 세컨샷】 7번 아이언! 탑 하나-둘 스톱 후 하체 사선 뒤로 밀어 팔 몸 붙여 1시로 뻗는 쓸 수 있는 드로우로 그린 중앙을 노립니다.',
+          '【1번홀 파4 · 어프로치】 포틴 52도 30m! 뒤꿈치 넓은 스탠스·공 중앙 세팅, 반동 없는 하나-둘 기다림으로 20미터 박스+평지 런 10미터를 붙입니다.',
+          '【2번홀 좁은 파4 · 티샷】 양쪽 해저드 홀! 180m 컨트롤 드라이버, 배꼽 살짝 우측 상태에서 팔을 몸에 붙여 릴리스하고 오른발은 다 친 뒤 세웁니다.',
+          '【2번홀 좁은 파4 · 세컨샷】 유틸리티! 동시 출발·동시 도착으로 백스윙 속도를 낮추고 머리 반 개 이내에 둔 채 긴 7번 아이언 템포로 쓸어냅니다.',
+          '【2번홀 좁은 파4 · 어프로치】 그린 에지 15m! 압박감을 느껴도 상하체 축을 고정하고, 공을 친 뒤 공이 지나간 빈 잔디를 끝까지 보는 루틴으로 헤드업을 막습니다.',
+          '【3번홀 파5 · 티샷】 넓은 파5, 220m 마스터 드로우! 왼손등 펴고 탑 스톱 후 1시로 폭발 방출, 빈 티 1초 응시로 들림 없이 통과합니다.',
+          '【3번홀 파5 · 세컨샷】 유틸리티 레이업! 100미터 안쪽 내 52도가 가장 좋아하는 30~50미터 남기는 전략 샷입니다. 욕심 버리고 30% 느낌으로 가볍게!',
+          '【3번홀 파5 · 서드샷】 50m 피치샷! 웨지 커플링으로 손목·몸통을 하나 묶고 9시에서 3시 L투L, 반동 없는 하나-둘 기다림으로 43미터 박스에 떨굽니다.',
+          '【4번홀 파3 · 티샷】 맞바람 파3! 한 클럽 크게 잡고 그립 짧게, 등근육 동시 출발과 골반 과회전 방지로 그린 한가운데 공략!',
+          '【4번홀 파3 · 에이프런 토샷】 52도 토샷! 공에 바짝 붙어 힐을 띄우고 퍼팅 진자로 툭 굴립니다. 소리 날 때까지 공 지나간 자리에서 시선 떼지 마세요.',
+          '【4번홀 파3 · 10m 보너스】 20m 러닝 어프로치 감각 응용! 왼쪽 힘 고정 후 3미터 지점에 툭 떨어뜨려 7미터 태워 붙입니다.',
+          '【5번홀 내리막 파4 · 안개 커튼 티샷】 200m 앞 안개 커튼! 결과 걱정은 끄고 머리 반 개 고정 + 탑 하나-둘 스톱 + 피니시 3초에만 집중합니다.',
+          '【5번홀 내리막 파4 · 세컨샷】 발끝 오르막 경사 가정! 그립 짧게 쥐고 상체 우측 남긴 채 1시 푸시로 쓸 수 있는 샷을 만듭니다.',
+          '【5번홀 내리막 파4 · 마지막 30m】 대망의 15구째! 뒤꿈치 넓은 스탠스, 공 중앙, 하나-둘 기다림, 공 지나간 빈 잔디 1초 응시로 20+10 완벽 마무리!'
         ]
       },
       ap_p1: {
         club: '퍼터 / 치퍼 / 52° 토샷',
         goalShots: 16,
         defaultPace: 25,
-        opening: '어프로치 50분, Phase 1입니다. 15미터 이내는 세이프 퍼스트 피라미드! 자존심을 버리고 1순위 퍼터, 2순위 치퍼, 잔디가 애매할 땐 52도 토샷으로 90퍼센트 굴려 더블보기를 원천 차단합니다. 1구째 시작합니다.',
-        swingCue: '손목을 완전히 잠그고 어깨와 등근육 진자로 목표 랜딩 지점에 가볍게 툭 내려놓습니다. 하나, 둘, 샷!',
-        finishCue: '헤드가 깃대를 향해 낮고 곧게 멈췄는지 확인하고 3미터 안착 여부를 기록하세요.',
-        midCue: '5분 경과했습니다. 10미터, 15미터는 띄우면 바보, 굴리면 고수입니다. 가장 낮고 안전한 궤도만 반복하세요.',
-        wrapCue: '마지막 1분! 그린 에지 밖 에이프런 52도 토샷 2구만 완벽하게 성공시키고 다음 칩샷 존으로 넘어가겠습니다.',
-        completeCue: '15미터 이내 세이프 퍼스트 훈련 완료! 이제 15에서 25미터 칩샷 Phase 2를 시작하세요.',
+        opening: '어프로치 50분, Phase 1입니다. 15미터 이내는 세이프 퍼스트! 1순위 퍼터, 2순위 치퍼, 잔디가 애매할 땐 52도 토샷으로 굴립니다. 특히 실전 압박감이 올 때는 상하체 축을 단단히 고정하고 공이 지나간 빈 잔디를 끝까지 바라봐 헤드업을 원천 봉쇄합니다. 1구째 시작합니다.',
+        swingCue: '축 고정, 웨지 커플링 진자로 통과 후 공 지나간 빈 잔디를 1초 더 봅니다. 하나, 둘, 샷!',
+        finishCue: '공 지나간 자리 시선 유지 확인! 헤드가 낮게 멈췄으면 3미터 안착 여부를 기록하세요.',
+        midCue: '5분 경과했습니다. 10~15미터는 절대 띄우지 말고 굴리세요. 압박감 속에서도 머리와 축이 흔들리지 않으면 거리 편차가 반으로 줄어듭니다.',
+        wrapCue: '마지막 1분! 그린 에지 밖 에이프런 52도 토샷과 빈 잔디 시선 고정 2구를 성공시키고 15~25미터 칩샷 존으로 넘어가겠습니다.',
+        completeCue: '15미터 이내 세이프 퍼스트 완료! 이제 김형근 숏게임 스탠스·런 공식을 적용하는 Phase 2로 이동하세요.',
         shots: [
-          '10미터 그린 프린지 앞입니다. 텍사스 웨지, 즉 퍼터를 들고 3·6·9 퍼터 거리 공식에 오르막 잔디 저항 한 걸음만 더해 쭉 굴려 보세요.',
-          '오르막 에이프런입니다. 치퍼나 8번 아이언을 퍼팅 그립으로 잡고 3미터 지점에 툭 떨어뜨려 7미터를 부드럽게 태워 굴립니다.',
-          '에이프런 필살기 52도 토샷입니다! 공에 헤드 2개 거리만큼 바짝 붙어 서서 샤프트를 거의 수직으로 세워 힐을 공중에 띄우세요.',
-          '52도 토샷 두 번째 체크! 뒤꿈치 힐이 땅에서 완전히 떨어졌는지 확인한 뒤 토우 끝부분만 지면에 댄 채 퍼팅 스트로크로 툭 칩니다.',
-          '왼발을 살짝 뒤로 뺀 좁은 오픈 스탠스에서 체중 70퍼센트를 왼발 앞꿈치에 고정하고, 스윙 내내 머리와 상체가 움직이지 않게 지키세요.',
-          '핀을 직접 보고 치지 마세요! 핀 앞 7미터 전방, 공이 가장 먼저 닿아야 할 가로세로 1미터 랜딩 박스에만 시선을 고정합니다.',
-          '손목이 꺾이면 거리가 들쭉날쭉해집니다. 왼손등의 각도를 어드레스 그대로 유지하며 타깃 쪽으로 손등이 스쳐 나가게 하세요.',
-          '내리막 에이프런 상황입니다. 띄우기 절대 금지! 오른발을 뒤로 빼 길을 열어주고 공을 오른발 쪽에 두어 30센티 앞에 살짝 떨어뜨리세요.'
+          '10미터 그린 프린지 앞! 텍사스 웨지 퍼터로 3·6·9 퍼터 폭 공식에 잔디 저항 한 걸음을 더해 굴리고 공 출발 후에도 1초간 빈 잔디를 봅니다.',
+          '오르막 에이프런! 치퍼나 8번 아이언을 퍼팅 그립으로 잡고 3미터 지점에 툭 떨어뜨려 오르막 런 감각으로 태워 굴립니다.',
+          '에이프런 필살기 52도 토샷! 공에 헤드 2개 거리로 바짝 붙어 샤프트를 거의 수직 세워 힐을 공중에 띄우세요.',
+          '52도 토샷 & 헤드업 차단! 토우 끝만 대고 퍼팅 스트로크로 툭 치되, 공이 핀에 붙었는지 미리 보지 말고 공 지나간 빈 잔디를 끝까지 지키세요.',
+          '체중 70퍼센트 왼쪽 앞꿈치 고정! 압박감이 커질수록 상하체 축이 무너져 탑볼이 나니 척추 축을 못박아 두고 스트로크합니다.',
+          '핀 대신 핀 앞 가로세로 1미터 랜딩 박스! 손목과 몸통을 커플링으로 묶고 반동 없는 하나-둘 기다림 뒤 박스에만 톡 내려놓습니다.',
+          '왼손등 유지! 백스윙과 팔로스루에서 손목 각도가 꺾이지 않아야 15미터 이내 거리감이 소름 돋게 일정해집니다.',
+          '내리막 에이프런 상황! 내리막 런은 평지보다 훨씬 깁니다. 30센티 앞에 살짝 떨구고 머리를 고정한 채 굴러 들어가는 소리를 기다리세요.'
         ]
       },
       ap_p2: {
         club: '포틴 52도 (15~25m 칩샷)',
         goalShots: 18,
         defaultPace: 30,
-        opening: 'Phase 2, 15분간 15에서 25미터 칩샷 집중 훈련입니다. 스탠스는 클럽 헤드 2개 폭에 왼골반을 미리 살짝 뒤로 열어두고, 옆그립으로 양 어깨를 수평 맞춘 뒤 앞바운스 성냥 켜기로 1미터 랜딩 박스에만 떨굽니다. 1구째 들어갑니다.',
-        swingCue: '오른손 엄지 검지 0퍼센트, 앞바운스로 잔디를 치익 스치며 랜딩 박스에 내려놓습니다. 하나, 둘, 샷!',
-        finishCue: '오른쪽 어깨가 밑으로 쏟아지지 않았는지 체크하고 3미터 안착 여부를 기록해 주세요.',
-        midCue: '7분 지났습니다. 공과 배꼽, 그립 끝이 함께 돌며 20미터 기준점인 캐리 10미터, 런 10미터 황금 1대1 비율을 체득하세요.',
-        wrapCue: '마지막 1분입니다. 20미터 포켓 높이 7시반 진자 리듬을 눈 감고도 재현할 수 있게 2구 마무리하겠습니다.',
-        completeCue: '15에서 25미터 칩샷 훈련 완료! 이제 30에서 80미터 시계추 피치샷 Phase 3으로 넘어가세요.',
+        opening: 'Phase 2, 15분간 15에서 25미터 칩샷 집중 훈련 — 김형근 8~10회차 숏게임 표준을 적용합니다! 발을 뒤꿈치 넓게 서서 하체를 안정시키고 공은 양발 정중앙에 두세요. 공을 뒤에 두면 찍혀서 런이 2미터에서 15미터로 들쭉날쭉해집니다. 백스윙 후 반동 없는 하나-둘 기다림, 평지 런 10미터(오르막 5미터, 내리막 15미터) 기준, 그리고 공 지나간 빈 잔디 시선 고정을 체득합니다. 1구째 시작!',
+        swingCue: '뒤꿈치 넓은 스탠스 공 중앙! 반동 없이 하나-둘 기다렸다 공 지나간 자리 보며 칩니다. 하나, 둘, 샷!',
+        finishCue: '찍히지 않고 부드럽게 떴는지, 공 지나간 빈 잔디를 1초 더 봤는지 체크 후 3미터 안착 여부를 기록하세요.',
+        midCue: '7분 지났습니다. 20미터 러닝 어프로치는 왼쪽에 힘 65퍼센트를 고정하고 흔들리지 않는 게 비결입니다. 평지 런 10m 기준점을 몸에 새기세요.',
+        wrapCue: '마지막 1분입니다. 반동 없는 하나-둘 기다림과 웨지 커플링 감각을 실전 30퍼센트 느낌으로 정리하며 2구 마무리하겠습니다.',
+        completeCue: '15에서 25미터 김형근 숏게임 표준 완료! 이제 30에서 80미터 시계추 Phase 3으로 넘어가세요.',
         shots: [
-          '15미터 칩샷입니다. 발 1개 폭 좁은 오픈 스탠스에 왼쪽 골반을 뒤로 살짝 열어 팔이 지나갈 통로를 미리 비켜두세요.',
-          '옆그립으로 잡더라도 오른손이 아래에 있다고 오른쪽 어깨까지 푹 낮추지 마세요! 양 어깨를 지면과 수평으로 맞추는 게 뒤땅 방지의 핵심입니다.',
-          '15미터 목표: 캐리 7미터, 런 8미터! 리딩엣지로 찍지 말고 52도 앞바운스가 잔디 위를 치익 미끄러지게 스쳐 가세요.',
-          '20미터 황금 기준점! 캐리 10미터, 런 10미터입니다. 백스윙은 포켓 높이 7시반까지 팔과 배꼽이 일체로 돌아갑니다.',
-          '오른손 엄지와 검지 힘을 완전히 빼세요. 백스윙에서 중지와 약지에 걸린 헤드 무게가 느껴져야 20미터 거리감이 저절로 살아납니다.',
-          '손목으로 걷어 올리거나 퍼올리지 마세요. 왼발에 체중 65퍼센트를 고정해 두고 그립 끝이 항상 배꼽 앞을 지키며 통과합니다.',
-          '오르막 라이 칩샷 가상 연습! 체중을 왼쪽에 두고 핸드퍼스트를 줄인 뒤 경사면을 따라 빗자루로 쓸어 올리듯 스윙을 한 단계 키우세요.',
-          '25미터 거리감 점검! 10미터 랜딩 박스보다 3미터 더 앞인 13미터 박스에 툭 떨어뜨려 나머지 12미터를 굴려 붙입니다.'
+          '【김형근 숏게임 ① 스탠스·공위치】 발끝은 좁아 보여도 뒤꿈치 폭을 넓게 벌려 하체를 단단히 고정하고 공은 뒤가 아닌 정중앙에 두세요!',
+          '【뒤에 두는 실수 금지】 공을 오른발 뒤에 두면 리딩엣지가 박혀 찍히고, 런이 2m에서 15m까지 제멋대로 튑니다. 중앙 위치와 양어깨 수평으로 앞바운스를 태우세요.',
+          '【경사별 런 10/5/15 법칙】 평지 어프로치 기본 런은 10미터! 반면 오르막 그린에선 런이 5미터로 줄고, 내리막에선 15미터로 늘어나니 랜딩 박스를 앞뒤로 옮기세요.',
+          '【20m 러닝 왼쪽 힘 고정】 20미터 굴리는 어프로치는 왼쪽 발·다리 힘을 65퍼센트 단단히 고정한 상태에서 배꼽과 팔이 함께 돌아가며 10캐리+10런을 만듭니다.',
+          '【반동 없는 하나-둘 기다림】 백스윙을 들자마자 탄력으로 퉁 튕겨 치지 마세요! 7시반에서 하나-둘 속으로 기다린 뒤 52도 헤드 무게로 툭 떨어뜨립니다.',
+          '【웨지 커플링】 손목과 클럽, 몸통을 따로 놀리지 말고 한 덩어리로 묶어 회전하세요. 오른손 엄지·검지 힘을 비우면 커플링이 저절로 유지됩니다.',
+          '【오르막·내리막 축 유지 & 빈 잔디】 경사지나 압박 상황에서 상하체 축이 들썩이지 않도록 고정하고, 임팩트 뒤 공이 지나간 빈 잔디를 끝까지 봅니다.',
+          '【25m 거리감 정리】 공 중앙 + 뒤꿈치 넓은 스탠스 그대로 스윙 크기만 조금 키워 15미터 박스에 떨어뜨리고 10미터를 굴려 붙입니다.'
         ]
       },
       ap_p3: {
         club: '포틴 52도 (30~80m 시계추)',
         goalShots: 20,
         defaultPace: 35,
-        opening: 'Phase 3, 15분 동안 30미터에서 80미터까지 포틴 52도 단일 클럽 시계추 매트릭스를 완성합니다. 주먹 3개 스탠스, 악력 3 등속 유지! 30미터는 8시 골반, 40미터는 8시반 명치, 50미터는 9시 L투L, 70미터는 10시 3분의 2 코어턴입니다. 1구째 30미터 기준점부터 시작합니다.',
-        swingCue: '악력 3 고정! 백스윙 크기만 시계에 맞추고 다운스윙은 반 박자 느리게 툭 떨어뜨립니다. 준비, 하나, 둘, 샷!',
-        finishCue: '임팩트 순간 감속하지 않았는지 확인하고 3미터 안착 여부를 기록해 주세요.',
-        midCue: '7분 30초 지났습니다. 50미터에서 70미터로 넘어갈 때 팔에 힘이 들어가기 쉽습니다. 핀을 지우고 랜딩 박스만 보며 등근육으로 도세요.',
-        wrapCue: '마지막 1분! 오늘 가장 잘 되었던 30미터 20캐리 10런 기준점 샷으로 영점을 다시 못 박고 마무리합시다.',
+        opening: 'Phase 3, 15분 동안 30에서 80미터 포틴 52도 시계추 거리 매트릭스입니다. 뒤꿈치 넓은 안정 스탠스와 공 중앙 기본을 지키고, 손목과 몸통을 하나로 묶는 웨지 커플링, 그리고 탑에서 반동 없는 하나-둘 기다림으로 백스윙 크기별 거리(30m 8시, 40m 8시반, 50m 9시, 70m 10시)를 완성합니다. 임팩트 순간 공 지나간 자리를 끝까지 보며 1구째 30미터 기준점부터 시작합니다.',
+        swingCue: '웨지 커플링, 반동 없는 하나-둘 기다림! 공 지나간 빈 잔디 보며 통과합니다. 준비, 하나, 둘, 샷!',
+        finishCue: '감속 없이 통과했고 공 지나간 자리를 1초 봤는지 확인 후 3미터 안착 여부를 기록해 주세요.',
+        midCue: '7분 30초 지났습니다. 50~70미터는 하체를 돌리기보다 왼엉덩이 사선 뒤로 살짝 열어주면서 팔을 몸에 붙여 치면 훅 없이 거리 일관성이 폭발합니다.',
+        wrapCue: '마지막 1분! 연습 120% 감각에서 실전 30% 부드러운 느낌만 남겨 30미터 20캐리 10런 영점을 재확인합시다.',
         completeCue: '30에서 80미터 시계추 거리 매트릭스 완성! 마지막 Phase 4, 90미터 컨트롤과 벙커 서바이벌로 이동하세요.',
         shots: [
-          '【30m ⭐ JS 검증 기준점】 스탠스 주먹 2~3개, 왼발 체중 60퍼센트, 오른팔꿈치를 옆구리에 밀착하고 8시에서 4시 대칭으로 돌아 캐리 20, 런 10미터를 꽂으세요.',
-          '【30m 반복 정밀】 오른손 엄지와 검지 힘이 0이어야 52도 헤드 무게가 20미터 지점 랜딩 박스에 정확히 떨어집니다. 절대 손목 쓰지 마세요.',
-          '【40m 명치 진자】 백스윙을 8시반 명치 앞까지 올리고, 다운스윙은 백스윙보다 오히려 반 박자 느리게 떨어뜨려 캐리 31미터 박스에 떨굽니다.',
-          '【40m 등속 점검】 손만 번쩍 들어 올리지 말고 배꼽과 가슴이 함께 8시반까지 돈 뒤 타깃을 향해 부드럽게 대칭 회전합니다.',
-          '【50~60m 9시-3시 L투L】 왼팔이 지면과 평행한 9시에서 샤프트가 L자를 이룹니다. 등근육 시동으로 올라갔다 등근육 회전으로 3시 L자까지 통과하세요.',
-          '【50~60m 감속 금지】 핀이 눈앞에 보이면 임팩트 직전에 브레이크를 밟아 뒤땅이 납니다. 오직 45미터 지점 랜딩 박스에만 가속도 유지한 채 던지세요.',
-          '【70~80m 10시-2시 코어턴】 백스윙 10시 어깨 높이까지 몸통을 꽉 회전했다가, 악력 3 그대로 하체 리드로 2시까지 흔들림 없이 돌아나갑니다.',
-          '【70~80m 좌측 훅 차단】 70미터 이상에서 오른손이 덮이면 좌측 훅으로 그린을 벗어납니다. 다운스윙 시 왼엉덩이 7시 벽을 먼저 밀어 길을 여세요.',
-          '【랜덤 30m → 50m 교대】 방금 큰 스윙 뒤 다시 30미터! 한 걸음 물러나 스탠스를 좁히고 8시-4시 작은 리듬으로 즉시 기어를 내리는 연습입니다.',
-          '【랜덤 30m 기준 확정】 어드레스 3, 탑 3, 임팩트 3, 피니시 3! 오늘 30미터는 눈 감고도 3미터 안에 들어갈 만큼 감각이 쌓였습니다.'
+          '【30m ⭐ 기준점 · 공 중앙 & 런 10m】 뒤꿈치 넓은 스탠스에 공을 중앙에 두고 8시에서 4시 대칭으로 캐리 20, 평지 런 10미터를 정확히 꽂으세요.',
+          '【30m 반동 없는 하나-둘 기다림】 8시 백스윙 끝에서 급하게 끌어내리지 말고 하나-둘 기다린 뒤 등근육 회전으로 20미터 박스에 톡 떨굽니다.',
+          '【40m 명치 진자 & 웨지 커플링】 8시반까지 손목과 몸이 하나로 묶인 웨지 커플링을 유지하고, 반동 없이 다운스윙으로 떨어뜨려 캐리 31미터에 세웁니다.',
+          '【40m 헤드업 절대 차단】 공이 잘 맞을 것 같아 일찍 고개를 들면 탑볼! 공이 떠난 빈 잔디를 1초 더 쳐다본 뒤 타구를 확인하세요.',
+          '【50~60m 9시-3시 L투L】 9시 L자 탑에서 하나-둘 스톱 느낌으로 잠깐 멈췄다 하체 7시 사선 밀기로 3시 L자까지 가속 통과하세요.',
+          '【50~60m 감속 금지 & 경사 런 계산】 핀 앞이 오르막이면 런 5m, 내리막이면 런 15m를 감안해 랜딩 박스를 정하고 망설임 없이 던집니다.',
+          '【70~80m 10시-2시 코어턴】 백스윙 시 머리를 반 개 안에 고정하고 동시 출발·도착! 큰 스윙일수록 백스윙 속도를 낮춰야 정타율이 90퍼센트 올라갑니다.',
+          '【70~80m 배꼽 우측 & 오른발 다 치고 들기】 하체가 너무 빨리 돌아 왼쪽 훅 나지 않게 배꼽 살짝 우측 상태에서 팔을 몸에 붙여 릴리스하고, 오른발은 다 치고 듭니다.',
+          '【랜덤 30m → 50m 기어 변속】 큰 샷 직후 곧바로 스탠스를 정비하고 뒤꿈치 넓게 밟아 8시-4시 30미터 리듬으로 즉시 기어를 낮춥니다.',
+          '【랜덤 30m 실전 30% 감각】 과장된 연습 의식을 30퍼센트로 내려놓고 웨지 커플링 리듬만으로 3미터 서클 안에 툭 넣어 마무리합니다.'
         ]
       },
       ap_p4: {
         club: '52°(80%) / PW / 벙커',
         goalShots: 14,
         defaultPace: 35,
-        opening: 'Phase 4, 10분 실전 트러블! 90미터 이상 컨트롤과 그린사이드 벙커 탈출 공식입니다. 웨지는 절대 100퍼센트 풀스윙하지 않고 80퍼센트 리듬이나 피칭웨지 3분의 2를 씁니다. 벙커는 페이스를 먼저 연 뒤 오른손 엄지 검지는 0, 왼손 끝 3손가락만 4에서 5로 단단히 걸어 공 뒤 3센티 모래를 폭발시킵니다. 시작합니다.',
-        swingCue: '리듬이 곧 거리입니다! 힘 주지 말고 바운스로 지면을 끝까지 폭발 통과합니다. 준비, 하나, 둘, 샷!',
-        finishCue: '피니시가 높고 균형이 잡혔는지 체크하고 성공 또는 미스 버튼을 눌러 기록하세요.',
-        midCue: '5분 경과! 벙커나 내리막 같은 무서운 라이일수록 핀은 잊어버리고 무조건 가장 넓고 안전한 그린 중앙만 봅니다.',
-        wrapCue: '마지막 1분! 깊은 러프나 벙커 1타 탈출 루틴으로 스코어 지키는 마지막 샷을 완성합시다.',
-        completeCue: '어프로치 50분, 100미터 이내 완전 정복 훈련 완료! 10분 퍼팅 연습장으로 이동하겠습니다.',
+        opening: 'Phase 4, 10분 실전 트러블! 90미터 컨트롤과 벙커·포대·러프 탈출 공식입니다. 웨지 100퍼센트 풀스윙 대신 80퍼센트 리듬을 쓰고, 압박감 강한 벙커·내리막일수록 축 고정 + 반동 없는 하나-둘 기다림 + 공 지나간 빈 잔디(모래) 시선 고정으로 미스를 없앱니다. 시작합니다.',
+        swingCue: '축 고정, 하나-둘 기다림! 공 지나간 바닥 끝까지 보며 바운스로 통과합니다. 준비, 하나, 둘, 샷!',
+        finishCue: '피니시 균형과 모래·빈 잔디 시선 유지 확인 후 성공 또는 미스를 기록하세요.',
+        midCue: '5분 경과! 무서운 라이일수록 핀은 지우고 가장 넓은 그린 중앙만 보며 실전 30퍼센트 부드러운 느낌으로 칩니다.',
+        wrapCue: '마지막 1분! 깊은 러프와 벙커 1타 탈출 루틴으로 타수를 지키는 마지막 샷을 완성합시다.',
+        completeCue: '어프로치 50분, 100미터 이내 완전 정복 완료! 이제 10분 퍼팅 연습장으로 이동하겠습니다.',
         shots: [
-          '【90m+ 52도 80% 컨트롤】 52도로 100퍼센트 풀스윙하면 뒤땅과 좌측 훅이 납니다. 80퍼센트 등근육 회전으로 가볍게 90미터 중앙만 공략하세요.',
-          '【90m+ 클럽업 PW 컨트롤】 바람이 불거나 조금만 불안하면 고민 없이 피칭웨지를 반 인치 짧게 쥐고 9시반 스윙으로 아주 편하게 올리세요.',
-          '【그린사이드 일반 벙커】 핀 금지, 그린 정중앙 에이밍! 페이스를 먼저 열고 발이 모래에 묻힌 만큼 그립을 짧게 내려 잡으세요.',
-          '【벙커 손가락 압력 공식】 오픈 페이스가 임팩트 때 닫히지 않도록 오른손 엄지 검지 힘은 0을 유지하고, 모래 저항에 채가 안 돌게 왼손 끝 3손가락 고리만 4에서 5로 단단히 겁니다.',
-          '【벙커 얼리 코킹 & 3cm 폭발】 백스윙에서 손목을 빨리 꺾어 헤드를 높게 든 뒤, 왼쪽 70퍼센트 체중을 고정하고 공 뒤 3센티 모래를 하이 피니시까지 날려 보내세요.',
-          '【중거리 30~70m 페어웨이 벙커】 페이스를 열지 마세요! 오른손 엄지 검지 0과 등속 악력 3으로 세게 치지 말고 헤드가 떨어지는 힘으로 공부터 깔끔히 컨택합니다.',
-          '【포대·내리막 트러블】 오른발을 살짝 뒤로 빼 길을 열고, 공은 오른발 쪽·체중은 왼발 85퍼센트 고정! 절대 띄우려 하지 말고 그린 입구에 떨궈 굴리세요.',
-          '【깊은 러프·디봇 잠김】 그립 끝까지 아주 짧게 쥐고 헤드를 지면에서 살짝 띄운 상태에서 악력 4~5로 풀 저항을 이기며 가파르게 볼만 톡 끊어 칩니다.'
+          '【90m+ 52도 80% 컨트롤】 풀스윙으로 머리가 뒤로 빠지며 손이 먼저 돌지 않게, 동시 출발과 탑 하나-둘 스톱 후 80퍼센트 리듬으로 중앙만 공략하세요.',
+          '【90m+ 클럽업 PW 컨트롤】 불안하면 피칭웨지 반 인치 짧게 쥐고 9시반 스윙, 오른발은 다 치고 난 뒤 들며 가볍게 올립니다.',
+          '【그린사이드 일반 벙커】 그린 정중앙 에이밍! 페이스를 먼저 열고 모래에 발이 묻힌 만큼 그립을 짧게 내려 잡으세요.',
+          '【벙커 손가락 압력 & 축 고정】 모래 저항에 채가 닫히지 않게 왼손 끝 3손가락 고리만 4~5로 걸고 압박감 속에서 상하체 축을 흔들지 않습니다.',
+          '【벙커 모래 3cm 폭발 & 시선 고정】 탑에서 반동 없이 잠깐 기다린 뒤 공 뒤 3센티 모래를 날리고, 공이 날아간 빈 모래 구덩이를 1초 보며 하이 피니시!',
+          '【페어웨이 벙커 30~70m】 하체 고정·웨지 커플링·악력 3으로 세게 치지 말고 동시 출발 리듬으로 공부터 깔끔히 컨택합니다.',
+          '【포대·내리막 트러블】 내리막 런 15m를 감안해 공을 살짝 오른발 쪽·체중 왼쪽 85퍼센트 고정! 띄우지 말고 입구에 떨궈 굴리고 절대 고개 들지 마세요.',
+          '【깊은 러프·디봇 잠김】 그립 짧게 악력 4~5로 헤드 살짝 띄워 가파르게 톡 끊어 치고, 공 지나간 잔디 자리를 끝까지 째려봅니다.'
         ]
       },
       pt_p1: {
@@ -3929,61 +4061,61 @@
         ]
       },
       hm_p1: {
-        club: '맨손 / 책 스퀘어',
+        club: '맨손 / 소파 사선밀기 / 책',
         goalShots: 10,
         defaultPace: 12,
-        opening: '평일 집콕 5분 홈트레이닝, 1단계 2분! 360도 복압 호흡과 벽 골반 힌지, 그리고 책 스퀘어 플레인 연습입니다. 벽에서 반 발짝 앞으로 서서 양손에 얇은 책을 들고 함께 시작해 봅시다.',
-        swingCue: '코로 복압 채우고, 골반 뒤로 접어 벽 터치 후 오른어깨 사선 아래로 떨어뜨립니다. 하나, 둘, 셋!',
-        finishCue: '무릎이나 허리가 들리지 않았는지 체크하며 다음 반복을 준비하세요.',
-        midCue: '1분 지났습니다. 이제부터는 양 손바닥으로 책을 쥔 채 백스윙 탑에서 임팩트 인아웃 궤도를 천천히 그려봅니다.',
-        wrapCue: '마지막 20초! 배치기 없는 완벽한 골반 공간과 책 임팩트 수직 면을 두 번만 더 확인하세요.',
-        completeCue: '홈트 1단계 완료! 이제 끝을 묶은 수건이나 클럽을 들고 2단계로 넘어가세요.',
+        opening: '평일 집콕 5분 홈트레이닝, 1단계 2분! 김형근 ②회차 소파 잡고 하체 사선 뒤로 밀기(+발 떼기)와 360도 복압 벽 힌지, 그리고 책 스퀘어 플레인 연습입니다. 소파나 식탁 모서리 앞 반 발짝 거리에 서서 함께 시작해 봅시다.',
+        swingCue: '상체 우측 고정하고 소파 잡은 채 왼쪽 엉덩이를 7시 사선 뒤로 깊게 밀어내세요! 하나, 둘, 셋!',
+        finishCue: '상체가 앞으로 덤비거나 골반이 과회전하지 않았는지 체크하며 다음 반복을 준비하세요.',
+        midCue: '1분 지났습니다! 이제 양 손바닥으로 얇은 책을 쥔 채 왼손등 펴기와 허벅지 앞 내림 인아웃 궤도를 그려봅니다.',
+        wrapCue: '마지막 20초! 배꼽이 살짝 우측에 남은 상태에서 팔이 몸에 붙어 지나가는 공간을 두 번만 더 확인하세요.',
+        completeCue: '홈트 1단계 완료! 이제 끝을 묶은 수건이나 클럽을 들고 2단계 동시 출발·하나-둘 스톱 리듬으로 넘어가세요.',
         shots: [
-          '1회차: 코로 깊게 4초 들이마시며 아랫배, 옆구리, 허리 뒤쪽까지 360도 복압 실린더를 팽팽하게 채운 채 척추각을 유지하세요.',
-          '2회차: 복압을 유지한 상태로 무릎이 앞으로 튀어나오지 않게 고관절을 뒤로 접어 엉덩이가 뒤 벽에 가볍게 닿는지 확인합니다.',
-          '3회차: 엉덩이가 벽에 닿은 상태 그대로 백스윙 회전! 오른쪽 엉덩이가 벽을 깊게 누르며 올라가고 오른무릎 각도가 지면 방향으로 버텨줍니다.',
-          '4회차: 전환 시 왼쪽 엉덩이를 7시 뒤쪽 벽으로 밀어 양쪽 엉덩이가 번갈아 벽에 닿는 배치기 제로 힙턴을 3회 천천히 반복합니다.',
-          '5회차: 이제 양 손바닥 사이에 책을 꽉 끼우세요. 백스윙 탑에서 책 표지가 타깃선과 나란한지 눈으로 점검합니다.',
-          '6회차: 책이 밖으로 엎어지지 않게 오른어깨 사선 아래, 몸 안쪽을 타고 부드럽게 내려오는 인아웃 플레인 궤도를 느낍니다.',
-          '7회차: 임팩트 지점에서 책 면이 공 앞 30센티 타깃선에 정확히 직각 수직으로 들어오는지 멈춰서 확인하세요.',
-          '8회차: 팔로스루에서 양팔이 1시 방향으로 자연스럽게 뻗어 나가며 왼쪽 엉덩이가 벽 뒤로 완전히 돌아나갑니다.'
+          '1회차: 코로 4초 들이마시며 아랫배와 옆구리, 허리 뒤까지 360도 복압 기둥을 세우고 벽 힌지로 엉덩이 공간을 확보하세요.',
+          '2회차 【김형근 ②회차 소파 사선 밀기 ①】: 양손으로 소파나 테이블을 가볍게 잡으세요. 상체는 우측에 고정한 채 골반을 옆으로 돌리지 말고 왼쪽 엉덩이를 7시 사선 뒤로 쭉 밀어냅니다.',
+          '3회차 【소파 잡고 발 떼기 ②】: 하체를 7시 사선 뒤로 민 상태 그대로 지탱하면서 발을 가볍게 떼어 보며 상체가 공 쪽으로 덤비지 않는 중심 축을 3초 유지하세요.',
+          '4회차 【골반 과회전 방지 ③】: 전환 동작에서 엉덩이를 억지로 다 돌려버리면 팔이 막힙니다! 배꼽이 타깃보다 살짝 우측에 남는 브레이크 지점을 소파 앞에서 3회 반복합니다.',
+          '5회차: 이제 양 손바닥 사이에 책을 꽉 끼우고 동시 출발·동시 도착으로 올리세요. 백스윙 탑에서 왼손등이 반듯하게 펴져 크로스오버가 없는지 확인합니다.',
+          '6회차: 탑에서 하나-둘 스톱! 서두르지 말고 책이 밖으로 덮이지 않게 오른쪽 허벅지 앞 몸 안쪽 공간으로 스르르 내려오는 궤도를 느낍니다.',
+          '7회차: 배꼽 살짝 우측 상태에서 팔을 몸에 바짝 붙여 책을 1시 타깃선 직각 수직으로 통과시키세요.',
+          '8회차: 팔로스루에서 양팔이 1시 방향으로 뻗어 나간 뒤 오른발 뒤꿈치를 마지막에 가볍게 세우며 마무리합니다.'
         ]
       },
       hm_p2: {
         club: '끝 묶은 수건 / 가슴 클럽',
         goalShots: 10,
         defaultPace: 12,
-        opening: '집콕 2단계 2분, 끝 묶은 수건 양어깨 터치 리듬과 가슴 교차 코어 회전입니다! 손으로 치는 버릇을 없애고 팔이 수동적인 채찍처럼 몸통 회전에 끌려가는 감각을 깨웁니다. 시작합니다.',
-        swingCue: '백스윙 탑 오른어깨 툭, 하체 반 박자 기다렸다가 코어 회전으로 왼어깨 툭! 리듬 타세요.',
-        finishCue: '수건 매듭이 얼굴 쪽이 아니라 양쪽 어깨에 일정한 박자로 닿았는지 느끼세요.',
-        midCue: '1분 경과! 수건을 연속으로 흔들며 하나에 백스윙 어깨 툭, 둘에 피니시 어깨 툭 소리를 일정한 메트로놈으로 맞추세요.',
-        wrapCue: '마지막 20초! 등근육과 복압이 리드하는 매끄러운 리듬으로 3회만 더 흔들고 마무리합니다.',
-        completeCue: '홈트 2단계 완료! 마지막 1분, 동전 밟기와 오른발 2센티 세팅으로 넘어갑시다.',
+        opening: '집콕 2단계 2분! 김형근 10회 핵심인 백스윙 머리 반 개 이내 고정과 동시 출발·동시 도착, 그리고 탑 하나-둘-스톱 수건 터치 리듬입니다. 팔이 손으로 덤비지 않게 만듭니다. 시작합니다.',
+        swingCue: '머리 반 개 안에 가두고, 백스윙 속도 절반! 탑 하나-둘 스톱 뒤 사선 밀기로 왼어깨 툭! 리듬 타세요.',
+        finishCue: '수건 매듭이 급하게 얼굴을 때리지 않고 등근육 기다림 끝에 양 어깨에 부드럽게 닿았는지 느끼세요.',
+        midCue: '1분 경과! 수건을 흔들며 연습 120% 과장 리듬(천천히 올리고, 하나-둘 멈췄다 내리기)을 메트로놈처럼 유지하세요.',
+        wrapCue: '마지막 20초! 과장했던 동작을 실전 30% 가벼운 느낌으로 줄여 3회만 부드럽게 흔들고 마무리합니다.',
+        completeCue: '홈트 2단계 완료! 마지막 1분, 동전 밟기와 오른발 다 치고 들기 세팅으로 넘어갑시다.',
         shots: [
-          '1세트: 클럽이나 우산을 가슴 X자로 안고 어드레스 각도를 잡은 뒤 머리를 벽에 고정한 채 좌우 무스웨이 코어 회전 5회 천천히 돕니다.',
-          '2세트: 끝 묶은 수건을 잡으세요. 손목 힘을 0으로 완전히 빼고 몸통 회전 반동으로만 수건을 오른쪽 어깨 위에 툭 얹어봅니다.',
-          '3세트: 오른쪽 어깨에 매듭이 닿는 찰나 하체가 먼저 7시로 돌며 기다리면 팔은 저절로 떨어집니다. 반대쪽 왼쪽 어깨에도 가볍게 툭 얹히는지 보세요.',
-          '4세트: 멈추지 말고 연속 빈스윙! 툭, 기다리고, 툭! 매듭이 양쪽 어깨를 번갈아 두드리는 박자가 일정해집니다.',
-          '5세트: 만약 매듭이 얼굴이나 목 앞을 친다면 손으로 서둘러 끌어내린 것입니다. 등근육 속도를 늦추고 팔을 길게 늘어뜨리세요.',
-          '6세트: 360도 복압 호흡을 살짝 유지한 상태에서 마지막 5회 연속 수건 리듬 스윙으로 80퍼센트 템포를 저장하세요.'
+          '1세트: 클럽을 가슴 X자로 안고 머리가 어드레스 원 반 개(공 1.5개) 바깥으로 밀리지 않게 벽이나 거울을 보며 무스웨이 회전 5회를 돕니다.',
+          '2세트: 끝 묶은 수건을 잡으세요. 동시 출발·동시 도착으로 평소 절반 속도로 백스윙을 들어 오른쪽 어깨에 매듭을 툭 얹습니다.',
+          '3세트: 오른쪽 어깨에 닿은 탑에서 하나-둘 스톱! 주저앉거나 덤비지 말고 하체가 7시 사선 뒤로 밀려 내려온 뒤 왼쪽 어깨에 매듭이 가볍게 얹히는지 보세요.',
+          '4세트: 멈추지 말고 연속 빈스윙! 천천히 동시 출발, 하나-둘 기다리고, 사선 밀기로 툭! 일정한 리듬을 저장합니다.',
+          '5세트: 만약 매듭이 목 앞을 치며 덮인다면 머리가 뒤로 갔다가 손이 먼저 돌았다는 신호입니다. 동시 출발 속도를 더 낮추세요.',
+          '6세트: 360도 복압을 채운 채 실전 30% 부드러운 여운만 남기고 마지막 5회 연속 수건 스윙으로 80% 템포를 완성합니다.'
         ]
       },
       hm_p3: {
-        club: '동전 밟기 (오른발 2cm 뒤)',
+        club: '동전 밟기 (오른발 다치고 들기)',
         goalShots: 5,
         defaultPace: 12,
-        opening: '집콕 마지막 3단계 1분! 오른발 엄지발가락 아래 안쪽 볼록한 살에 500원 동전을 깔고 오른발을 왼발보다 2센티미터만 살짝 뒤로 뺀 뒤 무스웨이 골반 회전을 체화합니다. 시작하세요.',
-        swingCue: '오른발 2센티 뒤 세팅, 발 안쪽 동전을 묵직하게 밟아 누르며 골반이 뒤로 깊게 회전합니다.',
-        finishCue: '체중이 오른발 바깥쪽으로 새지 않았는지 발바닥 감각을 확인하세요.',
-        midCue: '30초 경과! 골반 회전 길이 열렸으니 억지로 뒤로 당기지 않아도 오른쪽 엉덩이가 편하게 돌아가는 느낌을 기억하세요.',
-        wrapCue: '마지막 15초! 집콕 5분 루틴 완료 버튼만 누르면 오늘의 복리 연습이 기록됩니다.',
+        opening: '집콕 마지막 3단계 1분! 오른발 안쪽 동전을 밟고 스웨이를 막은 뒤, 임팩트 구간까지 오른발을 붙잡았다가 다 치고 난 뒤 오른발을 드는 ⑦·⑧회차 밸런스를 체화합니다. 시작하세요.',
+        swingCue: '머리 반 개 고정, 오른발 안쪽 동전 꾹 누른 채 회전하고, 다 친 다음에만 오른발을 가볍게 세웁니다.',
+        finishCue: '임팩트 전에 오른발 뒤꿈치가 먼저 들리지 않았는지 발바닥 감각을 확인하세요.',
+        midCue: '30초 경과! 오른발이 지면을 버텨줘야 왼엉덩이 사선 뒤로 밀기와 배꼽 살짝 우측 릴리스가 동시에 살아납니다.',
+        wrapCue: '마지막 15초! 집콕 5분 루틴 완료 버튼만 누르면 오늘의 김형근 마스터스윙 복원 홈트가 기록됩니다.',
         completeCue: '집콕 5분 홈트레이닝 완벽 완주! 하단 완료 버튼을 눌러 오늘 횟수를 기록하세요.',
         shots: [
-          '1~2회: 오른발을 왼발보다 2센티만 살짝 뒤로 빼 보세요. 오른쪽 고관절 회전 길이 뻥 뚫리는 느낌이 옵니다.',
-          '3~4회: 오른발 엄지발가락 아래 안쪽 살로 동전을 꾹 누르며 백스윙 톱까지 도세요. 바깥쪽 복숭아뼈로 무게가 넘어가면 스웨이입니다.',
-          '5~6회: 동전이 주는 지면 반력을 발바닥 안쪽에 단단히 모아뒀다가, 왼발 앞쪽을 밟으며 자연스럽게 7시 턴으로 전환합니다.',
-          '7~8회: 오른손 엄지 검지 힘 0과 오른발 안쪽 동전 압력을 동시에 느끼며 어드레스부터 탑, 임팩트 구간을 슬로우모션으로 지나갑니다.',
-          '9~10회: 오늘 밤 잠들기 전까지 이 가볍고 견고한 회전 감각만 기억하세요! 수고하셨습니다.'
+          '1~2회: 오른발을 왼발보다 2센티만 살짝 뒤로 빼고 엄지발가락 아래 안쪽 살로 500원 동전을 꾹 누르며 고관절 회전 길을 여세요.',
+          '3~4회: 동전 압력을 버티며 백스윙 탑까지 도세요. 머리는 원 반 개(공 1.5개) 안에 남고 바깥쪽 복숭아뼈로 무게가 넘어가면 스웨이입니다.',
+          '5~6회: 탑 하나-둘 스톱 뒤 왼엉덩이 사선 뒤로 밀 때, 오른발 안쪽이 지면에서 떨어지지 않고 공 위치까지 버텨주는 느낌을 잡으세요.',
+          '7~8회: 임팩트 구간을 완전히 통과하고 난 뒤, 팔이 1시로 뻗으며 비로소 오른발 뒤꿈치가 자연스럽게 따라 들리는 다 치고 들기 동작을 3회 반복합니다.',
+          '9~10회: 오늘 연습에서 과장했던 120% 교정은 내려놓고, 실전 30% 가벼운 리듬과 밸런스만 남기세요! 수고하셨습니다.'
         ]
       }
     };
@@ -4453,7 +4585,14 @@
       voiceStage = 'setup';
       playCoachTone(440, 0.11, 0.10);
 
-      const stage1Text = prefix + lessonBody;
+      let wristCuePrefix = '';
+      if (['in_p1', 'in_p2', 'in_p3', 'in_p4'].includes(activePhaseId) && (num === 1 || num % 4 === 0)) {
+        wristCuePrefix = (sessionState.wristMode === 'hk2021')
+          ? '[2021 김형근 통합 모드] 탑에서 그립 끝 공 방향 코킹과 검지 받침을 확인하고 팔을 몸에 붙여 릴리스합니다. '
+          : '[2026 호건·JS 모드] 오른손 엄지·검지 힘 0퍼센트, 손목 무조작 그립을 그대로 유지합니다. ';
+      }
+
+      const stage1Text = prefix + wristCuePrefix + lessonBody;
       const shotBadgeStr = `🏌️ ${num}구째 / 목표 ${db.goalShots}구`;
 
       speakCoachText(stage1Text, () => {
@@ -4796,6 +4935,23 @@
       if (!item) return;
       const text = `${item.title}. 원인 진단: ${item.cause} 첫 번째 응급처방: ${item.rx1} 두 번째 응급처방: ${item.rx2}`;
       playCoachTone(392.0, 0.16, 0.14);
+      speakCoachText(text);
+    }
+
+    function speakHkVideoGuide() {
+      unlockCoachAudio();
+      const hk = sessionState.hkChecks || {};
+      const doneCnt = ['headHalf', 'rightFoot', 'topSupport', 'pelvisHold'].filter(k => hk[k]).length;
+      const modeText = (sessionState.wristMode === 'hk2021')
+        ? '현재 2021 김형근 통합 손목 코킹·검지 받침 모드가 켜져 있습니다.'
+        : '현재 2026 호건·JS 엄지 검지 0퍼센트 손목 무조작 모드가 켜져 있습니다.';
+      const text = `김형근 10회 레슨 10구 정·후면 영상 셀프 판독 가이드입니다. 현재 4항목 중 ${doneCnt}개 통과 중이며, ${modeText} `
+        + `정면 1번: 탑에서 머리가 어드레스 원 반 개, 공 1.5개 이내에 고정되어 손이 먼저 돌지 않았는지 보세요. `
+        + `정면 2번: 백스윙 왼손등이 펴져 크로스오버가 없고, 오른발은 공을 다 치고 난 뒤 들리는지 확인하세요. `
+        + `후면 1번: 탑에서 하나-둘 스톱으로 멈추며 주저앉거나 덤비지 않고 검지가 받치는지 점검하세요. `
+        + `후면 2번: 상체는 우측에 둔 채 하체를 사선 뒤로 밀고, 배꼽이 살짝 우측에 남아 골반이 과회전하지 않았는지 확인하세요. `
+        + `연습에선 120퍼센트 과장해서 만들고, 실전에선 30퍼센트 느낌만 남기면 쓸 수 있는 드로우가 완성됩니다.`;
+      playCoachTone(523.25, 0.14, 0.12);
       speakCoachText(text);
     }
 
