@@ -3,32 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>벤 호건 × 김형근 10회 마스터스윙 비주얼 마스터북 v5 — 능동형 교본</title>
+  <title>Atelier Golf Studio v6 — 벤 호건 × 김형근 비주얼 마스터북</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" media="print" onload="this.media='all'" />
   <style>
     :root {
-      --bg-canvas: #F5F3EC;
+      --bg-canvas: #F7F5EF;
       --bg-surface: #FFFFFF;
-      --bg-muted: #ECE8DC;
-      --turf-900: #0E2A1C;
-      --turf-800: #153D29;
-      --turf-700: #1F5A3D;
-      --turf-100: #E3F1E9;
-      --sand-300: #DFD6C0;
-      --sand-100: #F8F4E8;
-      --persimmon-600: #C84B31;
-      --persimmon-100: #FCECE8;
-      --amber-600: #B7791F;
-      --amber-100: #FEF6E4;
-      --ink-900: #151C18;
+      --bg-muted: #EFECE3;
+      --turf-950: #071710;
+      --turf-900: #0B2218;
+      --turf-800: #143627;
+      --turf-700: #1E4D38;
+      --turf-100: #E6F0EB;
+      --sand-300: rgba(11, 34, 24, 0.12);
+      --sand-100: #F8F3E6;
+      --brass-600: #9C7834;
+      --brass-400: #C6A15B;
+      --brass-100: #F8F3E6;
+      --persimmon-600: #B84A39;
+      --persimmon-100: #FBECE9;
+      --amber-600: #9C7834;
+      --amber-100: #F8F3E6;
+      --ink-900: #121815;
       --ink-700: #3E4A43;
       --ink-500: #6B7870;
       --radius-xl: 20px;
       --radius-lg: 14px;
       --radius-md: 10px;
-      --shadow-sm: 0 2px 8px rgba(14, 42, 28, 0.06);
-      --shadow-md: 0 8px 28px rgba(14, 42, 28, 0.10);
-      --font-sans: -apple-system, BlinkMacSystemFont, "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Consolas, monospace;
+      --shadow-sm: 0 2px 10px rgba(11, 34, 24, 0.04);
+      --shadow-md: 0 10px 28px rgba(11, 34, 24, 0.07);
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
     }
 
     * { box-sizing: border-box; }
@@ -39,6 +49,7 @@
       color: var(--ink-900);
       font-family: var(--font-sans);
       line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Top Sticky Navigation */
@@ -46,10 +57,11 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: linear-gradient(135deg, var(--turf-900) 0%, var(--turf-800) 100%);
-      color: #F5F3EC;
+      background: linear-gradient(155deg, var(--turf-950) 0%, var(--turf-900) 60%, var(--turf-800) 100%);
+      color: #F7F5EF;
       padding: 14px 20px;
-      box-shadow: 0 4px 20px rgba(14, 42, 28, 0.22);
+      border-bottom: 1px solid rgba(198, 161, 91, 0.28);
+      box-shadow: 0 6px 24px rgba(7, 23, 16, 0.24);
     }
 
     .top-bar-inner {
@@ -513,16 +525,16 @@
   <header class="top-bar">
     <div class="top-bar-inner">
       <div class="title-wrap">
-        <h1>⛳ 벤 호건 × 김형근 10회 비주얼 마스터북 <span style="font-size:13px; color:#72F2A7;">v5</span></h1>
-        <p>눈으로 보고 손으로 눌러 각인하는 능동형 교본 (코치 앱 v5 · 김형근 10회 골든스윙 완전 동기화)</p>
+        <h1 style="font-family:var(--font-sans);">Atelier Golf Studio <span style="font-family:var(--font-serif); font-size:16px; color:var(--brass-400); letter-spacing:0.5px;">v6</span> · 비주얼 마스터북</h1>
+        <p>벤 호건 × 김형근 10회 골든스윙 능동형 도해 교본 (코치 스튜디오 v6 동기화)</p>
       </div>
       <nav class="chapter-nav" aria-label="챕터 이동">
-        <button class="ch-tab active" data-ch="ch0" onclick="openChapter('ch0')">🎯 0. 30초 영점 세팅</button>
-        <button class="ch-tab" data-ch="ch1" onclick="openChapter('ch1')">🏌️ 1. 인도어 90분</button>
-        <button class="ch-tab" data-ch="ch2" onclick="openChapter('ch2')">⛳ 2. 어프로치 100m</button>
-        <button class="ch-tab" data-ch="ch3" onclick="openChapter('ch3')">🕳️ 3. 퍼팅 3·6·9</button>
-        <button class="ch-tab" data-ch="ch4" onclick="openChapter('ch4')">🏠 4. 집콕 5분</button>
-        <button class="ch-tab sos-pill" data-ch="ch5" onclick="openChapter('ch5')">🆘 5. 필드 SOS 닥터</button>
+        <button class="ch-tab active" data-ch="ch0" onclick="openChapter('ch0')">0. 30초 영점 세팅</button>
+        <button class="ch-tab" data-ch="ch1" onclick="openChapter('ch1')">1. 인도어 90분</button>
+        <button class="ch-tab" data-ch="ch2" onclick="openChapter('ch2')">2. 어프로치 100m</button>
+        <button class="ch-tab" data-ch="ch3" onclick="openChapter('ch3')">3. 퍼팅 3·6·9</button>
+        <button class="ch-tab" data-ch="ch4" onclick="openChapter('ch4')">4. 집콕 5분</button>
+        <button class="ch-tab sos-pill" data-ch="ch5" onclick="openChapter('ch5')">5. 필드 SOS 닥터</button>
       </nav>
     </div>
   </header>
@@ -530,15 +542,15 @@
   <main class="page-wrap">
 
     <!-- ==========================================================
-         CHAPTER 0: 연습·필드 전 30초 영점 세팅 v3
+         CHAPTER 0: 연습·필드 전 30초 영점 세팅 (v6 ATELIER)
          ========================================================== -->
     <section id="ch0" class="chapter-section active">
       <div class="hero-banner">
         <div>
-          <h2>🎯 Chapter 0. 연습·필드 전 30초 영점 세팅 v3 (3대 기본기 시각화)</h2>
+          <h2>Chapter 0. 연습·필드 전 30초 영점 세팅 (3대 기본기 시각화)</h2>
           <p>공을 단 1개라도 치기 전에 반드시 맞춰야 할 영점입니다. 아래 버튼을 직접 눌러 <strong>정답 메커니즘과 아마추어 오류</strong>의 결정적 차이를 눈으로 확인하세요.</p>
         </div>
-        <a class="app-link-btn" href="./index.html">← 📱 실전 코치 앱 v3로 이동</a>
+        <a class="app-link-btn" href="./index.html">← Atelier 코치 앱 v6</a>
       </div>
 
       <!-- Visual 0-1: Hogan 2-Knuckle Neutral + Right Middle/Ring Grip X-Ray -->
@@ -626,13 +638,13 @@
     </section>
 
     <!-- ==========================================================
-         CHAPTER 1: 90분 인도어 연습장 v3 (좌측 훅 박멸 & 매트 착시 검증)
+         CHAPTER 1: 90분 인도어 연습장 (v6 ATELIER)
          ========================================================== -->
     <section id="ch1" class="chapter-section">
       <div class="hero-banner">
         <div>
-          <h2>🏌️ Chapter 1. 90분 인도어 연습장 v3 (좌측 풀훅 박멸 & 매트 착시 검증 시뮬레이터)</h2>
-          <p>아래 <strong>Phase 1 ~ Phase 5 탭</strong>을 눌러 인조 매트의 착시를 이겨내고 <strong>왼엉덩이 7시 벽 + 1시 푸시 익스텐션</strong>을 체화하세요.</p>
+          <h2>Chapter 1. 90분 인도어 연습장 — 좌측 풀훅 박멸 & 매트 착시 검증 시뮬레이터</h2>
+          <p>아래 <strong>Phase 1 ~ Phase 5 · 골든스윙</strong> 탭을 눌러 인조 매트의 착시를 이겨내고 <strong>머리 반 개 고정 · 사선 뒤로 밀기 · 1시 푸시 익스텐션</strong>을 체화하세요.</p>
         </div>
       </div>
 
@@ -789,13 +801,13 @@
     </section>
 
     <!-- ==========================================================
-         CHAPTER 4: 평일 집콕 5분 홈트레이닝 v3 (복압 · 벽 · 수건 · 동전)
+         CHAPTER 4: 평일 집콕 5분 홈트레이닝 (v6 ATELIER)
          ========================================================== -->
     <section id="ch4" class="chapter-section">
       <div class="hero-banner">
         <div>
-          <h2>🏠 Chapter 4. 평일 집콕 5분 홈트레이닝 v3 (360° 복압 · 벽 · 수건 · 동전)</h2>
-          <p>연습장에 못 가는 바쁜 주중 밤이나 아침, 소리 하나 내지 않고 <strong>360° 복압 코어 축 · 등근육 리듬 · 무스웨이 오른발 안쪽 압력</strong>을 교정하는 5분 루틴입니다.</p>
+          <h2>Chapter 4. 평일 집콕 5분 홈트레이닝 — 360° 복압 · 소파 사선밀기 · 수건 · 동전</h2>
+          <p>연습장에 못 가는 바쁜 주중 밤이나 아침, 소리 하나 내지 않고 <strong>360° 복압 코어 축 · 하체 사선 뒤 밀기 · 무스웨이 오른발 안쪽 압력</strong>을 교정하는 5분 루틴입니다.</p>
         </div>
       </div>
 
@@ -900,15 +912,15 @@
 
 
     <!-- ==========================================================
-         CHAPTER 5: 필드 SOS 긴급처방 닥터 v3 (호흡 · 4대 경사지 · 10대 미스샷)
+         CHAPTER 5: 필드 SOS 긴급처방 닥터 (v6 ATELIER)
          ========================================================== -->
     <section id="ch5" class="chapter-section">
       <div class="hero-banner" style="border-left-color: var(--persimmon-600);">
         <div>
-          <h2>🆘 Chapter 5. 필드 SOS 긴급처방 닥터 v3 (4대 산악 경사지 & 10대 미스샷 X-Ray)</h2>
+          <h2>Chapter 5. 필드 SOS 긴급처방 닥터 — 4대 산악 경사지 & 10대 미스샷 X-Ray</h2>
           <p>필드에서 흔들릴 때 <strong>① 24초 복압 호흡</strong>으로 심박을 낮추고, <strong>② 한국 산악 4대 경사지 3초 공식</strong>과 <strong>③ 10대 증상별 Before/After 처방 도해</strong>를 즉시 확인하세요.</p>
         </div>
-        <a class="app-link-btn" style="background: var(--persimmon-600);" href="./index.html">← 📱 앱 SOS 탭으로</a>
+        <a class="app-link-btn" style="background: var(--persimmon-600);" href="./index.html">← Atelier SOS 탭</a>
       </div>
 
       <!-- 1. 24s Live Breathing Orb -->

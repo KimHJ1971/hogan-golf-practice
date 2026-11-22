@@ -1,11 +1,11 @@
 {
-  "name": "벤 호건 싱글디짓 코치 & 필드 SOS",
-  "short_name": "호건 골프코치",
-  "description": "90분 인도어 · 50분 어프로치 · 10분 퍼팅 · 집콕 5분 · 필드 SOS 긴급처방 & Plaud 데이터 트래커",
+  "name": "Atelier Golf Studio v6 — 호건 × 김형근 마스터 코치",
+  "short_name": "아틀리에 골프코치",
+  "description": "신경망 프로 보이스 레슨 · 3:1 투어 템포 · 90분 인도어 · 50분 어프로치 · 10분 퍼팅 · 집콕 5분 · 필드 SOS 닥터",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#F6F4EE",
-  "theme_color": "#133826",
+  "background_color": "#F7F5EF",
+  "theme_color": "#0B2218",
   "orientation": "portrait",
   "lang": "ko-KR",
   "icons": [
